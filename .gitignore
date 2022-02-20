@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+
+# Build items
+build
+objbin
+bin
+
+# Reports items
+reports
+
+# Coverage items
+*.gcov
+*.gcda
+*.gcno
