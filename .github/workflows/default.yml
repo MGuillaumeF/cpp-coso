@@ -195,7 +195,7 @@ jobs:
       run: cmake --build ${{github.workspace}}/bin
 
     - name: Lint Clang-Tidy
-      run: clang-tidy -checks='*' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
+      run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
 
     - name: Convert Lint Clang-Tidy to sonarqube format
       working-directory: ${{github.workspace}}/bin
