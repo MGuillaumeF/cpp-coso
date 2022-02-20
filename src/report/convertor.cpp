@@ -113,7 +113,7 @@ boost::property_tree::ptree Convertor::cppCheckToSonarReport(
     boost::property_tree::ptree issue;
     // generate engineId with cppcheck version
     issue.put<std::string>("engineId", "cppcheck-" + cppckecVerison);
-    const std::string ruleId = error.second.get<std::string>("<xmlattr>.id");
+    const std::string ruleId = error.get<std::string>("<xmlattr>.id");
     const std::string severity = error.get<std::string>("<xmlattr>.severity");
 
     // the ruleId is the error Id
