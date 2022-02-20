@@ -200,6 +200,10 @@ jobs:
     - name: Convert Lint Clang-Tidy to sonarqube format
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso clang-tidy ${{github.workspace}}/reports/clang_tidy_report.txt ${{github.workspace}}/reports/clang-tidy-sonarqube-report.json
+      
+    - name: Convert Lint Cpp Check to sonarqube format
+      working-directory: ${{github.workspace}}/bin
+      run: ./cppcheck-to-sonarqube cppcheck ${{github.workspace}}/reports/cppcheck_report.xml ${{github.workspace}}/reports/cppcheck-sonarqube-report.json
 
     - name: Application Tests ctest
       working-directory: ${{github.workspace}}/bin
