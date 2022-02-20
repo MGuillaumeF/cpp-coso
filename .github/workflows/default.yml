@@ -59,17 +59,17 @@ jobs:
         name: cpp-coso-Linux
         path: ${{github.workspace}}/bin/cpp-coso
 
-    - name: Unit Tests Graph
-      working-directory: ${{github.workspace}}/bin
-      run: ./cpp-coso --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1; dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/reports/content.svg
+    # - name: Unit Tests Graph
+    #   working-directory: ${{github.workspace}}/bin
+    #   run: ./cpp-coso --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1; dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/reports/content.svg
    
-    - name: Application Tests ctest
-      working-directory: ${{github.workspace}}/test
-      run: ctest
+    # - name: Application Tests ctest
+    #   working-directory: ${{github.workspace}}/test
+    #   run: ctest
 
-    - name: Generate Unit Tests HTML report
-      working-directory: ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
-      run: gcovr --root ${{github.workspace}}/src --html-details ${{github.workspace}}/reports/CppCosoUnitTestReport.html --html-title "CPP-COSO Coverage report" ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
+    # - name: Generate Unit Tests HTML report
+    #   working-directory: ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
+    #   run: gcovr --root ${{github.workspace}}/src --html-details ${{github.workspace}}/reports/CppCosoUnitTestReport.html --html-title "CPP-COSO Coverage report" ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
 
     - name: Archive Test report
       uses: actions/upload-artifact@v2

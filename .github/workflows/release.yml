@@ -45,14 +45,14 @@ jobs:
     - name: Archive Application ZIP
       uses: actions/upload-artifact@v2
       with:
-        name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.zip
-        path: ${{github.workspace}}/bin/${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.zip
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
 
     - name: Archive Application DEB
       uses: actions/upload-artifact@v2
       with:
-        name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.deb
-        path: ${{github.workspace}}/bin/${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.deb
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
 
  install-linux:
     needs: [build-linux]
@@ -61,17 +61,17 @@ jobs:
 
     - uses: actions/download-artifact@v2
       with:
-        name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.deb
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
 
     - name: install
-      run: sudo dpkg -i ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Linux.deb
+      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
 
     - name: display installation tree
-      run: tree /usr/${{APPLICATION_NAME}}
+      run: tree /usr/${{env.APPLICATION_NAME}}
 
     # - name: try run
-    #   working-directory: /usr/${{APPLICATION_NAME}}
-    #   run: ./${{APPLICATION_NAME}}
+    #   working-directory: /usr/${{env.APPLICATION_NAME}}
+    #   run: ./${{env.APPLICATION_NAME}}
 
  build-win:
     runs-on: windows-latest
@@ -103,14 +103,14 @@ jobs:
     # - name: Archive Application windows ZIP
     #   uses: actions/upload-artifact@v2
     #   with:
-    #     name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-win32.zip
-    #     path: ${{github.workspace}}/bin/${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-win32.exe
+    #     name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.zip
+    #     path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
 
     # - name: Archive Application windows NSIS
     #   uses: actions/upload-artifact@v2
     #   with:
-    #     name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-win64.zip
-    #     path: ${{github.workspace}}/bin/${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-win64.exe
+    #     name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+    #     path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
 
  build-MacOSX:
     runs-on: macos-11
@@ -140,5 +140,5 @@ jobs:
     - name: Archive Application ZIP
       uses: actions/upload-artifact@v2
       with:
-        name: ${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Darwin.zip
-        path: ${{github.workspace}}/bin/${{APPLICATION_NAME}}-${{APPLICATION_VERSION}}-Darwin.zip
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
