@@ -96,6 +96,7 @@ Convertor::readCppCheckReport(const std::string &filename) {
  */
 boost::property_tree::ptree Convertor::cppCheckToSonarReport(
     const boost::property_tree::ptree &cppCheckTree) {
+  // init empty property tree to save convert result
   boost::property_tree::ptree sonarQubeReport;
 
   // get cppcheck version to generate engineId of issues
@@ -108,13 +109,12 @@ boost::property_tree::ptree Convertor::cppCheckToSonarReport(
   boost::property_tree::ptree issues;
 
   // for each error
-  for (const auto &error : errors) {
+  for (const auto &[errorTagName, error] : errors) {
     boost::property_tree::ptree issue;
     // generate engineId with cppcheck version
     issue.put<std::string>("engineId", "cppcheck-" + cppckecVerison);
     const std::string ruleId = error.second.get<std::string>("<xmlattr>.id");
-    const std::string severity =
-        error.second.get<std::string>("<xmlattr>.severity");
+    const std::string severity = error.get<std::string>("<xmlattr>.severity");
 
     // the ruleId is the error Id
     issue.put<std::string>("ruleId", ruleId);
@@ -126,12 +126,11 @@ boost::property_tree::ptree Convertor::cppCheckToSonarReport(
 
     // all issues have type CODE_SMELL
     issue.put<std::string>("type", "CODE_SMELL");
-    const std::string message = error.second.get<std::string>("<xmlattr>.msg");
+    const std::string message = error.get<std::string>("<xmlattr>.msg");
 
     bool first = true;
     boost::property_tree::ptree secondaryLocations;
-    for (const auto &[errorChildNodeKey, errorChildNodeContent] :
-         error.second) {
+    for (const auto &[errorChildNodeKey, errorChildNodeContent] : error) {
       if (errorChildNodeKey == "location") {
         const std::string filePath =
             errorChildNodeContent.get<std::string>("<xmlattr>.file");
@@ -190,6 +189,7 @@ boost::property_tree::ptree Convertor::cppCheckToSonarReport(
 boost::property_tree::ptree
 Convertor::clangTidyToSonarReport(const std::string &filename) {
 
+  // init empty property tree to save resilt of covert
   boost::property_tree::ptree sonarQubeReport;
   std::ifstream inFile;
   // open the input file
@@ -223,7 +223,7 @@ Convertor::clangTidyToSonarReport(const std::string &filename) {
     std::cout << "Match size = " << match.size() << std::endl;
 
     // save all raw splitted data
-    const std::string filename = match.str(1);
+    const std::string sourceFile = match.str(1);
     const std::string line = match.str(2);
     const std::string column = match.str(3);
     const std::string severity = match.str(4);
@@ -232,7 +232,7 @@ Convertor::clangTidyToSonarReport(const std::string &filename) {
 
     // print issue raw data
     std::cout << "Whole match : " << match.str(0) << std::endl
-              << "Filename is :" << filename << std::endl
+              << "SourceFile is :" << sourceFile << std::endl
               << "Line :" << line << std::endl
               << "Column :" << column << std::endl
               << "Severity :" << severity << std::endl
@@ -262,7 +262,7 @@ Convertor::clangTidyToSonarReport(const std::string &filename) {
 
     // get location Peter of issue
     const boost::property_tree::ptree location =
-        buildLocationTree(message, filename, line, column);
+        buildLocationTree(message, sourceFile, line, column);
     issue.add_child("primaryLocation", location);
 
     // add full generated issue in issue ptree array
