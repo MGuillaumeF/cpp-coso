@@ -96,9 +96,9 @@ jobs:
       working-directory: ${{github.workspace}}
       run: cmake --build ${{github.workspace}}/bin
 
-    # - name: Package Application
-    #   working-directory: ${{github.workspace}}/bin
-    #   run: cpack -G "ZIP;NSIS"
+    - name: Package Application
+      working-directory: ${{github.workspace}}/bin
+      run: cpack -G ZIP;NSIS
 
     # - name: Archive Application windows ZIP
     #   uses: actions/upload-artifact@v2
