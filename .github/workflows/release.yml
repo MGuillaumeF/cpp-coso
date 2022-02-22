@@ -97,7 +97,7 @@ jobs:
 
     - name: Build Application Windows
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin --config Release
+      run: cmake --build ${{github.workspace}}/bin --config MinSizeRel
 
     - name: Package Application
       working-directory: ${{github.workspace}}/bin
