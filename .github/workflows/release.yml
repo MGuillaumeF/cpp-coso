@@ -103,11 +103,11 @@ jobs:
       working-directory: ${{github.workspace}}/bin
       run: cpack -G "NSIS;ZIP;NSIS64"
 
-    - name: Archive Application windows NSIS 32
+    - name: Archive Application windows ZIP
       uses: actions/upload-artifact@v2
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-installer-win32.zip
-        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
 
     - name: Archive Application windows NSIS 64
       uses: actions/upload-artifact@v2
