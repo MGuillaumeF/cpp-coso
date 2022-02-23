@@ -8,8 +8,10 @@ project(cpp-coso VERSION 0.1.0)
 set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# activate test on project
-enable_testing()
+if (CMAKE_BUILD_TYPE EQUAL "Debug")
+  # activate test on project
+  enable_testing()
+endif()
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   # using Clang
@@ -55,17 +57,22 @@ if (Boost_FOUND)
   # Create application executable files
   add_executable(cpp-coso ${REPORT_SRC_DIR} "src/main.cpp")
   install(TARGETS cpp-coso DESTINATION cpp-coso)
-  # add_executable(cpp-cosoTest ${TESTS_SRC_UT_DIR} ${REPORT_SRC_DIR})
-  # add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=../reports/reports.xml  --report_sink=../reports/reportUT.xml) 
-  
+  if (CMAKE_BUILD_TYPE EQUAL "Debug")
+    add_executable(cpp-cosoTest ${TESTS_SRC_UT_DIR} ${REPORT_SRC_DIR})
+    add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=../reports/reports.xml  --report_sink=../reports/reportUT.xml) 
+  endif() 
   if(WIN32)
-  add_definitions("-D_WIN32_WINNT=0x0601")
+    add_definitions("-D_WIN32_WINNT=0x0601")
     target_link_libraries(cpp-coso ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS})
-    # target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+    if (CMAKE_BUILD_TYPE EQUAL "Debug")
+      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+    endif()
   else ()
     SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} --coverage")
     target_link_libraries(cpp-coso ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} )
-    target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+    if (CMAKE_BUILD_TYPE EQUAL "Debug")
+      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+    endif()
   endif()
 else ()
   # If boost not found print fatal error message
@@ -88,7 +95,6 @@ set(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMAKE_PROJECT_VERSION}")
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full UNIX paths properly.
   # Make sure there is at least one set of four backlashes.
-  set(CPACK_GENERATOR NSIS)
   # set(CPACK_PACKAGE_ICON "${CMake_SOURCE_DIR}/Utilities/Release\\\\InstallIcon.bmp")
   set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\cpp-coso.exe")
   set(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} cppcheck to sonarqube")
