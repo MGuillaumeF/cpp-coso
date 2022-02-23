@@ -101,7 +101,7 @@ jobs:
 
     - name: Package Application
       working-directory: ${{github.workspace}}/bin
-      run: cpack -G "NSIS;ZIP;NSIS64"
+      run: cpack -G "ZIP;NSIS64"
 
     - name: Archive Application windows ZIP
       uses: actions/upload-artifact@v2
