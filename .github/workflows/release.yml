@@ -91,7 +91,7 @@ jobs:
         boost_install_dir: 'D:/'
 
     - name: Generate Target 
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
