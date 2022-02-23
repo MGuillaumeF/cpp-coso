@@ -101,7 +101,7 @@ jobs:
 
     - name: Package Application
       working-directory: ${{github.workspace}}/bin
-      run: cpack -G NSIS
+      run: cpack -G "NSIS;ZIP;NSIS64;MSI"
 
     - name: Archive Application windows NSIS 32
       uses: actions/upload-artifact@v2
