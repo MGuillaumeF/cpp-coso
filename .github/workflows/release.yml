@@ -177,10 +177,10 @@ jobs:
       run: sudo hdiutil attach ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
     - name: copy application
-      run: sudo cp -R /Volumes/${{env.APPLICATION_NAME}}\${{env.APPLICATION_VERSION}}/${{env.APPLICATION_NAME}}.app /Applications
+      run: sudo cp -R /Volumes/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin/${{env.APPLICATION_NAME}}.app /Applications
 
     - name: unmount volume
-      run: sudo hdiutil unmount /Volumes/${{env.APPLICATION_NAME}}\${{env.APPLICATION_VERSION}}/
+      run: sudo hdiutil unmount /Volumes/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin/
 
  publish:
     needs: [install-linux, install-win, install-MacOSX]
