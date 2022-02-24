@@ -125,7 +125,7 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
 
     - name: install
-      run: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe /S
+      run: cmd /C "${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe /S"
 
  build-MacOSX:
     runs-on: macos-11
@@ -173,9 +173,15 @@ jobs:
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
-    - name: install
-      run: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+    - name: attach volume
+      run: sudo hdiutil attach ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
+    - name: copy application
+      run: sudo cp -R /Volumes/${{env.APPLICATION_NAME}}\${{env.APPLICATION_VERSION}}/${{env.APPLICATION_NAME}}.app /Applications
+
+    - name: unmount volume
+      run: sudo hdiutil unmount /Volumes/${{env.APPLICATION_NAME}}\${{env.APPLICATION_VERSION}}/
+      
  publish:
     needs: [install-linux, install-win, install-MacOSX]
     runs-on: ubuntu-latest
