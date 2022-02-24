@@ -178,8 +178,9 @@ jobs:
 
   publish:
     needs: [install-linux, install-win, install-MacOSX]
+    runs-on: ubuntu-latest
     steps:
-    
+
     - name: Download Linux versions
       uses: actions/download-artifact@v2
       with:
