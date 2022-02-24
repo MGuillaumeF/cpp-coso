@@ -114,8 +114,8 @@ jobs:
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
-
-  install-win:
+  
+ install-win:
     needs: [build-win]
     runs-on: ubuntu-latest
     steps:
@@ -164,7 +164,7 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
-  install-MacOSX:
+ install-MacOSX:
     needs: [build-MacOSX]
     runs-on: ubuntu-latest
     steps:
@@ -176,31 +176,37 @@ jobs:
     - name: install
       run: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
-  publish:
+ publish:
     needs: [install-linux, install-win, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
 
-    - name: Download Linux versions
+    - name: Download Linux version DEBIAN
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+
+    - name: Download Linux version ZIP
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
 
-    - name: Download Windows versions
+    - name: Download Windows version NSIS
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+    
+    - name: Download Windows version ZIP
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
 
-    - name: Download MacOSX versions
+    - name: Download MacOSX version DragNDrop
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+    
+    - name: Download MacOSX version ZIP
       uses: actions/download-artifact@v2
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
