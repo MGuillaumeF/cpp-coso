@@ -215,7 +215,7 @@ jobs:
       run: git checkout delivery
 
     - name: check version is not duplicated
-      run: [ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && echo "Erro the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit
+      run: bash [ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && echo "Erro the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit
 
     - name: Download Linux version DEBIAN
       uses: actions/download-artifact@v2
