@@ -132,7 +132,7 @@ jobs:
       run: cmd /C "${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe /S"
 
     - name: run
-      run: cmd /C "C:\program files\cpp-coso\cpp-coso"
+      run: '"C:\program files\cpp-coso\cpp-coso"'
 
  build-MacOSX:
     runs-on: macos-11
