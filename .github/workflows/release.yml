@@ -186,7 +186,6 @@ jobs:
 
     - name: Unit Tests
       run: ctest
-
  build-release-Windows:
     needs: [build-debug-Windows]
     runs-on: windows-latest
