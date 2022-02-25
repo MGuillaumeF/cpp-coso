@@ -187,32 +187,55 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: change branch
+      run: git checkout delivery
+
     - name: Download Linux version DEBIAN
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version ZIP
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Windows version NSIS
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+        path: delivery/${{env.APPLICATION_VERSION}}
     
     - name: Download Windows version ZIP
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download MacOSX version DragNDrop
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+        path: delivery/${{env.APPLICATION_VERSION}}
     
     - name: Download MacOSX version ZIP
       uses: actions/download-artifact@v2
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: index version
+      run: git add delivery
+
+    - name: commit version
+      run: git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
+
+    - name: push version
+      run: git push
