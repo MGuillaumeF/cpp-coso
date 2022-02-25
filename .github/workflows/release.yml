@@ -182,10 +182,11 @@ build-debug-Windows:
 
     - name: Build Application windows
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin
+      run: cmake --build ${{github.workspace}}/bin --config Debug
 
     - name: Unit Tests
-      run: ${{github.workspace}}/bin/Debug/cpp-cosoTest.exe --result_code=no --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${{github.workspace}}/reports/reports.xml --report_sink=${{github.workspace}}/reports/reportUT.xml
+      run: ctest
+
  build-release-Windows:
     needs: [build-debug-Windows]
     runs-on: windows-latest
