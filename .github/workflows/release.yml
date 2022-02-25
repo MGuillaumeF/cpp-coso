@@ -80,6 +80,9 @@ jobs:
     - name: run convert
       run: /usr/cpp-coso/cpp-coso cppcheck ./example.xml ./example.json
 
+    - name: display result
+      run: cat ./example.json
+
  build-win:
     runs-on: windows-latest
     steps:
@@ -194,6 +197,9 @@ jobs:
 
     - name: run convert
       run: /Applications/cpp-coso cppcheck ./example.xml ./example.json
+
+    - name: display result
+      run: cat ./example.json
 
  publish:
     needs: [install-linux, install-win, install-MacOSX]
