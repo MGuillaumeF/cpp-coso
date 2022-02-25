@@ -72,9 +72,13 @@ jobs:
     - name: display installation tree
       run: tree /usr/${{env.APPLICATION_NAME}}
 
-    # - name: try run
-    #   working-directory: /usr/${{env.APPLICATION_NAME}}
-    #   run: ./${{env.APPLICATION_NAME}}
+    - name: wget
+      uses: wei/wget@v1
+      with:
+        args: -O example.xml https://mguillaumef.github.io/cpp-coso/test/resources/example.xml
+
+    - name: run convert
+      run: /usr/cpp-coso/cpp-coso cppcheck ./example.xml ./example.json
 
  build-win:
     runs-on: windows-latest
@@ -181,6 +185,14 @@ jobs:
 
     - name: unmount volume
       run: sudo hdiutil unmount /Volumes/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin/
+
+    - name: wget
+      uses: wei/wget@v1
+      with:
+        args: -O example.xml https://mguillaumef.github.io/cpp-coso/test/resources/example.xml
+
+    - name: run convert
+      run: /Applications/cpp-coso/cpp-coso cppcheck ./example.xml ./example.json
 
  publish:
     needs: [install-linux, install-win, install-MacOSX]
