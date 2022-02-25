@@ -231,6 +231,11 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
+    - name: setup git config
+      run: |
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+
     - name: index version
       run: git add delivery
 
