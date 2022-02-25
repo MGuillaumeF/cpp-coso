@@ -236,6 +236,8 @@ jobs:
 
     - name: commit version
       run: git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: push version
       run: git push
