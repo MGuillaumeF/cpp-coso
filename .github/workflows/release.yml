@@ -156,7 +156,7 @@ jobs:
     - name: display result
       run: cat ./example.json
 
-build-debug-Windows:
+ build-debug-Windows:
     env:
       BUILD_TYPE: Debug
     runs-on: windows-latest
