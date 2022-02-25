@@ -132,7 +132,7 @@ jobs:
       run: cmd /C "${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe /S"
 
     - name: run
-      run: cmd /C "C:/program files/cpp-coso/cpp-coso"
+      run: cmd /C "C:\program files\cpp-coso\cpp-coso"
 
  build-MacOSX:
     runs-on: macos-11
@@ -193,7 +193,7 @@ jobs:
       run: curl -o example.xml https://mguillaumef.github.io/cpp-coso/test/resources/example.xml
 
     - name: run convert
-      run: /Applications/cpp-coso/cpp-coso cppcheck ./example.xml ./example.json
+      run: /Applications/cpp-coso cppcheck ./example.xml ./example.json
 
  publish:
     needs: [install-linux, install-win, install-MacOSX]
