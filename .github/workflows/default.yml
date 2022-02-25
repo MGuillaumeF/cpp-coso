@@ -53,6 +53,13 @@ jobs:
       working-directory: ${{github.workspace}}
       run: cmake --build ${{github.workspace}}/bin
 
+    - name: Run clang-tidy
+      if: github.event_name != 'pull_request'
+      uses: ZedThree/clang-tidy-review@v0.7.0
+      id: review
+      with:
+         build_dir: bin
+
     - name: Archive Application
       uses: actions/upload-artifact@v2
       with:
