@@ -356,7 +356,7 @@ jobs:
       run: git checkout delivery
 
     - name: check version is not duplicated
-      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1)
+      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1) || echo "The version number is available, prepare publish...")
 
     - name: Download docs
       uses: actions/download-artifact@v2
