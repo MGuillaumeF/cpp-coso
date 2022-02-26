@@ -3,9 +3,6 @@ name: CPP-COSO - RELEASE
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: 
-      - main
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -359,7 +356,7 @@ jobs:
       run: git checkout delivery
 
     - name: check version is not duplicated
-      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && echo "Erro the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1)
+      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1)
 
     - name: Download docs
       uses: actions/download-artifact@v2
@@ -407,6 +404,9 @@ jobs:
       run: |
         git config user.name "MGuillaumeF"
         git config user.email "${{secrets.EMAIL}}"
+
+    - name: Remove gitignore to store all package types
+      run: rm -rf .gitignore
 
     - name: index version
       run: git add delivery
