@@ -14,6 +14,8 @@ cmake -G %DCMAKE_GENERATOR% -DCMAKE_CXX_COMPILER=%DCMAKE_CXX_COMPILER% -DCMAKE_C
 echo.
 echo. BUILD TARGET
 cmake --build %DESTINATION_DIRECTORY%
+cd %DESTINATION_DIRECTORY%
+"C:\Program Files\CMake\bin\cpack.exe" -G "NSIS;ZIP"
 cd %~dp0
 echo. END
 pause
