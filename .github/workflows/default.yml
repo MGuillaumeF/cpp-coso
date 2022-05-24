@@ -423,7 +423,6 @@ jobs:
       run: cat ./example.json
 
  publish:
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
@@ -434,7 +433,7 @@ jobs:
         fetch-depth: 0
 
     - name: change branch
-      run: git checkout delivery
+      run: git checkout delivery --
 
     - name: check version is not duplicated
       run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1) || echo "The version number is available, prepare publish...")
@@ -492,10 +491,10 @@ jobs:
     - name: index version
       run: git add delivery
 
-    - name: commit version
-      run: git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
+    - name: commit/push version
+      #if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+      run: |
+        git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
+        git push
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
-    - name: push version
-      run: git push
