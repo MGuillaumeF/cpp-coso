@@ -1,0 +1,7 @@
+<map id="boostSonarState" name="boostSonarState">
+<area shape="rect" id="node1" title="map to convert boost test node name to sonar test result leveling" alt="" coords="780,13,909,39"/>
+<area shape="rect" id="node2" href="$de/dc0/class_test_convertor.html#a48e3841031ac5a40c45588a2aef67a5b" title="Save the Result of test in Map object." alt="" coords="535,5,732,47"/>
+<area shape="rect" id="node3" href="$de/dc0/class_test_convertor.html#a9a144655dc1d0174593b9d8c16d1f44d" title="Function to convert unified boost report to sonar generic report." alt="" coords="280,5,487,47"/>
+<area shape="rect" id="node4" href="$de/d6b/class_application.html#a7a5f0d21081c19b16f0038f0ce1477a4" title="Method to run application." alt="" coords="108,13,232,39"/>
+<area shape="rect" id="node5" href="$df/d0a/main_8cpp.html#a1e53c4c3470ded40a0119755a8456f2a" title="entry of application" alt="" coords="5,13,60,39"/>
+</map>
