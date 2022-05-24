@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testExecutions version="1">
+    <file path="/C/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp">
+        <testCase name="testBoostLogReport" duration="389">
+            <error line="Error at line 11">check false has failed</error>
+        </testCase>
+        <testCase name="testBoostResultReport" duration="192">
+            <error line="Error at line 16">check false has failed</error>
+            <error line="Error at line 19">check false has failed two</error>
+        </testCase>
+        <testCase name="testSonarReport" duration="624">
+            <error line="Error at line 22">check false has failed</error>
+            <skipped line="Exception at line 0">class std::exception: here
+                    
+            </skipped>
+            <skipped line="Exception at line 0">class std::exceptionbis: here
+                    
+            </skipped>
+        </testCase>
+    </file>
+    <file path="/C/Users/miche/Desktop/repo/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp">
+        <testCase name="testClangTidyToSonarQube" duration="140"/>
+    </file>
+    <file path="/C/Users/miche/Desktop/repo/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp">
+        <testCase name="testReadCppCheck" duration="129"/>
+        <testCase name="testConvertCppCheckToSonarQube" duration="128"/>
+    </file>
+</testExecutions>

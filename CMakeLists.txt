@@ -1,8 +1,13 @@
 # minimum CMake version (minimum feature)
 cmake_minimum_required(VERSION 3.12)
 
+set(CPACK_PACKAGE_VERSION_MAJOR "0")
+set(CPACK_PACKAGE_VERSION_MINOR "2")
+set(CPACK_PACKAGE_VERSION_PATCH "0")
+set(PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
+
 # Add name on project 
-project(cpp-coso VERSION 0.1.0)
+project(cpp-coso VERSION "${PACKAGE_VERSION}")
 
 # define C++ version on standard
 set (CMAKE_CXX_STANDARD 20)
@@ -46,32 +51,46 @@ file(GLOB_RECURSE TESTS_SRC_UT_DIR CONFIGURE_DEPENDS
 file(GLOB_RECURSE REPORT_SRC_DIR CONFIGURE_DEPENDS
      "src/report/*.hpp"
      "src/report/*.cpp"
+     "src/Application.hpp"
+     "src/Application.cpp"
 )
 
 find_package (Threads)
+set(Boost_USE_STATIC_LIBS ON)
 # search external dependence BOOST
-find_package (Boost)
+find_package (Boost COMPONENTS system filesystem REQUIRED)
 if (Boost_FOUND)
+  # Specify the configuration file from which the header file will be generated
+  configure_file (config.hpp.in config.hpp @ONLY)
+ 
+  # add a directory with header files to see the generated file
+  include_directories (${CMAKE_CURRENT_BINARY_DIR})
+ 
   # add boost includes
   include_directories(${Boost_INCLUDE_DIRS}) 
   # Create application executable files
-  add_executable(cpp-coso ${REPORT_SRC_DIR} "src/main.cpp")
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/versioninfo.rc.cmake.in versioninfo.rc @ONLY)
+  set(APP_ICO_RESOURCE "${CMAKE_CURRENT_SOURCE_DIR}/appicon.rc")
+  add_executable(${PROJECT_NAME} ${REPORT_SRC_DIR} "src/main.cpp" "${CMAKE_CURRENT_BINARY_DIR}/versioninfo.rc" ${APP_ICO_RESOURCE})
   install(TARGETS cpp-coso DESTINATION cpp-coso)
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_executable(cpp-cosoTest ${TESTS_SRC_UT_DIR} ${REPORT_SRC_DIR})
+    
+    add_custom_command(TARGET cpp-cosoTest PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/test/resources $<TARGET_FILE_DIR:cpp-cosoTest>/resources)
     add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=../reports/reports.xml  --report_sink=../reports/reportUT.xml) 
   endif() 
   if(WIN32)
+    add_custom_command(TARGET cpp-coso PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:cpp-coso>/resources)
     add_definitions("-D_WIN32_WINNT=0x0601")
-    target_link_libraries(cpp-coso ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS})
+    target_link_libraries(cpp-coso ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY})
+      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
     endif()
   else ()
     SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
-    target_link_libraries(cpp-coso ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} )
+    target_link_libraries(cpp-coso ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+      target_link_libraries(cpp-cosoTest ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
     endif()
   endif()
 else ()
@@ -83,21 +102,19 @@ endif ()
 include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_NAME "cpp-coso")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "cppcheck report to sonarqube report")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "cpp reports to sonarqube converter")
 set(CPACK_PACKAGE_VENDOR "MGuillaumeF")
 set(CPACK_PACKAGE_CONTACT "draft@gmail.com")
 # set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/docs/README.txt")
-# set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/docs/Copyright.txt")
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "1")
-set(CPACK_PACKAGE_VERSION_PATCH "0")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMAKE_PROJECT_VERSION}")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${CMAKE_PROJECT_VERSION}")
 if(WIN32 AND NOT UNIX)
   # There is a bug in NSI that does not handle full UNIX paths properly.
   # Make sure there is at least one set of four backlashes.
-  # set(CPACK_PACKAGE_ICON "${CMake_SOURCE_DIR}/Utilities/Release\\\\InstallIcon.bmp")
+  # set(CPACK_PACKAGE_ICON "resources\\\\icon/cpp-coso/cpp-coso.bmp")
+  # set(CPACK_NSIS_MUI_ICON "icon.ico")
   set(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\cpp-coso.exe")
-  set(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} cppcheck to sonarqube")
+  set(CPACK_NSIS_DISPLAY_NAME "${PROJECT_NAME} ${CMAKE_PROJECT_VERSION} cpp reports to sonarqube converter")
   set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.github.com/MGuillaumeF")
   set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.github.com/MGuillaumeF")
   set(CPACK_NSIS_CONTACT "draft@gmail.com")

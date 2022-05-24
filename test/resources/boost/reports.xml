@@ -1,0 +1,47 @@
+<TestLog>
+    <TestSuite name="CppCosoSonarqubeTest">
+        <TestSuite name="boostTestFrameworksConvertor" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="7">
+            <TestCase name="testBoostLogReport" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="9">
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="10"><![CDATA[check true has passed]]></Info>
+                <Error file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="11"><![CDATA[check false has failed]]></Error>
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="12"><![CDATA[check true has passed]]></Info>
+                <TestingTime>389</TestingTime>
+            </TestCase>
+            <TestCase name="testBoostResultReport" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="14">
+                <Error file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="16"><![CDATA[check false has failed]]></Error>
+                <Error file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="19"><![CDATA[check false has failed two]]></Error>
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="17"><![CDATA[check true has passed]]></Info>
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="18"><![CDATA[check true has passed]]></Info>
+                <TestingTime>192</TestingTime>
+            </TestCase>
+            <TestCase name="testSonarReport" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="21">
+                <Error file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="22"><![CDATA[check false has failed]]></Error>
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="23"><![CDATA[check true has passed]]></Info>
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="24"><![CDATA[check true has passed]]></Info>
+                <Exception file="unknown location" line="0"><![CDATA[class std::exception: here]]>
+                    <LastCheckpoint file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="24"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <Exception file="unknown location" line="0"><![CDATA[class std::exceptionbis: here]]>
+                    <LastCheckpoint file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="24"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>624</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsClangTidyConvertor" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="6">
+            <TestCase name="testClangTidyToSonarQube" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="8">
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="8"><![CDATA[check true has passed]]></Info>
+                <TestingTime>140</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsCppCheckConvertor" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="6">
+            <TestCase name="testReadCppCheck" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="8">
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="8"><![CDATA[check true has passed]]></Info>
+                <TestingTime>129</TestingTime>
+            </TestCase>
+            <TestCase name="testConvertCppCheckToSonarQube" file="C:\Users\miche\Desktop\repo\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="9">
+                <Info file="C:/Users/miche/Desktop/repo/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="9"><![CDATA[check true has passed]]></Info>
+                <TestingTime>128</TestingTime>
+            </TestCase>
+        </TestSuite>
+    </TestSuite>
+</TestLog>

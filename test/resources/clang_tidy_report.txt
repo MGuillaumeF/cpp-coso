@@ -1,0 +1,52 @@
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:17:7: warning: class 'IssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+class IssueReportConvertor : public ReportConvertor {
+      ^
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:17:7: warning: class 'IssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [hicpp-special-member-functions]
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:38:11: warning: use '= default' to define a trivial destructor [hicpp-use-equals-default]
+  virtual ~IssueReportConvertor(){};
+          ^
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:38:11: warning: prefer using 'override' or (rarely) 'final' instead of 'virtual' [hicpp-use-override]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:38:11: warning: use '= default' to define a trivial destructor [modernize-use-equals-default]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/./IssueReportConvertor.hpp:38:11: warning: prefer using 'override' or (rarely) 'final' instead of 'virtual' [modernize-use-override]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/./ReportConvertor.hpp:16:7: warning: class 'ReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+class ReportConvertor {
+      ^
+/home/runner/work/cpp-coso/cpp-coso/src/report/./ReportConvertor.hpp:16:7: warning: class 'ReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [hicpp-special-member-functions]
+/home/runner/work/cpp-coso/cpp-coso/src/report/./ReportConvertor.hpp:45:11: warning: use '= default' to define a trivial destructor [hicpp-use-equals-default]
+  virtual ~ReportConvertor(){};
+          ^
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/./ReportConvertor.hpp:45:11: warning: use '= default' to define a trivial destructor [modernize-use-equals-default]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:10:7: warning: class 'ClangTidyIssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+class ClangTidyIssueReportConvertor : public IssueReportConvertor {
+      ^
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:10:7: warning: class 'ClangTidyIssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [hicpp-special-member-functions]
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:37:11: warning: use '= default' to define a trivial destructor [hicpp-use-equals-default]
+  virtual ~ClangTidyIssueReportConvertor() override{};
+          ^
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:37:11: warning: 'virtual' is redundant since the function is already declared 'override' [hicpp-use-override]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:37:11: warning: use '= default' to define a trivial destructor [modernize-use-equals-default]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/ClangTidyIssueReportConvertor.hpp:37:11: warning: 'virtual' is redundant since the function is already declared 'override' [modernize-use-override]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:10:7: warning: class 'CppCheckIssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [cppcoreguidelines-special-member-functions]
+class CppCheckIssueReportConvertor : public IssueReportConvertor {
+      ^
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:10:7: warning: class 'CppCheckIssueReportConvertor' defines a non-default destructor but does not define a copy constructor, a copy assignment operator, a move constructor or a move assignment operator [hicpp-special-member-functions]
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:32:11: warning: use '= default' to define a trivial destructor [hicpp-use-equals-default]
+  virtual ~CppCheckIssueReportConvertor() override{};
+          ^
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:32:11: warning: 'virtual' is redundant since the function is already declared 'override' [hicpp-use-override]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:32:11: warning: use '= default' to define a trivial destructor [modernize-use-equals-default]
+note: this fix will not be applied because it overlaps with another fix
+/home/runner/work/cpp-coso/cpp-coso/src/report/CppCheckIssueReportConvertor.hpp:32:11: warning: 'virtual' is redundant since the function is already declared 'override' [modernize-use-override]
+note: this fix will not be applied because it overlaps with another fix
