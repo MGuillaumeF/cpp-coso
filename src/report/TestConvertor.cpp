@@ -82,7 +82,7 @@ void TestConvertor::extractCaseDatas(const boost::property_tree::ptree &source,
 
       boost::property_tree::ptree errorPtree(
           caseDataValue.get_value<std::string>());
-      errorPtree.put("<xmlattr>.line",
+      errorPtree.put("<xmlattr>.message",
                      "Error at line " +
                          caseDataValue.get<std::string>("<xmlattr>.line"));
 
@@ -92,7 +92,7 @@ void TestConvertor::extractCaseDatas(const boost::property_tree::ptree &source,
 
       boost::property_tree::ptree errorPtree(
           caseDataValue.get_value<std::string>());
-      errorPtree.put("<xmlattr>.line",
+      errorPtree.put("<xmlattr>.message",
                      "Exception at line " +
                          caseDataValue.get<std::string>("<xmlattr>.line"));
       destination.push_back(
@@ -161,7 +161,7 @@ TestConvertor::boostReportsToSonarReport(const std::string &pathToLogXML,
             boost::property_tree::ptree testCaseContent;
             if (testCaseResult != "passed") {
               boost::property_tree::ptree defaultErrorPtree("no data");
-              defaultErrorPtree.put("<xmlattr>.line", "unknown");
+              defaultErrorPtree.put("<xmlattr>.message", "unknown");
 
               extractCaseDatas(value, testCaseContent);
             }
