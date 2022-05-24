@@ -1,0 +1,6 @@
+<map id="IssueReportConvertor" name="IssueReportConvertor">
+<area shape="rect" id="node1" title="abstract class to convert issue report" alt="" coords="181,219,382,369"/>
+<area shape="rect" id="node3" href="$d2/d59/class_clang_tidy_issue_report_convertor.html" title="abstract class to convert issue report" alt="" coords="5,417,269,583"/>
+<area shape="rect" id="node4" href="$d7/d9a/class_cpp_check_issue_report_convertor.html" title="abstract class to convert issue report" alt="" coords="293,417,557,583"/>
+<area shape="rect" id="node2" href="$df/dff/class_report_convertor.html" title="abstract class to convert report" alt="" coords="199,5,364,171"/>
+</map>
