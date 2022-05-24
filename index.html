@@ -1,25 +1,132 @@
 <html>
+  <head>
+    <title>CPP-COSO</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+      #logo img {
+        max-width: 250px;
+      }
+
+      details.app-version {
+        margin-top: 1em;
+        border-radius: 0.25em;
+        border: 1px solid hsla(0, 0%, 0%, 0.322);
+      }
+      details.app-version summary {
+        min-width: 25em;
+        height: 1.5em;
+        border: 1px solid #0d6ac1;
+        border-radius: 0.25em;
+        background-color: #0d6ac1;
+        color: #f07427;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      h4.os-name {
+        margin-left: 1em;
+      }
+
+      a:link,
+      a:visited {
+        color: #0d6ac1;
+      }
+
+      a:hover {
+        color: #f07427;
+      }
+    </style>
+  </head>
   <body>
-    <h2>version 0.1.0</h2>
-    <ul>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-win64.zip">ZIP Windows x64</a>
-      </li>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-win64.exe">Installer Windows x64</a>
-      </li>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-Linux.zip">ZIP Linux</a>
-      </li>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-Linux.deb">Installer Linux</a>
-      </li>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-Darwin.dmg">Installer Mac OSX</a>
-      </li>
-      <li>
-        <a href="./delivery/0.1.0/cpp-coso-0.1.0-Darwin.zip">ZIP Mac OSX</a>
-      </li>
-    </ul>
+    <figure id="logo">
+      <img src="./resources/icon/cpp-coso/cpp-coso.svg" alt="CPP-COSO" />
+      <figcaption>CPP reports convertor to sonarqube</figcaption>
+    </figure>
+    <details class="app-version" open="true">
+      <summary>version 0.2.0</summary>
+      <h4 class="os-name">Windows</h4>
+      <ul>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-win64.zip"
+            >ZIP Windows x64</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-win64.exe"
+            >Installer Windows x64</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Linux</h4>
+      <ul>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-Linux.zip">ZIP Linux</a>
+        </li>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-Linux.deb"
+            >Installer Linux</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Mac OSX</h4>
+      <ul>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-Darwin.dmg"
+            >Installer Mac OSX</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/0.2.0/cpp-coso-0.2.0-Darwin.zip">ZIP Mac OSX</a>
+        </li>
+      </ul>
+    </details>
+    <details class="app-version" open="true">
+      <summary>version 0.1.0</summary>
+      <h4 class="os-name">Windows</h4>
+      <ul>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-win64.zip"
+            >ZIP Windows x64</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-win64.exe"
+            >Installer Windows x64</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Linux</h4>
+      <ul>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-Linux.zip">ZIP Linux</a>
+        </li>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-Linux.deb"
+            >Installer Linux</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Mac OSX</h4>
+
+      <ul>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-Darwin.dmg"
+            >Installer Mac OSX</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/0.1.0/cpp-coso-0.1.0-Darwin.zip">ZIP Mac OSX</a>
+        </li>
+      </ul>
+    </details>
   </body>
 </html>
