@@ -46,8 +46,8 @@ void checkApplicationEntryRun(const std::list<std::string> &arguments,
 
 BOOST_AUTO_TEST_CASE(testCLIEntries) {
   // VERSION TEST
-  checkApplicationEntryRun({"--version"}, 0, "0.2.0\n", "");
-  checkApplicationEntryRun({"-v"}, 0, "0.2.0\n", "");
+  checkApplicationEntryRun({"--version"}, 0, "0.2.1\n", "");
+  checkApplicationEntryRun({"-v"}, 0, "0.2.1\n", "");
 
   // HELP MESSAGE TEST
   const std::string HELP_MESSAGE =
