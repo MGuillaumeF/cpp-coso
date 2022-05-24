@@ -1,0 +1,73 @@
+<TestLog>
+    <TestSuite name="CppCosoSonarqubeTest">
+        <TestSuite name="boostTestFrameworksConvertor" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="14">
+            <TestCase name="testNotFoundBoostLogReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="16">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="16"><![CDATA[check true has passed]]></Info>
+                <TestingTime>162</TestingTime>
+            </TestCase>
+            <TestCase name="testNotFoundBoostResultReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="18">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="18"><![CDATA[check true has passed]]></Info>
+                <TestingTime>131</TestingTime>
+            </TestCase>
+            <TestCase name="testInvalidSyntaxeBoostLogReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="20">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="20"><![CDATA[check true has passed]]></Info>
+                <TestingTime>121</TestingTime>
+            </TestCase>
+            <TestCase name="testInvalidSyntaxeBoostResultReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="22">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="22"><![CDATA[check true has passed]]></Info>
+                <TestingTime>148</TestingTime>
+            </TestCase>
+            <TestCase name="testInvalidContentBoostLogReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="24">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="24"><![CDATA[check true has passed]]></Info>
+                <TestingTime>122</TestingTime>
+            </TestCase>
+            <TestCase name="testInvalidContentBoostResultReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="26">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="26"><![CDATA[check true has passed]]></Info>
+                <TestingTime>133</TestingTime>
+            </TestCase>
+            <TestCase name="testNotMatchBoostResultAndReports" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="28">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="28"><![CDATA[check true has passed]]></Info>
+                <TestingTime>145</TestingTime>
+            </TestCase>
+            <TestCase name="testValidSyntaxeBoostLogReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="30">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="30"><![CDATA[check true has passed]]></Info>
+                <TestingTime>127</TestingTime>
+            </TestCase>
+            <TestCase name="testValidBoostResultReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="32">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="39"><![CDATA[check sonarReport.get<std::string>("testExecutions.<xmlattr>.version") == "1" has passed]]></Info>
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="53"><![CDATA[check files.find(filename) != files.end() has passed]]></Info>
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="56"><![CDATA[check testCaseKey == "testCase" has passed]]></Info>
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="57"><![CDATA[check testCaseValue.get<std::string>("<xmlattr>.name") != "" has passed]]></Info>
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="58"><![CDATA[check testCaseValue.get<uint64_t>("<xmlattr>.duration") >= 0 has passed]]></Info>
+                <Error file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="56"><![CDATA[check testCaseKey == "testCase" has failed [<xmlattr> != testCase]]]></Error>
+                <Exception file="/home/runner/work/cpp-coso/cpp-coso/boost/boost/include/boost/property_tree/detail/ptree_implementation.hpp" line="576" function="get_child"><![CDATA[/home/runner/work/cpp-coso/cpp-coso/boost/boost/include/boost/property_tree/detail/ptree_implementation.hpp(576): Throw in function get_child
+Dynamic exception type: boost::wrapexcept<boost::property_tree::ptree_bad_path>
+std::exception::what: No such node (<xmlattr>.name)
+]]>
+                    <LastCheckpoint file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="57"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>4972</TestingTime>
+            </TestCase>
+            <TestCase name="testGeneratedSonarReport" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="66">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp" line="66"><![CDATA[check true has passed]]></Info>
+                <TestingTime>175</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsClangTidyConvertor" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="6">
+            <TestCase name="testClangTidyToSonarQube" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="8">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="8"><![CDATA[check true has passed]]></Info>
+                <TestingTime>146</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsCppCheckConvertor" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="6">
+            <TestCase name="testReadCppCheck" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="8">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="8"><![CDATA[check true has passed]]></Info>
+                <TestingTime>137</TestingTime>
+            </TestCase>
+            <TestCase name="testConvertCppCheckToSonarQube" file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="9">
+                <Info file="/home/runner/work/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="9"><![CDATA[check true has passed]]></Info>
+                <TestingTime>194</TestingTime>
+            </TestCase>
+        </TestSuite>
+    </TestSuite>
+</TestLog>

@@ -1,4 +1,4 @@
-#define BOOST_TEST_MODULE CppCheckToSonarqubeTest
+#define BOOST_TEST_MODULE CppCosoSonarqubeTest
 #define BOOST_TEST_DYN_LINK
 // #define BOOST_TEST_NO_MAIN
 

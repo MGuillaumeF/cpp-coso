@@ -1,0 +1,132 @@
+{
+  "issues": [
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "uninitMemberVar",
+      "severity": "MAJOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "Member variable 'user::id_' is not initialized in the constructor.",
+        "filePath": "data-management/src/model/user.hxx",
+        "textRange": {
+          "startLine": "15",
+          "startColumn": "3"
+        }
+      }
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "shadowVariable",
+      "severity": "MINOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "Local variable 'joe' shadows outer variable",
+        "filePath": "data-management/src/main.cpp",
+        "textRange": {
+          "startLine": "89",
+          "startColumn": "20"
+        }
+      },
+      "secondaryLocations": [
+        {
+          "message": "Local variable 'joe' shadows outer variable",
+          "filePath": "data-management/src/main.cpp",
+          "textRange": {
+            "startLine": "47",
+            "startColumn": "8"
+          }
+        }
+      ]
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "useStlAlgorithm",
+      "severity": "MINOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "Consider using std::replace_if algorithm instead of a raw loop.",
+        "filePath": "server/src/common/HTTP/LocationEndpoint.cpp",
+        "textRange": {
+          "startLine": "51",
+          "startColumn": "11"
+        }
+      }
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "functionStatic",
+      "severity": "CRITICAL",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "Technically the member function 'Logger::getLog' can be static (but you may consider moving to unnamed namespace).",
+        "filePath": "server/src/common/Logger/Logger.hpp",
+        "textRange": {
+          "startLine": "118",
+          "startColumn": "15"
+        }
+      },
+      "secondaryLocations": [
+        {
+          "message": "Technically the member function 'Logger::getLog' can be static (but you may consider moving to unnamed namespace).",
+          "filePath": "server/src/common/Logger/Logger.cpp",
+          "textRange": {
+            "startLine": "88",
+            "startColumn": "21"
+          }
+        }
+      ]
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "funcArgNamesDifferent",
+      "severity": "MINOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "Function 'addAppender' argument 3 names different: declaration 'tracer' definition 'appender'.",
+        "filePath": "server/src/common/Logger/Logger.cpp",
+        "textRange": {
+          "startLine": "132",
+          "startColumn": "44"
+        }
+      },
+      "secondaryLocations": [
+        {
+          "message": "Function 'addAppender' argument 3 names different: declaration 'tracer' definition 'appender'.",
+          "filePath": "server/src/common/Logger/Logger.hpp",
+          "textRange": {
+            "startLine": "110",
+            "startColumn": "38"
+          }
+        }
+      ]
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "variableScope",
+      "severity": "MINOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "The scope of the variable 'nbSuccess' can be reduced.",
+        "filePath": "server/test/it/httpClient.cpp",
+        "textRange": {
+          "startLine": "95",
+          "startColumn": "11"
+        }
+      }
+    },
+    {
+      "engineId": "cppcheck-2.4.1",
+      "ruleId": "unusedFunction",
+      "severity": "MINOR",
+      "type": "CODE_SMELL",
+      "primaryLocation": {
+        "message": "The function 'getLevel' is never used.",
+        "filePath": "server/src/common/Logger/Logger.cpp",
+        "textRange": {
+          "startLine": "30",
+          "startColumn": "0"
+        }
+      }
+    }
+  ]
+}

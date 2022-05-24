@@ -1,0 +1,23 @@
+<TestResult>
+    <TestSuite name="CppCosoSonarqubeTest" result="failed" assertions_passed="17" assertions_failed="2" warnings_failed="0" expected_failures="0" test_cases_passed="12" test_cases_passed_with_warnings="0" test_cases_failed="1" test_cases_skipped="0" test_cases_aborted="1" test_cases_timed_out="0" test_suites_timed_out="0">
+        <TestSuite name="boostTestFrameworksConvertor" result="failed" assertions_passed="14" assertions_failed="2" warnings_failed="0" expected_failures="0" test_cases_passed="9" test_cases_passed_with_warnings="0" test_cases_failed="1" test_cases_skipped="0" test_cases_aborted="1" test_cases_timed_out="0" test_suites_timed_out="0">
+            <TestCase name="testNotFoundBoostLogReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testNotFoundBoostResultReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testInvalidSyntaxeBoostLogReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testInvalidSyntaxeBoostResultReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testInvalidContentBoostLogReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testInvalidContentBoostResultReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testNotMatchBoostResultAndReports" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testValidSyntaxeBoostLogReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testValidBoostResultReport" result="aborted" assertions_passed="5" assertions_failed="2" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testGeneratedSonarReport" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+        </TestSuite>
+        <TestSuite name="testsClangTidyConvertor" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0" test_cases_passed="1" test_cases_passed_with_warnings="0" test_cases_failed="0" test_cases_skipped="0" test_cases_aborted="0" test_cases_timed_out="0" test_suites_timed_out="0">
+            <TestCase name="testClangTidyToSonarQube" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+        </TestSuite>
+        <TestSuite name="testsCppCheckConvertor" result="passed" assertions_passed="2" assertions_failed="0" warnings_failed="0" expected_failures="0" test_cases_passed="2" test_cases_passed_with_warnings="0" test_cases_failed="0" test_cases_skipped="0" test_cases_aborted="0" test_cases_timed_out="0" test_suites_timed_out="0">
+            <TestCase name="testReadCppCheck" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+            <TestCase name="testConvertCppCheckToSonarQube" result="passed" assertions_passed="1" assertions_failed="0" warnings_failed="0" expected_failures="0"></TestCase>
+        </TestSuite>
+    </TestSuite>
+</TestResult>

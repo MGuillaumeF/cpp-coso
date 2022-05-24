@@ -1,6 +1,8 @@
-name: CPP-COSO - DEFAULT
+name: CPP-COSO
 
 on:
+  schedule:
+    - cron: '* * 1 * *'
   push:
     branches: [ main ]
   pull_request:
@@ -8,167 +10,19 @@ on:
       - main
 
 env:
-  BUILD_TYPE: Debug
-  BOOST_VERSION: 1.78.0
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+  BOOST_VERSION: 1.79.0
+  APPLICATION_VERSION: 0.2.0
+  APPLICATION_NAME: cpp-coso
 
 permissions: write-all
 
 jobs:
- build-linux:
-    runs-on: ubuntu-latest
-    steps:
-
-    - uses: actions/checkout@v2
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting
-        fetch-depth: 0
-
-    - name: Install dependencies
-      run: sudo apt-get update -y && sudo apt-get install -y doxygen graphviz gcovr clang-tidy cppcheck
-
-    - name: Create reports directory
-      run: mkdir ${{github.workspace}}/reports; 
-
-    - name: Analyze CPPCheck
-      uses: deep5050/cppcheck-action@main
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        force_language: c++
-        std: c++20
-        output_file: ${{github.workspace}}/reports/cppcheck_report_actions.xml
-        other_options: --xml
-
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.0.0
-      id: install-boost
-      with:
-        boost_version: ${{env.BOOST_VERSION}}
-
-    - name: Generate Target
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-      env:
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-
-    - name: Build Application
-      working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin
-
-    - name: Run clang-tidy
-      if: github.event_name == 'pull_request'
-      uses: ZedThree/clang-tidy-review@v0.7.0
-      id: review
-      with:
-         build_dir: bin
-
-    - name: Archive Application
-      uses: actions/upload-artifact@v2
-      with:
-        name: cpp-coso-Linux
-        path: ${{github.workspace}}/bin/cpp-coso
-
-    # - name: Unit Tests Graph
-    #   working-directory: ${{github.workspace}}/bin
-    #   run: ./cpp-coso --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1; dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/reports/content.svg
-   
-    # - name: Application Tests ctest
-    #   working-directory: ${{github.workspace}}/test
-    #   run: ctest
-
-    # - name: Generate Unit Tests HTML report
-    #   working-directory: ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
-    #   run: gcovr --root ${{github.workspace}}/src --html-details ${{github.workspace}}/reports/CppCosoUnitTestReport.html --html-title "CPP-COSO Coverage report" ${{github.workspace}}/bin/CMakeFiles/cpp-cosoTest.dir/src
-
-    - name: Archive Test report
-      uses: actions/upload-artifact@v2
-      with:
-        name: CPP-COSO-Reports
-        path: ${{github.workspace}}/reports
-
-    - name: Doxygen Docs
-      run: doxygen docg.conf
-
-    - name: Archive Docs
-      uses: actions/upload-artifact@v2
-      with:
-        name: Docs-CPP-COSO
-        path: ${{github.workspace}}/docs
-
- build-win:
-    runs-on: windows-latest
-    steps:
-
-    - uses: actions/checkout@v2
-
-    - name: Create reports directory
-      run: mkdir ${{github.workspace}}/reports; 
-
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.0.0
-      id: install-boost
-      with:
-        boost_version: ${{env.BOOST_VERSION}}
-        platform_version: 2019
-        boost_install_dir: 'D:/'
-
-    - name: Generate target 
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-      env:
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-
-    - name: Build Application windows
-      working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin
-
-    - name: Archive Application windows 
-      uses: actions/upload-artifact@v2
-      with:
-        name: cpp-coso-Win
-        path: ${{github.workspace}}/bin/Debug/*.exe
-
-    - name: Unit Tests
-      run: ${{github.workspace}}/bin/Debug/cpp-cosoTest.exe --result_code=no --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${{github.workspace}}/reports/reports.xml --report_sink=${{github.workspace}}/reports/reportUT.xml
-
-    - name: Archive Test report
-      uses: actions/upload-artifact@v2
-      with:
-        name: CPP-COSO Unit Test (win - temp) - Reports
-        path: ${{github.workspace}}/reports
-
- build-MacOSX:
-    runs-on: macos-11
-    steps:
-
-    - uses: actions/checkout@v2
-
-    - name: Create reports directory
-      run: mkdir ${{github.workspace}}/reports; 
-
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.0.0
-      id: install-boost
-      with:
-        boost_version: ${{env.BOOST_VERSION}}
-
-    - name: Generate Target
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-      env:
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-
-    - name: Build Application
-      working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin
-
-    - name: Archive Application
-      uses: actions/upload-artifact@v2
-      with:
-        name: CPP-COSO-MacOSX
-        path: ${{github.workspace}}/bin/cpp-coso
-
-    - name: Application Tests ctest
-      working-directory: ${{github.workspace}}/bin
-      run: ctest
-
  sonarcloud-analyse:
+    env:
+      BUILD_TYPE: Debug
+    
     runs-on: ubuntu-latest
     steps:
 
@@ -178,19 +32,49 @@ jobs:
         fetch-depth: 0
 
     - name: Install dependencies
-      run: sudo apt-get install -y clang-tidy cppcheck
+      run: sudo apt-get install -y clang-tidy cppcheck doxygen graphviz inkscape imagemagick
+
+    - name: Create icon
+      working-directory: ${{github.workspace}}/resources/icon/cpp-coso
+      run: |
+        dbus-run-session inkscape -w 16 -h 16 -e cpp-coso-16x16.png cpp-coso.svg
+        dbus-run-session inkscape -w 32 -h 32 -e cpp-coso-32x32.png cpp-coso.svg
+        dbus-run-session inkscape -w 48 -h 48 -e cpp-coso-48x48.png cpp-coso.svg
+        dbus-run-session inkscape -w 256 -h 256 -e cpp-coso-256x256.png cpp-coso.svg
+        dbus-run-session inkscape -e cpp-coso.bmp cpp-coso.svg
+        convert cpp-coso-16x16.png cpp-coso-32x32.png cpp-coso-48x48.png cpp-coso-256x256.png cpp-coso.ico
+
+    - name: Save icon changes
+      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add resources/icon/cpp-coso
+        (git commit -m "[AUTO] update icon generated" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Create reports directory
       run: mkdir ${{github.workspace}}/reports; 
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 20.04
 
     - name: Lint Cpp Check
-      run: cppcheck --enable=all --inconclusive --language=c++ --std=c++20 --xml --output-file=${{github.workspace}}/reports/cppcheck_report.xml ${{github.workspace}}
-
-    - name: Install boost
-      uses: MarkusJx/install-boost@v2.0.0
-      id: install-boost
+      run: cppcheck --enable=all --language=c++ --std=c++20 --xml -i ${{github.workspace}}/boost -I ${{github.workspace}}/boost/include -I  /usr/include -I /usr/local/include --output-file=${{github.workspace}}/reports/cppcheck_report.xml ${{github.workspace}}
+ 
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
       with:
-        boost_version: ${{env.BOOST_VERSION}}
+        languages: 'cpp'
 
     - name: Generate target
       run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
@@ -200,6 +84,18 @@ jobs:
     - name: Build Application
       working-directory: ${{github.workspace}}
       run: cmake --build ${{github.workspace}}/bin
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+
+    - name: Doxygen Docs
+      run: doxygen docg.conf
+
+    - name: Archive Docs
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
+        path: ${{github.workspace}}/docs
 
     - name: Lint Clang-Tidy
       run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-fuchsia-default-arguments-calls' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
@@ -216,11 +112,17 @@ jobs:
       working-directory: ${{github.workspace}}/bin
       run: ctest
 
+    - name: Convert Boost Tests reports to sonarqube format
+      working-directory: ${{github.workspace}}/bin
+      run: ./cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
+
     - name: gcov after unit tests
-      working-directory: ${{github.workspace}}/bin/CMakeFiles/cpp-coso.dir/src
+      working-directory: ${{github.workspace}}/bin/CMakeFiles
+      # /cpp-coso.dir/src
       run: find -name '*.gcda' | xargs gcov;
 
     - name: Archive Test report
+      if: always()
       uses: actions/upload-artifact@v2
       with:
         name: Application - Reports
@@ -237,9 +139,363 @@ jobs:
         -Dsonar.host.url=https://sonarcloud.io/
         -Dsonar.verbose=false
 
-    - name: SonarQube Quality Gate check
-      uses: sonarsource/sonarqube-quality-gate-action@master
-      # Force to fail step after specific time
-      timeout-minutes: 5
+    # - name: SonarQube Quality Gate check
+    #   uses: sonarsource/sonarqube-quality-gate-action@master
+    # Force to fail step after specific time
+    #   timeout-minutes: 5
+    #   env:
+    #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+ build-release-Linux:
+    needs: [sonarcloud-analyse]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 20.04
+
+    - name: Generate Target
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       env:
-       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin
+
+    - name: Package Application
+      working-directory: ${{github.workspace}}/bin
+      run: cpack -G "ZIP;DEB"
+
+    - name: Archive Application ZIP
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+
+    - name: Archive Application DEB
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+
+ install-Linux:
+    needs: [build-release-Linux]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+
+    - name: install
+      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+
+    - name: display installation tree
+      run: tree /usr/${{env.APPLICATION_NAME}}
+
+    - name: wget
+      uses: wei/wget@v1
+      with:
+        args: -O example.xml https://mguillaumef.github.io/cpp-coso/test/resources/example.xml
+
+    - name: run convert
+      run: |
+        /usr/cpp-coso/cpp-coso --help
+        /usr/cpp-coso/cpp-coso --version
+        /usr/cpp-coso/cpp-coso cppcheck ./example.xml ./example.json
+
+    - name: display result
+      run: cat ./example.json
+
+ build-debug-Windows:
+    env:
+      BUILD_TYPE: Debug
+      BOOST_VERSION: 1.79.0
+
+    runs-on: windows-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Create reports directory
+      run: mkdir ${{github.workspace}}/reports; 
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 2022
+        boost_install_dir: 'D:/'
+        toolset: msvc
+
+    - name: Generate target 
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application windows
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin --config Debug
+
+    - name: Unit Tests
+      working-directory: ${{github.workspace}}/bin/Debug/
+      run: |
+        move ${{github.workspace}}/test/resources ./resources
+        cmd /C "cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${{github.workspace}}/reports/reports-win.xml --report_sink=${{github.workspace}}/reports/reportUT-win.xml"
+
+    - name: Archive Test report
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: CPP-COSO Unit Test (win - temp) - Reports
+        path: ${{github.workspace}}/reports
+
+ build-release-Windows:
+    needs: [build-debug-Windows]
+    env:
+      BOOST_VERSION: 1.79.0
+
+    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: windows-latest
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 2022
+        boost_install_dir: 'D:/'
+        toolset: msvc
+
+    - name: Generate Target 
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application Windows
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin --config ${{env.BUILD_TYPE}}
+
+    - name: Package Application
+      working-directory: ${{github.workspace}}/bin
+      run: cpack -G "ZIP;NSIS64" || type d:/a/cpp-coso/cpp-coso/bin/_CPack_Packages/win64/NSIS64/NSISOutput.log
+
+    - name: Archive Application windows ZIP
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+
+    - name: Archive Application windows NSIS 64
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+  
+ install-Windows:
+    needs: [build-release-Windows]
+    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: windows-latest
+    steps:
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+
+    - name: install
+      run: cmd /C "${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe /S"
+
+    - name: run
+      run: '"C:\program files\cpp-coso\cpp-coso --version"'
+
+ build-debug-MacOSX:
+    env:
+      BUILD_TYPE: Debug
+    runs-on: macos-11
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Create reports directory
+      run: mkdir ${{github.workspace}}/reports; 
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+
+    - name: Generate Target
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin
+
+    - name: Application Tests ctest
+      working-directory: ${{github.workspace}}/bin
+      run: ctest
+
+ build-release-MacOSX:
+    needs: [build-debug-MacOSX]
+    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: macos-11
+    steps:
+
+    - uses: actions/checkout@v2
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.3.0
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+
+    - name: Generate Target
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin
+
+    - name: Package Application
+      working-directory: ${{github.workspace}}/bin
+      run: cpack -G "ZIP;DragNDrop"
+
+    - name: Archive Application ZIP
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+
+    - name: Archive Application DMG
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+
+ install-MacOSX:
+    needs: [build-release-MacOSX]
+    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    runs-on: macos-11
+    steps:
+
+    - uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+
+    - name: convert image
+      run: sudo hdiutil convert -quiet ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg -format UDTO -o ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin
+
+    - name: attach volume
+      run: sudo hdiutil attach -quiet -nobrowse -noverify -noautoopen -debug -verbose ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.cdr
+
+    - name: copy application
+      run: sudo cp -R /Volumes/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin/${{env.APPLICATION_NAME}}/${{env.APPLICATION_NAME}} /Applications
+
+    - name: unmount volume
+      run: sudo hdiutil unmount /Volumes/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin/
+
+    - name: wget
+      run: curl -o example.xml https://mguillaumef.github.io/cpp-coso/test/resources/example.xml
+
+    - name: run convert
+      run: /Applications/cpp-coso cppcheck ./example.xml ./example.json
+
+    - name: display result
+      run: cat ./example.json
+
+ publish:
+    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
+    needs: [install-Linux, install-Windows, install-MacOSX]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: change branch
+      run: git checkout delivery
+
+    - name: check version is not duplicated
+      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1) || echo "The version number is available, prepare publish...")
+
+    - name: Download docs
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download Linux version DEBIAN
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download Linux version ZIP
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download Windows version NSIS
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+        path: delivery/${{env.APPLICATION_VERSION}}
+    
+    - name: Download Windows version ZIP
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download MacOSX version DragNDrop
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
+        path: delivery/${{env.APPLICATION_VERSION}}
+    
+    - name: Download MacOSX version ZIP
+      uses: actions/download-artifact@v2
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: setup git config
+      run: |
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+
+    - name: Remove gitignore to store all package types
+      run: rm -rf .gitignore
+
+    - name: index version
+      run: git add delivery
+
+    - name: commit version
+      run: git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+    - name: push version
+      run: git push
