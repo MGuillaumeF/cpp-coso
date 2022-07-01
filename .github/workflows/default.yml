@@ -2,7 +2,7 @@ name: CPP-COSO
 
 on:
   schedule:
-    - cron: '* * 1 * *'
+    - cron: '* 1 1 * *'
   push:
     branches: [ main ]
   pull_request:
