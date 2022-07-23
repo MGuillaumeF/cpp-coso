@@ -67,10 +67,7 @@ jobs:
       with:
         boost_version: ${{env.BOOST_VERSION}}
         platform_version: 20.04
-
-    - name: Lint Cpp Check
-      run: cppcheck --enable=all --language=c++ --std=c++20 --xml -i ${{github.workspace}}/boost -I ${{github.workspace}}/boost/include -I  /usr/include -I /usr/local/include --output-file=${{github.workspace}}/reports/cppcheck_report.xml ${{github.workspace}}
- 
+  
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
@@ -84,6 +81,9 @@ jobs:
     - name: Build Application
       working-directory: ${{github.workspace}}
       run: cmake --build ${{github.workspace}}/bin
+
+    - name: Lint Cpp Check
+      run: cppcheck --enable=all --language=c++ --std=c++20 --xml --output-file=${{github.workspace}}/reports/cppcheck_report.xml --project=bin/compile_commands.json
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
