@@ -108,7 +108,7 @@ jobs:
       run: doxygen docg.conf
 
     - name: Archive Docs
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
         path: ${{github.workspace}}/docs
@@ -139,7 +139,7 @@ jobs:
 
     - name: Archive Test report
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Application - Reports
         path: ${{github.workspace}}/reports
@@ -193,13 +193,13 @@ jobs:
       run: cpack -G "ZIP;DEB"
 
     - name: Archive Application ZIP
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
 
     - name: Archive Application DEB
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
@@ -272,7 +272,7 @@ jobs:
 
     - name: Archive Test report
       if: always()
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: CPP-COSO Unit Test (win - temp) - Reports
         path: ${{github.workspace}}/reports
@@ -311,13 +311,13 @@ jobs:
       run: cpack -G "ZIP;NSIS64" || type d:/a/cpp-coso/cpp-coso/bin/_CPack_Packages/win64/NSIS64/NSISOutput.log
 
     - name: Archive Application windows ZIP
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
 
     - name: Archive Application windows NSIS 64
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
@@ -396,13 +396,13 @@ jobs:
       run: cpack -G "ZIP;DragNDrop"
 
     - name: Archive Application ZIP
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
 
     - name: Archive Application DMG
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
