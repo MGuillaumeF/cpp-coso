@@ -144,9 +144,11 @@ jobs:
         path: ${{github.workspace}}/reports
 
     - name: Setup sonarqube
+      if: github.actor != 'dependabot[bot]'
       uses: warchant/setup-sonar-scanner@v3
 
     - name: Run SonarQube
+      if: github.actor != 'dependabot[bot]'
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: sonar-scanner
@@ -438,6 +440,7 @@ jobs:
       run: cat ./example.json
 
  publish:
+    if: github.actor != 'dependabot[bot]'
     needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
@@ -513,3 +516,23 @@ jobs:
         git push
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+ dependabot:
+    needs: [sonarcloud-analyse]
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.3.4
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Enable auto-merge for Dependabot PRs 
+        run: gh pr merge --delete-branch --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+
