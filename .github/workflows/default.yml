@@ -56,10 +56,10 @@ jobs:
     - name: Create icon
       working-directory: ${{github.workspace}}/resources/icon/cpp-coso
       run: |
-        dbus-run-session inkscape -w 16 -h 16 -e cpp-coso-16x16.png cpp-coso.svg
-        dbus-run-session inkscape -w 32 -h 32 -e cpp-coso-32x32.png cpp-coso.svg
-        dbus-run-session inkscape -w 48 -h 48 -e cpp-coso-48x48.png cpp-coso.svg
-        dbus-run-session inkscape -w 256 -h 256 -e cpp-coso-256x256.png cpp-coso.svg
+        dbus-run-session inkscape -w 16 -h 16 --export-type=png --export-filename=cpp-coso-16x16.png cpp-coso.svg
+        dbus-run-session inkscape -w 32 -h 32 --export-type=png --export-filename=cpp-coso-32x32.png cpp-coso.svg
+        dbus-run-session inkscape -w 48 -h 48 --export-type=png --export-filename=cpp-coso-48x48.png cpp-coso.svg
+        dbus-run-session inkscape -w 256 -h 256 --export-type=png --export-filename=cpp-coso-256x256.png cpp-coso.svg
         dbus-run-session inkscape -e cpp-coso.bmp cpp-coso.svg
         convert cpp-coso-16x16.png cpp-coso-32x32.png cpp-coso-48x48.png cpp-coso-256x256.png cpp-coso.ico
 
