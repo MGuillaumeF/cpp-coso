@@ -46,7 +46,7 @@ int32_t Application::run(const std::list<std::string> &args) {
   const uint8_t ARGUMENTS_LINT_SIZE = 3;
   const uint8_t ARGUMENTS_BOOST_TEST_SIZE = 4;
 
-  const std::string VERSION = PACKAGE_VERSION;
+  const std::string VERSION = PROJECT_VERSION;
   const std::string HELP_MESSAGE =
       "CPP-COSO - MANUAL\r\n"
       "[OPTIONS]\r\n"
