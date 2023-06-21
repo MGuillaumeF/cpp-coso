@@ -17,17 +17,17 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "Free Software Foundation, Inc"
-            VALUE "FileDescription", "This application convert cpp result report of lint tools to sonarqube generic data issue report"
+            VALUE "CompanyName", "@COMPANY_NAME@"
+            VALUE "FileDescription", "@APPLICATION_DESCRIPTION@"
             VALUE "FileVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@"
             VALUE "InternalName", "@PROJECT_NAME@"
-            VALUE "LegalCopyright", "Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>"
+            VALUE "LegalCopyright", "@LEGAL_COPYRIGHT@"
 #ifdef _DEBUG
-            VALUE "OriginalFilename", "cpp-coso.exe"
+            VALUE "OriginalFilename", "@PROJECT_NAME@.exe"
 #else
-            VALUE "OriginalFilename", "cpp-coso.exe"
+            VALUE "OriginalFilename", "@PROJECT_NAME@.exe"
 #endif
-            VALUE "ProductName", "cpp-coso"
+            VALUE "ProductName", "@PROJECT_NAME@"
             VALUE "ProductVersion","@PROJECT_VERSION_MAJOR@, @PROJECT_VERSION_MINOR@, @PROJECT_VERSION_PATCH@"
         END
     END
