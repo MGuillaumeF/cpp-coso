@@ -1,13 +1,15 @@
 # minimum CMake version (minimum feature)
 cmake_minimum_required(VERSION 3.12)
 
-set(CPACK_PACKAGE_VERSION_MAJOR "0")
-set(CPACK_PACKAGE_VERSION_MINOR "2")
-set(CPACK_PACKAGE_VERSION_PATCH "1")
-set(PACKAGE_VERSION "${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH}")
-
 # Add name on project 
-project(cpp-coso VERSION "${PACKAGE_VERSION}")
+project(cpp-coso VERSION "0.2.2")
+
+set(GITHUB_USERNAME "MGuillaumeF")
+set(CPACK_PACKAGE_VENDOR "${GITHUB_USERNAME}")
+set(CPACK_PACKAGE_CONTACT "draft@gmail.com")
+set(COMPANY_NAME "")
+set(LEGAL_COPYRIGHT "")
+
 
 # define C++ version on standard
 set (CMAKE_CXX_STANDARD 20)
@@ -103,8 +105,6 @@ include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_NAME "cpp-coso")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "cpp reports to sonarqube converter")
-set(CPACK_PACKAGE_VENDOR "MGuillaumeF")
-set(CPACK_PACKAGE_CONTACT "draft@gmail.com")
 # set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/docs/README.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${CMAKE_PROJECT_VERSION}")
