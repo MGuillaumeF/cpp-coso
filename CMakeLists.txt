@@ -10,6 +10,9 @@ set(CPACK_PACKAGE_CONTACT "draft@gmail.com")
 set(COMPANY_NAME "")
 set(LEGAL_COPYRIGHT "")
 
+# Create application executable files
+set(APPLICATION_NAME ${PROJECT_NAME})
+set(APPLICATION_DESCRIPTION "cpp reports to sonarqube converter")
 
 # define C++ version on standard
 set (CMAKE_CXX_STANDARD 20)
@@ -104,7 +107,7 @@ endif ()
 include(InstallRequiredSystemLibraries)
 
 set(CPACK_PACKAGE_NAME "cpp-coso")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "cpp reports to sonarqube converter")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${APPLICATION_DESCRIPTION}")
 # set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/docs/README.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}-${CMAKE_PROJECT_VERSION}")
@@ -117,7 +120,7 @@ if(WIN32 AND NOT UNIX)
   set(CPACK_NSIS_DISPLAY_NAME "${PROJECT_NAME} ${CMAKE_PROJECT_VERSION} cpp reports to sonarqube converter")
   set(CPACK_NSIS_HELP_LINK "http:\\\\\\\\www.github.com/MGuillaumeF")
   set(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\www.github.com/MGuillaumeF")
-  set(CPACK_NSIS_CONTACT "draft@gmail.com")
+  set(CPACK_NSIS_CONTACT "${CPACK_PACKAGE_CONTACT}")
   set(CPACK_NSIS_MODIFY_PATH ON)
 else()
   set(CPACK_STRIP_FILES "bin/cpp-coso")
