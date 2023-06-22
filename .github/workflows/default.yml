@@ -13,7 +13,7 @@ on:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
-  BOOST_VERSION: 1.79.0
+  BOOST_VERSION: 1.81.0
   APPLICATION_VERSION: 0.2.2
   APPLICATION_NAME: cpp-coso
 
@@ -455,7 +455,9 @@ jobs:
       run: git checkout delivery --
 
     - name: check version is not duplicated
-      run: ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1) || echo "The version number is available, prepare publish...")
+      run: |
+        ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1)
+        echo "The version number is available, prepare publish...")
 
     - name: Download docs
       uses: actions/download-artifact@v3
