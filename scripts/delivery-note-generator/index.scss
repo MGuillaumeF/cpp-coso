@@ -1,0 +1,46 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Helvetica, Arial, sans-serif;
+}
+#logo img {
+  max-width: 250px;
+}
+
+details {
+  &.app-version {
+    margin-top: 1em;
+    border-radius: 0.25em;
+    border: 1px solid hsla(0, 0%, 0%, 0.322);
+  }
+  &.app-version summary {
+    min-width: 25em;
+    height: 1.5em;
+    border: 1px solid #0d6ac1;
+    border-radius: 0.25em;
+    background-color: #0d6ac1;
+    color: #f07427;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+}
+h4.os-name {
+  margin-left: 1em;
+}
+
+a {
+  &:link,
+  &:visited {
+    color: #0d6ac1;
+  }
+
+  &:hover {
+    color: #f07427;
+  }
+}
