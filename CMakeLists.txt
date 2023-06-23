@@ -6,7 +6,7 @@ project(cpp-coso VERSION "0.2.2")
 
 set(GITHUB_USERNAME "MGuillaumeF")
 set(CPACK_PACKAGE_VENDOR "${GITHUB_USERNAME}")
-set(CPACK_PACKAGE_CONTACT "draft@gmail.com")
+set(CPACK_PACKAGE_CONTACT "mguillaumef@gmail.com")
 set(COMPANY_NAME "")
 set(LEGAL_COPYRIGHT "")
 

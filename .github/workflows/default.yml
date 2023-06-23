@@ -14,7 +14,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   BOOST_VERSION: 1.81.0
-  APPLICATION_VERSION: 0.2.2
+  APPLICATION_VERSION: 0.2.3
   APPLICATION_NAME: cpp-coso
 
 permissions: write-all
@@ -463,7 +463,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
-        path: delivery/${{env.APPLICATION_VERSION}}
+        path: delivery/${{env.APPLICATION_VERSION}}/doc
 
     - name: Download Linux version DEBIAN
       uses: actions/download-artifact@v3
@@ -500,6 +500,12 @@ jobs:
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
         path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Update Deployment html page
+      working-directory: ${{github.workspace}}/scripts/delivery-note-generator
+      run: |
+        npm install
+        npm run build
 
     - name: setup git config
       run: |

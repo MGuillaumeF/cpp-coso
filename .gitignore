@@ -43,3 +43,7 @@ reports
 *.gcov
 *.gcda
 *.gcno
+/index.html
+/cpp-coso.svg
+
+/main.*.bundle.js

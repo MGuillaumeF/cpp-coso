@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>CPP-COSO</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+  </head>
+  <body>
+    <figure id="logo">
+      <img src="./resources/icon/cpp-coso/cpp-coso.svg" alt="CPP-COSO" />
+      <figcaption>CPP reports convertor to sonarqube</figcaption>
+    </figure>
+    
+    <% for(var i=0; i<htmlWebpackPlugin.options.versions.length; i++) {%>
+    <details class="app-version" open="true">
+      <summary>version <%= htmlWebpackPlugin.options.versions[i] %></summary>
+      <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/">Documentation</a>
+      <h4 class="os-name">Windows</h4>
+      <ul>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-win64.zip"
+            >ZIP Windows x64</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-win64.exe"
+            >Installer Windows x64</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Linux</h4>
+      <ul>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Linux.zip">ZIP Linux</a>
+        </li>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Linux.deb"
+            >Installer Linux</a
+          >
+        </li>
+      </ul>
+      <h4 class="os-name">Mac OSX</h4>
+      <ul>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Darwin.dmg"
+            >Installer Mac OSX</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Darwin.zip">ZIP Mac OSX</a>
+        </li>
+      </ul>
+    </details>
+    <% } %>
+  </body>
+</html>
