@@ -148,7 +148,11 @@ boost::property_tree::ptree ClangTidyIssueReportConvertor::buildLocationTree(
   // add text range to get location of error
   boost::property_tree::ptree textRange;
   textRange.put<std::string>("startLine", line == "0" ? "1" : line);
-  textRange.put<std::string>("startColumn", column);
+  uint64_t startColumn = stoi(column);
+  if (startColumn > 0) {
+    startColumn -= 1;
+  }
+  textRange.put<uint64_t>("startColumn", startColumn);
   location.add_child("textRange", textRange);
 
   return location;

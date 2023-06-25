@@ -89,9 +89,14 @@ boost::property_tree::ptree CppCheckIssueReportConvertor::processing(
         // the line 0 not exist if error is at line 0 (all file for example),
         // move issue at the first line of file
         textRange.put<std::string>("startLine", line == "0" ? "1" : line);
-        textRange.put<std::string>(
-            "startColumn",
-            errorChildNodeContent.get<std::string>("<xmlattr>.column"));
+
+        uint64_t startColumn =
+            errorChildNodeContent.get<uint64_t>("<xmlattr>.column");
+        if (startColumn > 0) {
+          startColumn -= 1;
+        }
+
+        textRange.put<uint64_t>("startColumn", startColumn);
         location.add_child("textRange", textRange);
 
         // if it's first occurency of error add in primary place
