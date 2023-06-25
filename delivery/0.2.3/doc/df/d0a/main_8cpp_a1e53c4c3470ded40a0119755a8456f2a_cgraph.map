@@ -1,0 +1,10 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title="entry of application" alt="" coords="5,110,60,137"/>
+<area shape="rect" id="node2" href="$de/d6b/class_application.html#a7a5f0d21081c19b16f0038f0ce1477a4" title="Method to run application." alt="" coords="108,110,232,137"/>
+<area shape="rect" id="node3" href="$de/dc0/class_test_convertor.html#a9a144655dc1d0174593b9d8c16d1f44d" title="Function to convert unified boost report to sonar generic report." alt="" coords="291,37,497,79"/>
+<area shape="rect" id="node7" href="$d2/d59/class_clang_tidy_issue_report_convertor.html#ab4e324abfed9eda9a0a5ce01c458b197" title="Get instance of singleton ClangTidyIssueReportConvertor." alt="" coords="280,103,508,144"/>
+<area shape="rect" id="node8" href="$d7/d9a/class_cpp_check_issue_report_convertor.html#aec3ad540f1aa46463462c66ff6f9fc77" title="Get instance of singleton CppCheckIssueReportConvertor." alt="" coords="280,168,508,209"/>
+<area shape="rect" id="node4" href="$de/dc0/class_test_convertor.html#abc25ae29b63f0d501f322f31c2077c57" title="method to extract data case from log result test report to convert to sonarqube report" alt="" coords="556,5,755,47"/>
+<area shape="rect" id="node5" href="$de/dc0/class_test_convertor.html#a48e3841031ac5a40c45588a2aef67a5b" title="Save the Result of test in Map object." alt="" coords="557,71,754,112"/>
+<area shape="rect" id="node6" href="$d9/d04/_test_convertor_8cpp.html#a97c6c231c4c9a339e925921214c7f595" title="map to convert boost test node name to sonar test result leveling" alt="" coords="803,78,932,105"/>
+</map>
