@@ -465,6 +465,12 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
 
+    - name: Save Deployment HTML tool temporary
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
+        path: ${{github.workspace}}/scripts/delivery-note-generator
+
     - name: change branch
       run: git checkout delivery --
 
@@ -473,6 +479,18 @@ jobs:
         ([ -d "./delivery/${{env.APPLICATION_VERSION}}" ] && (echo "Error the version ${{env.APPLICATION_VERSION}} already exist in repository" && exit 1)
         echo "The version number is available, prepare publish...")
 
+    - name: Download Deployment HTML tool temporary
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
+        path: ${{github.workspace}}/scripts/delivery-note-generator
+
+    - uses: geekyeggo/delete-artifact@v2
+      if: always()
+      with:
+          name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
+          failOnError: false
+          
     - name: Download docs
       uses: actions/download-artifact@v3
       with:
@@ -541,6 +559,7 @@ jobs:
         git add index.html
         git add cpp-coso.svg
         git add main.*.bundle.js
+        git add scripts/delivery-note-generator
 
     - name: commit/push version
       if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
