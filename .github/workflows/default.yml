@@ -346,30 +346,56 @@ jobs:
         boost_install_dir: 'D:/'
         toolset: msvc
 
-    - name: Generate Target 
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+    - name: Generate Target x64
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x64 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -A x64
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
-    - name: Build Application Windows
+    - name: Build Application Windows x64
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin --config ${{env.BUILD_TYPE}}
+      run: cmake --build ${{github.workspace}}/bin-x64 --config ${{env.BUILD_TYPE}}
 
-    - name: Package Application
-      working-directory: ${{github.workspace}}/bin
+    - name: Package Application x64
+      working-directory: ${{github.workspace}}/bin-x64
       run: cpack -G "ZIP;NSIS64" || type d:/a/cpp-coso/cpp-coso/bin/_CPack_Packages/win64/NSIS64/NSISOutput.log
 
-    - name: Archive Application windows ZIP
+    - name: Archive Application windows ZIP x64
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
-        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
 
     - name: Archive Application windows NSIS 64
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
-        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
+        
+    - name: Generate Target x32
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x32 -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -A Win32
+      env:
+        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
+
+    - name: Build Application Windows x32
+      working-directory: ${{github.workspace}}
+      run: cmake --build ${{github.workspace}}/bin-x32 --config ${{env.BUILD_TYPE}}
+
+    - name: Package Application x32
+      working-directory: ${{github.workspace}}/bin-x32
+      run: cpack -G "ZIP;NSIS" || type d:/a/cpp-coso/cpp-coso/bin/_CPack_Packages/win32/NSIS/NSISOutput.log
+
+    - name: Archive Application windows ZIP x32
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.zip
+        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.zip
+
+    - name: Archive Application windows NSIS 32
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
+        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
+  
   
  install-Windows:
     needs: [build-release-Windows]
