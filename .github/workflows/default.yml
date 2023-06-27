@@ -189,6 +189,9 @@ jobs:
       with:
         boost_version: ${{env.BOOST_VERSION}}
         platform_version: 20.04
+        
+    - name: install dependences
+      run: sudo apt-get install gcc-multilib g++-multilib
 
     - name: Generate Target x64
       run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x64 -DCMAKE_ARCH_TYPE=64 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
@@ -260,10 +263,10 @@ jobs:
 
     - uses: actions/download-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
 
     - name: install
-      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
 
     - name: display installation tree
       run: tree /usr/${{env.APPLICATION_NAME}}
