@@ -15,7 +15,7 @@ public:
    * @param engineId Th engine Id to identify tools
    *
    */
-  GccCompileLogIssueReportConvertor(const std::string &engineId)
+  explicit GccCompileLogIssueReportConvertor(const std::string &engineId)
       : m_engineId(engineId){};
   /**
    * @brief Destroy the Report Convertor object
