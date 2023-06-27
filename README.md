@@ -12,12 +12,17 @@ This application convert cpp result report of lint tools to sonarqube generic da
 
 ## conversions available
 
+- gcc/g++ warning text logs to sonarqube generic data issues
 - cppcheck XML reports to sonarqube generic data issues
 - clang-tidy plain text reports to sonarqube generic data issues
+- boost test XML reports to sonarqube generic test reports
 
 ## how to use
 
 ```sh
+# convert gcc/g++ warnings plain text report to sonarqube generic data issue report
+cpp-coso gcc-warning ./path/to/reports/gcc_warning_source_report.txt ./path/to/reports/gcc-warning-sonarqube-report.json
+
 # convert clang tidy plain text report to sonarqube generic data issue report
 cpp-coso clang-tidy ./path/to/reports/clang_tidy_source_report.txt ./path/to/reports/clang-tidy-sonarqube-report.json
 
@@ -47,6 +52,9 @@ cpp-coso boost-test boost-test-log-report.xml boost-test-results-report.xml boos
 
 - name: Install cpp-coso
   run: sudo dpkg -i cpp-coso-${{env.CPP_COSO_VERSION}}-Linux.deb
+
+- name: Convert GCC warnings to sonarqube format
+  run: /usr/cpp-coso/cpp-coso gcc-warning ./path/to/reports/gcc_warning_report.txt ./path/to/reports/gcc-warning-sonarqube-report.json
 
 - name: Convert Lint Clang-Tidy to sonarqube format
   run: /usr/cpp-coso/cpp-coso clang-tidy ./path/to/reports/clang_tidy_report.txt ./path/to/reports/clang-tidy-sonarqube-report.json

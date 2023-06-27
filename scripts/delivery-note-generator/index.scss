@@ -16,18 +16,30 @@ details {
     margin-top: 1em;
     border-radius: 0.25em;
     border: 1px solid hsla(0, 0%, 0%, 0.322);
-  }
-  &.app-version summary {
-    min-width: 25em;
-    height: 1.5em;
-    border: 1px solid #0d6ac1;
-    border-radius: 0.25em;
-    background-color: #0d6ac1;
-    color: #f07427;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
+    summary {
+      min-width: 25em;
+      height: 1.5em;
+      border: 1px solid #0d6ac1;
+      border-radius: 0.25em;
+      background-color: #0d6ac1;
+      color: #f07427;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+	  padding : 0.2em;
+	  
+		a {
+		  &:link,
+		  &:visited {
+			color: #f07427;
+		  }
+
+		  &:hover {
+			color: #f48538;
+		  }
+		}
+	}
   }
 }
 h4.os-name {

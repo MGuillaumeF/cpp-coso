@@ -13,7 +13,7 @@
     
     <% for(var i=0; i<htmlWebpackPlugin.options.versions.length; i++) {%>
     <details class="app-version" open="true">
-      <summary>version <%= htmlWebpackPlugin.options.versions[i] %> - [<a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/doc/">Documentation</a>]</summary>
+      <summary><h3>v<%= htmlWebpackPlugin.options.versions[i] %></h3><a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/doc/">[Documentation]</a></summary>
       <h4 class="os-name">Windows</h4>
       <ul>
         <li>
@@ -34,7 +34,12 @@
         </li>
         <li>
           <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Linux.deb"
-            >Installer Linux</a
+            >Installer Linux Debian</a
+          >
+        </li>
+        <li>
+          <a href="./delivery/<%= htmlWebpackPlugin.options.versions[i] %>/cpp-coso-<%= htmlWebpackPlugin.options.versions[i] %>-Linux.rpm"
+            >Installer Linux RedHat</a
           >
         </li>
       </ul>

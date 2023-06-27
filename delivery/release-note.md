@@ -2,7 +2,7 @@
 
 ## Version 0 (preview version)
 
-### Version 0.1.0 (current)
+### Version 0.1.0
 
 #### Main goal of version
 
@@ -19,7 +19,7 @@ First implementation with draft interfaces and no configuration for customisatio
 
 - exit status in error case is 0 like success
 
-### Version 0.2.0 (next delivery)
+### Version 0.2.0
 
 #### Main goal of version
 
@@ -36,13 +36,25 @@ Convert Boost Test reports to Sonarqube with generic format
 - add --version, -v options in cli
 - add --help, -h options in cli
 
-### Version 0.3.0 (planning)
+### Version 0.3.0 (next delivery)
+
+#### Main goal of version
+
+Add GCC warning reports capacity
+#### Features of version
+
+- add vcpkg manifest
+- add compile option in CMakeLists.txt
+- add RPM packaging
+- add generated web page for deployments
+- add Readme in doxygen home pages
+- add GCC warning reports
+- fix column start
 
 #### Main goal of version
 
 Add logger and configuration
-
-#### Features of version
+### Version 0.4.0 (planning)
 
 - add icon app in cpack configuration (part 2)
 - add summary after report conversion

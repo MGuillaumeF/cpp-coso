@@ -86,7 +86,7 @@ jobs:
       with:
         boost_version: ${{env.BOOST_VERSION}}
         platform_version: 20.04
-  
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
@@ -99,11 +99,13 @@ jobs:
 
     - name: Build Application
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin
-
+      run: |
+        cmake --build ${{github.workspace}}/bin 2> ${{github.workspace}}/reports/gcc_warning_report.txt
+        cat ${{github.workspace}}/reports/gcc_warning_report.txt
+        
     - name: Lint Cpp Check
       run: cppcheck --enable=all --language=c++ --std=c++20 --xml --output-file=${{github.workspace}}/reports/cppcheck_report.xml --project=bin/compile_commands.json
-
+      
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
 
@@ -123,10 +125,14 @@ jobs:
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso clang-tidy ${{github.workspace}}/reports/clang_tidy_report.txt ${{github.workspace}}/reports/clang-tidy-sonarqube-report.json
       
-    - name: Convert Lint Cpp Check to sonarqube format
+    - name: Convert Lint CppCheck to sonarqube format
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso cppcheck ${{github.workspace}}/reports/cppcheck_report.xml ${{github.workspace}}/reports/cppcheck-sonarqube-report.json
-
+      
+    - name: Convert GCC Warnings to sonarqube format
+      working-directory: ${{github.workspace}}/bin
+      run: ./cpp-coso gcc-warning ${{github.workspace}}/reports/gcc_warning_report.txt ${{github.workspace}}/reports/gcc-warning-sonarqube-report.json
+      
     - name: Application Tests ctest
       working-directory: ${{github.workspace}}/bin
       run: ctest
@@ -195,7 +201,7 @@ jobs:
 
     - name: Package Application
       working-directory: ${{github.workspace}}/bin
-      run: cpack -G "ZIP;DEB"
+      run: cpack -G "ZIP;DEB;RPM"
 
     - name: Archive Application ZIP
       uses: actions/upload-artifact@v3
@@ -208,6 +214,12 @@ jobs:
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        
+    - name: Archive Application RPM
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
 
  install-Linux:
     needs: [build-release-Linux]
@@ -356,6 +368,7 @@ jobs:
       id: install-boost
       with:
         boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 11
 
     - name: Generate Target
       run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
@@ -383,6 +396,7 @@ jobs:
       id: install-boost
       with:
         boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 11
 
     - name: Generate Target
       run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
@@ -469,6 +483,12 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download Linux version RedHat
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version ZIP

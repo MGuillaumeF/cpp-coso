@@ -56,11 +56,13 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
       "-h, --help       display help message\r\n"
       "-v, --version    display version of application\r\n"
       "[EXAMPLES]\r\n"
-      "cpp-coso cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
+      "cpp-coso cppcheck cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
       "cpp-coso clang-tidy clang-tidy-report.txt "
       "clang-tidy-sonarqube-report.json\r\n"
+      "cpp-coso gcc-warning gcc-warning-report.txt "
+      "gcc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
-      "boost-test-results-report.xml boost-test-sonarqube-report.json\n";
+      "boost-test-results-report.xml boost-test-sonarqube-report.json";
 
   checkApplicationEntryRun({"-h"}, 0, HELP_MESSAGE, "");
   checkApplicationEntryRun({"--help"}, 0, HELP_MESSAGE, "");
