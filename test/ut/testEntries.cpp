@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
       "cpp-coso gcc-warning gcc-warning-report.txt "
       "gcc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
-      "boost-test-results-report.xml boost-test-sonarqube-report.json";
+      "boost-test-results-report.xml boost-test-sonarqube-report.json\n";
 
   checkApplicationEntryRun({"-h"}, 0, HELP_MESSAGE, "");
   checkApplicationEntryRun({"--help"}, 0, HELP_MESSAGE, "");
