@@ -459,56 +459,31 @@ jobs:
         boost_version: ${{env.BOOST_VERSION}}
         platform_version: 11
 
-    - name: Generate Target x64
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x64 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=x86_64
+    - name: Generate Target
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
-    - name: Build Application x64
+    - name: Build Application
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin-x64
+      run: cmake --build ${{github.workspace}}/bin
 
-    - name: Package Application x64
-      working-directory: ${{github.workspace}}/bin-x64
+    - name: Package Application
+      working-directory: ${{github.workspace}}/bin
       run: cpack -G "ZIP;DragNDrop"
 
-    - name: Archive Application ZIP x64
+    - name: Archive Application ZIP
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x64.zip
-        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
 
-    - name: Archive Application DMG x64
+    - name: Archive Application DMG
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x64.dmg
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
  
-    - name: Generate Target x32
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x32 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_C_COMPILER=clang  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_OSX_ARCHITECTURES=i386
-      env:
-        BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
-
-    - name: Build Application x32
-      working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin-x32
-
-    - name: Package Application x64
-      working-directory: ${{github.workspace}}/bin-x32
-      run: cpack -G "ZIP;DragNDrop"
-
-    - name: Archive Application ZIP x32
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x32.zip
-        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x32.zip
-
-    - name: Archive Application DMG x32
-      uses: actions/upload-artifact@v3
-      with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x32.dmg
-        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin-x64.dmg
-
  install-MacOSX:
     needs: [build-release-MacOSX]
     if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
