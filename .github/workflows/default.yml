@@ -230,6 +230,9 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+    
+    - name: Install armx64 toolchain
+      run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -531,7 +534,7 @@ jobs:
 
  publish:
     if: github.actor != 'dependabot[bot]'
-    needs: [install-Linux, install-Windows, install-MacOSX]
+    needs: [install-Linux, build-release-Linux-arm64, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
 
