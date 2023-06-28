@@ -222,7 +222,7 @@ jobs:
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
 
  build-release-Linux-arm64:
-    if: never()
+    if: ${{ false }}
     needs: [sonarcloud-analyse]
     runs-on: ubuntu-latest
     steps:
