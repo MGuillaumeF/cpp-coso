@@ -222,6 +222,7 @@ jobs:
         path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
 
  build-release-Linux-arm64:
+    if: never()
     needs: [sonarcloud-analyse]
     runs-on: ubuntu-latest
     steps:
@@ -534,7 +535,7 @@ jobs:
 
  publish:
     if: github.actor != 'dependabot[bot]'
-    needs: [install-Linux, build-release-Linux-arm64, install-Windows, install-MacOSX]
+    needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
 
@@ -578,31 +579,43 @@ jobs:
     - name: Download Linux version DEBIAN
       uses: actions/download-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version RedHat
       uses: actions/download-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.rpm
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version ZIP
       uses: actions/download-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
-    - name: Download Windows version NSIS
+    - name: Download Windows version NSIS win64
       uses: actions/download-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
         path: delivery/${{env.APPLICATION_VERSION}}
     
-    - name: Download Windows version ZIP
+    - name: Download Windows version ZIP win64
       uses: actions/download-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
+        path: delivery/${{env.APPLICATION_VERSION}}
+
+    - name: Download Windows version NSIS win32
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
+        path: delivery/${{env.APPLICATION_VERSION}}
+    
+    - name: Download Windows version ZIP win32
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download MacOSX version DragNDrop
