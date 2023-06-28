@@ -283,7 +283,7 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
 
     - name: install
-      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
+      run: sudo dpkg -i ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
 
     - name: display installation tree
       run: tree /usr/${{env.APPLICATION_NAME}}
