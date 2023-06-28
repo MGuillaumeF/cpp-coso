@@ -173,7 +173,7 @@ jobs:
     #   env:
     #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
- build-release-Linux:
+ build-release-Linux-x64:
     needs: [sonarcloud-analyse]
     runs-on: ubuntu-latest
     steps:
@@ -189,75 +189,89 @@ jobs:
       with:
         boost_version: ${{env.BOOST_VERSION}}
         platform_version: 20.04
-        
-    - name: install dependences
-      run: sudo apt-get install gcc-multilib g++-multilib
-
+      
     - name: Generate Target x64
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x64 -DCMAKE_ARCH_TYPE=64 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
     - name: Build Application x64
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin-x64
+      run: cmake --build ${{github.workspace}}/bin
 
     - name: Package Application x64
-      working-directory: ${{github.workspace}}/bin-x64
+      working-directory: ${{github.workspace}}/bin
       run: cpack -G "ZIP;DEB;RPM"
 
     - name: Archive Application ZIP x64
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.zip
-        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
 
     - name: Archive Application DEB x64
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
-        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
         
     - name: Archive Application RPM x64
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.rpm
-        path: ${{github.workspace}}/bin-x64/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
 
-    - name: Generate Target x32
-      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin-x32 -DCMAKE_ARCH_TYPE=32 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_CXX_USE_RESPONSE_FILE_FOR_INCLUDES=OFF -DCMAKE_CXX_COMPILER=g++ -DCMAKE_C_COMPILER=gcc  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+ build-release-Linux-arm64:
+    needs: [sonarcloud-analyse]
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+
+    - name: Install boost
+      uses: MarkusJx/install-boost@v2.4.4
+      id: install-boost
+      with:
+        boost_version: ${{env.BOOST_VERSION}}
+        platform_version: 20.04
+        arch: aarch64
+      
+    - name: Generate Target arm64
+      run: cmake -S ${{github.workspace}} -B ${{github.workspace}}/bin -D CMAKE_TOOLCHAIN_FILE=${{github.workspace}}/tools/toolchains/Toolchain-RaspberryPi.cmake -D Boost_NO_SYSTEM_PATHS=TRUE -DBoost_DEBUG=ON -D Boost_INCLUDE_DIR=${{ steps.install-boost.outputs.BOOST_ROOT }}/include  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
       env:
         BOOST_ROOT: ${{ steps.install-boost.outputs.BOOST_ROOT }}
 
-    - name: Build Application x32
+    - name: Build Application arm64
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin-x32
+      run: cmake --build ${{github.workspace}}/bin
 
-    - name: Package Application x32
-      working-directory: ${{github.workspace}}/bin-x32
+    - name: Package Application arm64
+      working-directory: ${{github.workspace}}/bin
       run: cpack -G "ZIP;DEB;RPM"
 
-    - name: Archive Application ZIP x32
+    - name: Archive Application ZIP arm64
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x32.zip
-        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-arm64.zip
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.zip
 
-    - name: Archive Application DEB x32
+    - name: Archive Application DEB arm64
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x32.deb
-        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-arm64.deb
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.deb
         
-    - name: Archive Application RPM x32
+    - name: Archive Application RPM arm64
       uses: actions/upload-artifact@v3
       with:
-        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x32.rpm
-        path: ${{github.workspace}}/bin-x32/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
-
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-arm64.rpm
+        path: ${{github.workspace}}/bin/${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux.rpm
 
  install-Linux:
-    needs: [build-release-Linux]
+    needs: [build-release-Linux-x64]
     runs-on: ubuntu-latest
     steps:
 
