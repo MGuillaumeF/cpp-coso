@@ -36,7 +36,7 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # using GCC
   MESSAGE("Compiler used is g++")
-  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -pedantic -Wformat -Wformat-security -Winit-self -Wparentheses -Wsequence-point -Wreturn-type -Wunknown-pragmas -Wfloat-equal -Wtype-limits -Woverlength-strings -Waddress")
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -pedantic -Wformat -Wformat-security -Winit-self -Wparentheses -Wsequence-point -Wreturn-type -Wunknown-pragmas -Wfloat-equal -Wtype-limits -Woverlength-strings -Waddress")
   SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -ftest-coverage -lgcov --coverage")
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage --coverage")
