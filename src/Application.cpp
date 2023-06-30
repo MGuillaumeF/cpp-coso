@@ -144,18 +144,20 @@ int32_t Application::run(const std::list<std::string> &args) {
             exitStatus = EXIT_FAILURE;
           }
         } else {
-          std::cerr << "Bad usage of tool : " << std::endl
-                    << "unknown entry reports format, accepted format : "
-                       "cppcheck, clang-tidy, boost-test"
-                    << std::endl;
+          std::cerr
+              << "Bad usage of tool : " << std::endl
+              << "unknown entry reports format, accepted format : "
+                 "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+              << std::endl;
           // change process return value
           exitStatus = EXIT_FAILURE;
         }
       } else {
-        std::cerr << "Bad usage of tool : " << std::endl
-                  << "unknown entry reports format, accepted format : "
-                     "cppcheck, clang-tidy, boost-test"
-                  << std::endl;
+        std::cerr
+            << "Bad usage of tool : " << std::endl
+            << "unknown entry reports format, accepted format : "
+               "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+            << std::endl;
         // change process return value
         exitStatus = EXIT_FAILURE;
       }

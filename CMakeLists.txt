@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Add name on project 
-project(cpp-coso VERSION "0.2.3")
+project(cpp-coso VERSION "0.2.4")
 
 set(GITHUB_USERNAME "MGuillaumeF")
 set(CPACK_PACKAGE_VENDOR "${GITHUB_USERNAME}")

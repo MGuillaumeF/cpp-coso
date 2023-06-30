@@ -4,7 +4,7 @@ Run cmake --build D:\a\cpp-coso\cpp-coso/bin --config Debug
   env:
     BUILD_TYPE: Debug
     BOOST_VERSION: 1.81.0
-    APPLICATION_VERSION: 0.2.3
+    APPLICATION_VERSION: 0.2.4
     APPLICATION_NAME: cpp-coso
 MSBuild version 17.6.3+07e294721 for .NET Framework
 

@@ -46,8 +46,8 @@ void checkApplicationEntryRun(const std::list<std::string> &arguments,
 
 BOOST_AUTO_TEST_CASE(testCLIEntries) {
   // VERSION TEST
-  checkApplicationEntryRun({"--version"}, 0, "0.2.3\n", "");
-  checkApplicationEntryRun({"-v"}, 0, "0.2.3\n", "");
+  checkApplicationEntryRun({"--version"}, 0, "0.2.4\n", "");
+  checkApplicationEntryRun({"-v"}, 0, "0.2.4\n", "");
 
   // HELP MESSAGE TEST
   const std::string HELP_MESSAGE =
@@ -71,7 +71,7 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
 
   const std::string BAD_TOOL_MESSAGE =
       "Bad usage of tool : \nunknown entry reports format, accepted format : "
-      "cppcheck, clang-tidy, boost-test\n";
+      "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test\n";
   const std::string BAD_TOOL_CLANG_TIDY_CPP_CHECK_MESSAGE =
       "Bad usage of tool : "
       "\narguments list error, accepted format :"

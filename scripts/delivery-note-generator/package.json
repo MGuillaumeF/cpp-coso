@@ -1,6 +1,6 @@
 {
   "name": "delivery-note-generator",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Generator of delivery HTML page of published version of package cpp-coso",
   "main": "index.js",
   "scripts": {
