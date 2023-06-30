@@ -46,8 +46,8 @@ void checkApplicationEntryRun(const std::list<std::string> &arguments,
 
 BOOST_AUTO_TEST_CASE(testCLIEntries) {
   // VERSION TEST
-  checkApplicationEntryRun({"--version"}, 0, "0.2.3\n", "");
-  checkApplicationEntryRun({"-v"}, 0, "0.2.3\n", "");
+  checkApplicationEntryRun({"--version"}, 0, "0.3.0\n", "");
+  checkApplicationEntryRun({"-v"}, 0, "0.3.0\n", "");
 
   // HELP MESSAGE TEST
   const std::string HELP_MESSAGE =
@@ -56,9 +56,13 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
       "-h, --help       display help message\r\n"
       "-v, --version    display version of application\r\n"
       "[EXAMPLES]\r\n"
-      "cpp-coso cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
+      "cpp-coso cppcheck cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
       "cpp-coso clang-tidy clang-tidy-report.txt "
       "clang-tidy-sonarqube-report.json\r\n"
+      "cpp-coso gcc-warning gcc-warning-report.txt "
+      "gcc-warning-sonarqube-report.json\r\n"
+      "cpp-coso mvsc-warning mvsc-warning-report.txt "
+      "mvsc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
       "boost-test-results-report.xml boost-test-sonarqube-report.json\n";
 
@@ -67,7 +71,7 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
 
   const std::string BAD_TOOL_MESSAGE =
       "Bad usage of tool : \nunknown entry reports format, accepted format : "
-      "cppcheck, clang-tidy, boost-test\n";
+      "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test\n";
   const std::string BAD_TOOL_CLANG_TIDY_CPP_CHECK_MESSAGE =
       "Bad usage of tool : "
       "\narguments list error, accepted format :"

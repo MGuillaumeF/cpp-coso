@@ -2,6 +2,8 @@
 
 #include "report/ClangTidyIssueReportConvertor.hpp"
 #include "report/CppCheckIssueReportConvertor.hpp"
+#include "report/GccCompileWarningIssueReportConvertor.hpp"
+#include "report/MvscCompileWarningIssueReportConvertor.hpp"
 #include "report/TestConvertor.hpp"
 
 // boost imports
@@ -53,9 +55,13 @@ int32_t Application::run(const std::list<std::string> &args) {
       "-h, --help       display help message\r\n"
       "-v, --version    display version of application\r\n"
       "[EXAMPLES]\r\n"
-      "cpp-coso cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
+      "cpp-coso cppcheck cppcheck-report.xml cppcheck-sonarqube-report.json\r\n"
       "cpp-coso clang-tidy clang-tidy-report.txt "
       "clang-tidy-sonarqube-report.json\r\n"
+      "cpp-coso gcc-warning gcc-warning-report.txt "
+      "gcc-warning-sonarqube-report.json\r\n"
+      "cpp-coso mvsc-warning mvsc-warning-report.txt "
+      "mvsc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
       "boost-test-results-report.xml boost-test-sonarqube-report.json";
   try {
@@ -98,7 +104,9 @@ int32_t Application::run(const std::list<std::string> &args) {
             exitStatus = EXIT_FAILURE;
           }
 
-        } else if (reportType == "cppcheck" || reportType == "clang-tidy") {
+        } else if (reportType == "cppcheck" || reportType == "clang-tidy" ||
+                   reportType == "gcc-warning" ||
+                   reportType == "mvsc-warning") {
           if (args.size() == ARGUMENTS_LINT_SIZE) {
             const std::string inputFile = argsCopy.front();
             argsCopy.pop_front();
@@ -110,10 +118,18 @@ int32_t Application::run(const std::list<std::string> &args) {
                                                                    outputFile);
               CppCheckIssueReportConvertor::getInstance().reset();
 
-            } else {
+            } else if (reportType == "clang-tidy") {
               ClangTidyIssueReportConvertor::getInstance()->convert({inputFile},
                                                                     outputFile);
               ClangTidyIssueReportConvertor::getInstance().reset();
+            } else if (reportType == "gcc-warning") {
+              GccCompileWarningIssueReportConvertor::getInstance()->convert(
+                  {inputFile}, outputFile);
+              GccCompileWarningIssueReportConvertor::getInstance().reset();
+            } else {
+              MvscCompileWarningIssueReportConvertor::getInstance()->convert(
+                  {inputFile}, outputFile);
+              MvscCompileWarningIssueReportConvertor::getInstance().reset();
             }
           } else {
             std::cerr
@@ -128,18 +144,20 @@ int32_t Application::run(const std::list<std::string> &args) {
             exitStatus = EXIT_FAILURE;
           }
         } else {
-          std::cerr << "Bad usage of tool : " << std::endl
-                    << "unknown entry reports format, accepted format : "
-                       "cppcheck, clang-tidy, boost-test"
-                    << std::endl;
+          std::cerr
+              << "Bad usage of tool : " << std::endl
+              << "unknown entry reports format, accepted format : "
+                 "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+              << std::endl;
           // change process return value
           exitStatus = EXIT_FAILURE;
         }
       } else {
-        std::cerr << "Bad usage of tool : " << std::endl
-                  << "unknown entry reports format, accepted format : "
-                     "cppcheck, clang-tidy, boost-test"
-                  << std::endl;
+        std::cerr
+            << "Bad usage of tool : " << std::endl
+            << "unknown entry reports format, accepted format : "
+               "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+            << std::endl;
         // change process return value
         exitStatus = EXIT_FAILURE;
       }

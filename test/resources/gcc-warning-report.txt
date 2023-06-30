@@ -1,0 +1,29 @@
+[  5%] Building CXX object CMakeFiles/cpp-coso.dir/src/Application.cpp.o
+[ 10%] Building CXX object CMakeFiles/cpp-coso.dir/src/report/ClangTidyIssueReportConvertor.cpp.o
+[ 15%] Building CXX object CMakeFiles/cpp-coso.dir/src/report/CppCheckIssueReportConvertor.cpp.o
+[ 20%] Building CXX object CMakeFiles/cpp-coso.dir/src/report/IssueReportConvertor.cpp.o
+[ 25%] Building CXX object CMakeFiles/cpp-coso.dir/src/report/ReportConvertor.cpp.o
+[ 30%] Building CXX object CMakeFiles/cpp-coso.dir/src/report/TestConvertor.cpp.o
+[ 35%] Building CXX object CMakeFiles/cpp-coso.dir/src/main.cpp.o
+[ 40%] Linking CXX executable cpp-coso
+[ 40%] Built target cpp-coso
+[ 45%] Building CXX object CMakeFiles/cpp-cosoTest.dir/test/ut/main.cpp.o
+[ 50%] Building CXX object CMakeFiles/cpp-cosoTest.dir/test/ut/testBoostTestFwkResultConvertor.cpp.o
+In file included from /home/runner/work/cpp-coso/cpp-coso/boost/boost/include/boost/test/test_tools.hpp:45,
+                 from /home/runner/work/cpp-coso/cpp-coso/boost/boost/include/boost/test/unit_test.hpp:18,
+                 from /home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp:2:
+/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp: In member function ‘void boostTestFrameworksConvertor::testValidBoostResultReport::test_method()’:
+/home/runner/work/cpp-coso/cpp-coso/test/ut/testBoostTestFwkResultConvertor.cpp:44:73: warning: comparison of unsigned expression in ‘>= 0’ is always true [-Wtype-limits]
+   44 |           BOOST_CHECK(testCaseValue.get<uint64_t>("<xmlattr>.duration") >= 0);
+      |                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~
+[ 55%] Building CXX object CMakeFiles/cpp-cosoTest.dir/test/ut/testClangTidyIssueConvertor.cpp.o
+[ 60%] Building CXX object CMakeFiles/cpp-cosoTest.dir/test/ut/testCppCheckIssueConvertor.cpp.o
+[ 65%] Building CXX object CMakeFiles/cpp-cosoTest.dir/test/ut/testEntries.cpp.o
+[ 70%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/Application.cpp.o
+[ 75%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/report/ClangTidyIssueReportConvertor.cpp.o
+[ 80%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/report/CppCheckIssueReportConvertor.cpp.o
+[ 85%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/report/IssueReportConvertor.cpp.o
+[ 90%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/report/ReportConvertor.cpp.o
+[ 95%] Building CXX object CMakeFiles/cpp-cosoTest.dir/src/report/TestConvertor.cpp.o
+[100%] Linking CXX executable cpp-cosoTest
+[100%] Built target cpp-cosoTest

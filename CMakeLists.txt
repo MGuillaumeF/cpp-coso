@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Add name on project 
-project(cpp-coso VERSION "0.2.3")
+project(cpp-coso VERSION "0.3.0")
 
 set(GITHUB_USERNAME "MGuillaumeF")
 set(CPACK_PACKAGE_VENDOR "${GITHUB_USERNAME}")
@@ -26,25 +26,34 @@ endif()
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   # using Clang
   MESSAGE("Compiler used is Clang")
-  SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++20 -g -O0 -fprofile-arcs -ftest-coverage --coverage")
-  SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -ftest-coverage --coverage") #-stdlib=libc++ -lc++abi
+  if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage --coverage")
+    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -ftest-coverage -lgcov --coverage")
+  else ()
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
+  endif()
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   # using GCC
   MESSAGE("Compiler used is g++")
-  SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -std=c++2a -g -O0 -fprofile-arcs -ftest-coverage --coverage")
-  SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -ftest-coverage -lgcov --coverage")
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -Wall -Wextra -pedantic -Wformat -Wformat-security -Winit-self -Wparentheses -Wsequence-point -Wreturn-type -Wunknown-pragmas -Wfloat-equal -Wtype-limits -Woverlength-strings -Waddress")
+  SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static-libstdc++ -ftest-coverage -lgcov --coverage")
+  if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage --coverage")
+    SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -ftest-coverage -lgcov --coverage")
+  else ()
+    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O")
+  endif()
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
   # using Intel C++
   MESSAGE("Compiler used is Intel")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   # using Visual Studio C++
   MESSAGE("Compiler used is Microsoft Visual Studio C++")
-  SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /std:c++20")
-  SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} /EHsc /MD")
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++20 /Wall /Zi /D_CRT_NONSTDC_NO_DEPRECATE /D_CRT_SECURE_NP_DEPRECATE /DNOMINMAX")
+  SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS}") 
+  #/EHsc /MD
 endif()
-
-add_definitions("-Wall")
 
 # Add all tests files in TESTS_SRC_UT_DIR variable
 file(GLOB_RECURSE TESTS_SRC_UT_DIR CONFIGURE_DEPENDS

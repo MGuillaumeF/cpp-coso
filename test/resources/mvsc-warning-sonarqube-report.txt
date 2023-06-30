@@ -1,0 +1,424 @@
+{
+    "issues": [
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\/ClangTidyIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "17",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\/GccCompileWarningIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "18",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4365",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "conversion from 'int' to 'uint64_t', signed\/unsigned mismatch",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\GccCompileLogIssueReportConvertor.cpp",
+                "textRange": {
+                    "startLine": "125",
+                    "startColumn": "37"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\.\/GccCompileLogIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "18",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4100",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced formal parameter",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\GccCompileWarningIssueReportConvertor.cpp",
+                "textRange": {
+                    "startLine": "24",
+                    "startColumn": "23"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ValidationException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4296",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "expression is always true",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\testBoostTestFwkResultConvertor.cpp",
+                "textRange": {
+                    "startLine": "44",
+                    "startColumn": "10"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\..\/..\/src\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\..\/..\/src\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\..\/..\/src\/report\/ClangTidyIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "17",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4100",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced formal parameter",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\testEntries.cpp",
+                "textRange": {
+                    "startLine": "27",
+                    "startColumn": "49"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4100",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced formal parameter",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\test\\ut\\testEntries.cpp",
+                "textRange": {
+                    "startLine": "26",
+                    "startColumn": "75"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\/ClangTidyIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "17",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\/GccCompileWarningIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "18",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4365",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "conversion from 'int' to 'uint64_t', signed\/unsigned mismatch",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\GccCompileLogIssueReportConvertor.cpp",
+                "textRange": {
+                    "startLine": "125",
+                    "startColumn": "37"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\.\/GccCompileLogIssueReportConvertor.hpp",
+                "textRange": {
+                    "startLine": "18",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4100",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced formal parameter",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\GccCompileWarningIssueReportConvertor.cpp",
+                "textRange": {
+                    "startLine": "24",
+                    "startColumn": "23"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "20",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ConversionException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        },
+        {
+            "engineId": "mvsc-warning",
+            "ruleId": "C4514",
+            "severity": "MAJOR",
+            "type": "CODE_SMELL",
+            "primaryLocation": {
+                "message": "unreferenced inline function has been removed",
+                "filePath": "D:\\a\\cpp-coso\\cpp-coso\\src\\report\\..\/exception\/ValidationException.hpp",
+                "textRange": {
+                    "startLine": "14",
+                    "startColumn": "2"
+                }
+            }
+        }
+    ]
+}
