@@ -61,6 +61,8 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
       "clang-tidy-sonarqube-report.json\r\n"
       "cpp-coso gcc-warning gcc-warning-report.txt "
       "gcc-warning-sonarqube-report.json\r\n"
+      "cpp-coso mvsc-warning mvsc-warning-report.txt "
+      "mvsc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
       "boost-test-results-report.xml boost-test-sonarqube-report.json\n";
 
