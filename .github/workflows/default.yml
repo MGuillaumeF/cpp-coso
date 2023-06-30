@@ -14,7 +14,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   BOOST_VERSION: 1.81.0
-  APPLICATION_VERSION: 0.2.4
+  APPLICATION_VERSION: 0.3.0
   APPLICATION_NAME: cpp-coso
 
 permissions: write-all
@@ -559,7 +559,7 @@ jobs:
         echo "The version number is available, prepare publish...")
 
     - name: Download Deployment HTML tool temporary
-      uses: actions/upload-artifact@v3
+      uses: actions/download-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
         path: ${{github.workspace}}/scripts/delivery-note-generator
