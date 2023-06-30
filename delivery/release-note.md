@@ -36,11 +36,12 @@ Convert Boost Test reports to Sonarqube with generic format
 - add --version, -v options in cli
 - add --help, -h options in cli
 
-### Version 0.3.0 (next delivery)
+### Version 0.3.0
 
 #### Main goal of version
 
-Add GCC warning reports capacity
+Add GCC and MVSC warning reports capacity
+
 #### Features of version
 
 - add vcpkg manifest
@@ -49,6 +50,7 @@ Add GCC warning reports capacity
 - add generated web page for deployments
 - add Readme in doxygen home pages
 - add GCC warning reports
+- add MVSC warning reports
 - fix column start
 
 #### Main goal of version
