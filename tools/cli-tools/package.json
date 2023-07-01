@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "download": "node src/main.mjs download",
+    "extract": "node src/main.mjs extract",
+    "build:doc": "jsdoc -c jsdoc.conf.json"
+  },
+  "dependencies": {
+    "zip-lib": "^0.7.3"
+  },
+  "devDependencies": {
+    "@mguillaumef/audiso": "^0.0.4",
+    "jsdoc": "^4.0.2"
+  }
+}

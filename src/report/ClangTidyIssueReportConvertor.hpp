@@ -2,20 +2,19 @@
 #define __CLANG_TIDY_ISSUE_REPORT_CONVERTOR_HPP__
 
 // extend abstract class
-#include "./GccCompileLogIssueReportConvertor.hpp"
+#include "./UnixTextLogReportConvertor.hpp"
 
 /**
  * @brief abstract class to convert issue report
  */
-class ClangTidyIssueReportConvertor : public GccCompileLogIssueReportConvertor {
+class ClangTidyIssueReportConvertor : public UnixTextLogReportConvertor {
 
 public:
   /**
    * @brief Construct a new Report Convertor object
    *
    */
-  ClangTidyIssueReportConvertor()
-      : GccCompileLogIssueReportConvertor("clang-tidy"){};
+  ClangTidyIssueReportConvertor() : UnixTextLogReportConvertor("clang-tidy"){};
 
   /**
    * @brief Destroy the Report Convertor object
@@ -42,9 +41,9 @@ public:
    * @brief Get the Issue Severity object
    *
    * @param reportSeverity
-   * @return const ESonarCloudSeverity
+   * @return ESonarCloudSeverity
    */
-  const ESonarCloudSeverity
+  ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity) override;
 
   /**

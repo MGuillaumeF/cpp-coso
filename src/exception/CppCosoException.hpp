@@ -21,6 +21,12 @@ public:
   explicit CppCosoException(const std::string_view &message)
       : m_message(message) {}
 
+  /**
+   * @brief The explanation of exceptn cause
+   * @see std::exception
+   *
+   * @return const char* The message of exception
+   */
   const char *what() const noexcept override { return m_message.c_str(); }
 
 private:

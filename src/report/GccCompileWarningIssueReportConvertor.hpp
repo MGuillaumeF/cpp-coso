@@ -2,13 +2,13 @@
 #define __GCC_COMPILE_WARNING_ISSUE_REPORT_CONVERTOR_HPP__
 
 // extend abstract class
-#include "./GccCompileLogIssueReportConvertor.hpp"
+#include "./UnixTextLogReportConvertor.hpp"
 
 /**
  * @brief abstract class to convert issue report
  */
 class GccCompileWarningIssueReportConvertor
-    : public GccCompileLogIssueReportConvertor {
+    : public UnixTextLogReportConvertor {
 
 public:
   /**
@@ -16,7 +16,7 @@ public:
    *
    */
   GccCompileWarningIssueReportConvertor()
-      : GccCompileLogIssueReportConvertor("gcc-warning"){};
+      : UnixTextLogReportConvertor("gcc-warning"){};
   /**
    * @brief Destroy the Report Convertor object
    *
@@ -39,15 +39,6 @@ public:
    */
   GccCompileWarningIssueReportConvertor &
   operator=(GccCompileWarningIssueReportConvertor &&) = delete;
-
-  /**
-   * @brief Get the Issue Severity object
-   *
-   * @param reportSeverity
-   * @return const ESonarCloudSeverity
-   */
-  const ESonarCloudSeverity
-  getMappedIssueSeverity(const std::string &reportSeverity) override;
 
   /**
    * @brief Get instance of singleton GccCompileWarningIssueReportConvertor

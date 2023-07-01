@@ -12,6 +12,43 @@
 enum class ESonarCloudSeverity { INFO, MINOR, MAJOR, CRITICAL, BLOCKER };
 
 /**
+ * @brief The issue structure to complete for each item parsed
+ *
+ */
+struct Issue {
+  /**
+   * @brief The path of source file where the issue is found
+   *
+   */
+  std::string source_file;
+  /**
+   * @brief The row where issue is raised in source file (start at index 1)
+   *
+   */
+  uint64_t line;
+  /**
+   * @brief The column where issue is raised in source file (start at index 0)
+   *
+   */
+  uint64_t column;
+  /**
+   * @brief The severity of issue
+   *
+   */
+  ESonarCloudSeverity severity;
+  /**
+   * @brief The message to explain the issue
+   *
+   */
+  std::string message;
+  /**
+   * @brief The rule id to display in sonarqube menu
+   *
+   */
+  std::string rule_id;
+};
+
+/**
  * @brief abstract class to convert issue report
  */
 class IssueReportConvertor : public ReportConvertor {

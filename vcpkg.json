@@ -1,16 +1,37 @@
 {
   "name": "cpp-coso",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage": "https://github.com/MGuillaumeF/cpp-coso/",
-  "description": "Tool o convert cpp reports to sonarqube reports",
+  "description": "Tool to convert cpp reports to sonarqube reports",
   "dependencies": [
-    { "name": "boost-core", "version>=" : "1.81.0"},
-    { "name": "boost-lambda", "version>=" : "1.81.0"},
-    { "name": "boost-property-tree", "version>=" : "1.81.0"},
-    { "name": "boost-system", "version>=" : "1.81.0"},
-    { "name": "boost-thread", "version>=" : "1.81.0"},
-    { "name": "boost-test", "version>=" : "1.81.0"},
-    { "name": "boost-filesystem", "version>=" : "1.81.0"}
-  ], 
+    {
+      "name": "boost-core",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-lambda",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-property-tree",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-system",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-thread",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-test",
+      "version>=": "1.81.0"
+    },
+    {
+      "name": "boost-filesystem",
+      "version>=": "1.81.0"
+    }
+  ],
   "builtin-baseline": "b6b5c0b9a44819b095b369f507599c79ac885ec5"
 }

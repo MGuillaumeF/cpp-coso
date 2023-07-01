@@ -23,10 +23,23 @@
 // generated configuration
 #include "config.hpp"
 
+/**
+ * @brief string hash to convert arguments of CLI to Set
+ *
+ */
 struct StringHash {
-  // enables heterogenous lookup
+  /**
+   * @brief enables heterogenous lookup
+   *
+   */
   using is_transparent = void;
 
+  /**
+   * @brief The string view haser
+   *
+   * @param sv The string view to hash
+   * @return std::size_t The hash value
+   */
   std::size_t operator()(const std::string_view sv) const {
     const std::hash<std::string_view> hasher;
     return hasher(sv);

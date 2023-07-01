@@ -14,7 +14,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   BOOST_VERSION: 1.81.0
-  APPLICATION_VERSION: 0.3.0
+  APPLICATION_VERSION: 0.3.1
   APPLICATION_NAME: cpp-coso
 
 permissions: write-all
@@ -47,12 +47,48 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
 
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
+    
+    - name: Save version changes
+      if: ${{ github.actor != 'dependabot[bot]' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add . || echo "No modification server to add pop"
+        (git commit -m "[AUTO] update version ${{env.APPLICATION_VERSION}}" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
     - name: Install dependencies
       run: |
         sudo add-apt-repository ppa:inkscape.dev/stable
         sudo apt update  
         sudo apt-get install -y doxygen graphviz clang-tidy clang-format cppcheck imagemagick inkscape
       
+    - name: clang format
+      run: find ./ -regex ".*\.\(h\|c\|cc\|hh\|hxx\|cxx\|hpp\|cpp\)" | xargs clang-format -style=file -i
+        
+    - name: Save format changes
+      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add src || echo "No modification server to add pop"
+        git add test || echo "No data-management server to add pop"
+        (git commit -m "[AUTO] clang format write" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        
     - name: Create icon
       working-directory: ${{github.workspace}}/resources/icon/cpp-coso
       run: |
@@ -106,11 +142,36 @@ jobs:
     - name: Lint Cpp Check
       run: cppcheck --enable=all --language=c++ --std=c++20 --xml --output-file=${{github.workspace}}/reports/cppcheck_report.xml --project=bin/compile_commands.json
       
+    - name: Lint Clang-Tidy
+      run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-llvmlibc-*,-fuchsia-default-arguments-calls' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-
+      
     - name: Doxygen Docs
       run: doxygen docg.conf
+      
+    - name: Unit Tests Graph
+      working-directory: ${{github.workspace}}
+      run: |
+        cd ${{github.workspace}}/bin
+        ./cpp-cosoTest --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1
+        dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/wiki/ut-tests.svg
+        cp ${{github.workspace}}/wiki/ut-tests.svg ${{github.workspace}}/docs/ut-tests.svg
+        
+    - name: Save tests graph
+      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add wiki || echo "No modification to add pop"
+        (git commit -m "[AUTO] update test unit test graph generated" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Archive Docs
       uses: actions/upload-artifact@v3
@@ -118,8 +179,21 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
         path: ${{github.workspace}}/docs
 
-    - name: Lint Clang-Tidy
-      run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-fuchsia-default-arguments-calls' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
+    - name: Application Tests ctest
+      working-directory: ${{github.workspace}}/bin
+      run: ctest
+
+    - name: gcov after unit tests
+      working-directory: ${{github.workspace}}/bin
+      run: |
+        find -name '*.gcda' | xargs gcov --preserve-paths
+        cd ..
+        mkdir ./bin/coverage
+        find . -name \*.gcov -exec cp {} ./bin/coverage \;
+
+    - name: Convert Boost Tests reports to sonarqube format
+      working-directory: ${{github.workspace}}/bin
+      run: ./cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
 
     - name: Convert Lint Clang-Tidy to sonarqube format
       working-directory: ${{github.workspace}}/bin
@@ -132,19 +206,6 @@ jobs:
     - name: Convert GCC Warnings to sonarqube format
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso gcc-warning ${{github.workspace}}/reports/gcc_warning_report.txt ${{github.workspace}}/reports/gcc-warning-sonarqube-report.json
-      
-    - name: Application Tests ctest
-      working-directory: ${{github.workspace}}/bin
-      run: ctest
-
-    - name: Convert Boost Tests reports to sonarqube format
-      working-directory: ${{github.workspace}}/bin
-      run: ./cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
-
-    - name: gcov after unit tests
-      working-directory: ${{github.workspace}}/bin/CMakeFiles
-      # /cpp-coso.dir/src
-      run: find -name '*.gcda' | xargs gcov;
 
     - name: Archive Test report
       if: always()
@@ -157,6 +218,17 @@ jobs:
       if: github.actor != 'dependabot[bot]'
       uses: warchant/setup-sonar-scanner@v4
 
+    - name: Run SonarQube full
+      working-directory: ${{github.workspace}}
+      if: github.actor != 'dependabot[bot]'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        -Dsonar.host.url=https://sonarcloud.io/
+        -Dsonar.verbose=false
+        -Dsonar.branch.name=branch-full
+        
     - name: Run SonarQube
       if: github.actor != 'dependabot[bot]'
       env:
@@ -182,6 +254,10 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -231,6 +307,10 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
     
     - name: Install armx64 toolchain
       run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu
@@ -331,13 +411,19 @@ jobs:
 
     - name: Build Application windows
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin --config Debug
+      run: cmake --build ${{github.workspace}}/bin --config Debug > reports/mvsc-warning-report.json 2>&1
 
     - name: Unit Tests
       working-directory: ${{github.workspace}}/bin/Debug/
       run: |
         move ${{github.workspace}}/test/resources ./resources
         cmd /C "cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${{github.workspace}}/reports/reports-win.xml --report_sink=${{github.workspace}}/reports/reportUT-win.xml"
+
+    - name: Convert reports to sonarqube
+      working-directory: ${{github.workspace}}/bin/Debug/
+      run: |
+        cmd /C "cpp-coso mvsc-warning ${{github.workspace}}/reports/mvsc-warning-report.json ${{github.workspace}}/reports/mvsc-warning-sonarqube-report.json"
+        cmd /C "cpp-coso boost-test ${{github.workspace}}/reports/reportUT-win.xml ${{github.workspace}}/reports/reports-win.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml"
 
     - name: Archive Test report
       if: always()
@@ -346,14 +432,51 @@ jobs:
         name: CPP-COSO Unit Test (win - temp) - Reports
         path: ${{github.workspace}}/reports
 
+    - name: Replace sonar-project.properties
+      run: |
+        del sonar-project.properties
+        move ${{github.workspace}}/tools/sonar/windows/sonar-project.properties .
+
+    - name: Download build wrapper C++
+      working-directory: ${{github.workspace}}/tools/cli-tools
+      run: |
+        npm install
+        npm run download https://sonarcloud.io/static/cpp/build-wrapper-win-x86.zip?_gl=1*1ewia2a*_ga*MTgyNTUwMTg5OS4xNjM1NDY4NDgz*_ga_3BQP5VHE6N*MTY4ODM0MTM0OS4yNi4wLjE2ODgzNDEzNDkuMC4wLjA.*_ga_9JZ0GZ5TC6*MTY4ODM0MTM0OS41LjAuMTY4ODM0MTM0OS42MC4wLjA. build-wrapper-win-x86.zip
+        npm run extract build-wrapper-win-x86.zip .
+        move build-wrapper-win-x86/build-wrapper-win-x86-64.exe ${{github.workspace}}/bin
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.3
+
+    - name: Call build wrapper
+      working-directory: ${{github.workspace}}/bin
+      run : cmd /C "build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe cpp-coso.sln /p:PreBuildEventUseInBuild=false /t:Rebuild /nodeReuse:False"
+
+    - name: Setup sonarqube
+      if: github.actor != 'dependabot[bot]'
+      uses: warchant/setup-sonar-scanner@v4
+
+    - name: Run SonarQube Windows
+      working-directory: ${{github.workspace}}
+      if: github.actor != 'dependabot[bot]'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+        -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
+        -D"sonar.host.url=https://sonarcloud.io/"
+        -D"sonar.verbose=false"
+        -D"sonar.branch.name=branch-windows-analysis"
+
  build-release-Windows:
     needs: [build-debug-Windows]
-
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: windows-latest
     steps:
 
     - uses: actions/checkout@v3
+    
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -417,7 +540,6 @@ jobs:
   
  install-Windows:
     needs: [build-release-Windows]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: windows-latest
     steps:
 
@@ -464,11 +586,14 @@ jobs:
 
  build-release-MacOSX:
     needs: [build-debug-MacOSX]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: macos-11
     steps:
 
     - uses: actions/checkout@v3
+    
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -504,7 +629,6 @@ jobs:
  
  install-MacOSX:
     needs: [build-release-MacOSX]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: macos-11
     steps:
 
@@ -534,7 +658,7 @@ jobs:
       run: cat ./example.json
 
  publish:
-    if: github.actor != 'dependabot[bot]'
+    if: ${{ github.actor != 'dependabot[bot]' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
@@ -550,6 +674,12 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
         path: ${{github.workspace}}/scripts/delivery-note-generator
 
+    - name: Save Updater Version configuration temporary
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
+        path: ${{github.workspace}}/scripts/project-updater
+
     - name: change branch
       run: git checkout delivery --
 
@@ -564,12 +694,28 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
         path: ${{github.workspace}}/scripts/delivery-note-generator
 
+    - name: Download Updater Version configuration
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
+        path: ${{github.workspace}}/scripts/project-updater
+
     - uses: geekyeggo/delete-artifact@v2
       if: always()
       with:
           name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
           failOnError: false
+
+    - uses: geekyeggo/delete-artifact@v2
+      if: always()
+      with:
+          name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
+          failOnError: false
           
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
+
     - name: Download docs
       uses: actions/download-artifact@v3
       with:
@@ -653,7 +799,6 @@ jobs:
         git add scripts/delivery-note-generator
 
     - name: commit/push version
-      if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
       run: |
         git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
         git push

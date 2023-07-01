@@ -1,4 +1,4 @@
-#include "./GccCompileLogIssueReportConvertor.hpp"
+#include "./TextLogIssueReportConvertor.hpp"
 #include "../exception/ConversionException.hpp"
 
 // STL stream import
@@ -10,16 +10,13 @@
 #include <list>
 #include <map>
 
-// STL regrex import
-#include <regex>
-
 /**
  * @brief method to processing entries to change data format
  *
  * @param entries The list of entries files
  * @return The property tree result of conversion
  */
-boost::property_tree::ptree GccCompileLogIssueReportConvertor::processing(
+boost::property_tree::ptree TextLogIssueReportConvertor::processing(
     const std::list<boost::filesystem::path> &entries) {
   // init empty property tree to save resilt of covert
   boost::property_tree::ptree sonarQubeReport;
@@ -33,9 +30,7 @@ boost::property_tree::ptree GccCompileLogIssueReportConvertor::processing(
   // str holds the content of the file
   const std::string reportContent = strStream.str();
 
-  const std::regex regex(
-      "(.+\\.[ch](?:pp|xx)?):(\\d+):(\\d+):\\s([a-z]+):\\s*(.+)\\[(.+)\\]",
-      std::regex_constants::ECMAScript);
+  const std::regex regex(m_pattern, std::regex_constants::ECMAScript);
 
   // all issues have engineId for this conversion
   const std::string engineId = m_engineId;
@@ -51,44 +46,42 @@ boost::property_tree::ptree GccCompileLogIssueReportConvertor::processing(
   for (auto i = std::sregex_iterator(reportContent.begin(), reportContent.end(),
                                      regex);
        i != std::sregex_iterator(); ++i) {
+
     const std::smatch match = *i;
     std::cout << "Match size = " << match.size() << std::endl;
-
-    // save all raw splitted data
-    const std::string sourceFile = match.str(1);
-    const std::string line = match.str(2);
-    const std::string column = match.str(3);
-    const std::string severity = match.str(4);
-    const std::string message = match.str(5);
-    const std::string ruleId = match.str(6);
+    const Issue mappedIssue = getMappedIssue(match);
 
     // print issue raw data
     std::cout << "Whole match : " << match.str(0) << std::endl
-              << "SourceFile is :" << sourceFile << std::endl
-              << "Line :" << line << std::endl
-              << "Column :" << column << std::endl
-              << "Severity :" << severity << std::endl
-              << "Message :" << message << std::endl
-              << "ruleId :" << ruleId << std::endl;
+              << "SourceFile is :" << mappedIssue.source_file << std::endl
+              << "Line :" << mappedIssue.line << std::endl
+              << "Column :" << mappedIssue.column << std::endl
+              << "Severity :"
+              << IssueReportConvertor::SonarCloudSeverityValue.at(
+                     mappedIssue.severity)
+              << std::endl
+              << "Message :" << mappedIssue.message << std::endl
+              << "ruleId :" << mappedIssue.rule_id << std::endl;
 
-    std::cout << "new rule added in map : " << ruleId << std::endl;
+    std::cout << "new rule added in map : " << mappedIssue.rule_id << std::endl;
 
     // create and populate issue property tree
     boost::property_tree::ptree issue;
 
     // common properties
     issue.put<std::string>("engineId", engineId);
-    issue.put<std::string>("ruleId", ruleId);
+    issue.put<std::string>("ruleId", mappedIssue.rule_id);
 
     // add converted level of issue
-    issue.put<std::string>("severity",
-                           IssueReportConvertor::SonarCloudSeverityValue.at(
-                               getMappedIssueSeverity(severity)));
+    issue.put<std::string>(
+        "severity",
+        IssueReportConvertor::SonarCloudSeverityValue.at(mappedIssue.severity));
     issue.put<std::string>("type", type);
 
     // get location Peter of issue
-    const boost::property_tree::ptree location =
-        buildLocationTree(message, sourceFile, line, column);
+    const boost::property_tree::ptree location = buildLocationTree(
+        mappedIssue.message, mappedIssue.source_file,
+        std::to_string(mappedIssue.line), std::to_string(mappedIssue.column));
     issue.add_child("primaryLocation", location);
 
     // add full generated issue in issue ptree array
@@ -110,8 +103,7 @@ boost::property_tree::ptree GccCompileLogIssueReportConvertor::processing(
  * @param column The column of issue
  * @return boost::property_tree::ptree The location property tree
  */
-boost::property_tree::ptree
-GccCompileLogIssueReportConvertor::buildLocationTree(
+boost::property_tree::ptree TextLogIssueReportConvertor::buildLocationTree(
     const std::string &message, const std::string &filePath,
     const std::string &line, const std::string &column) const {
   boost::property_tree::ptree location;
@@ -130,4 +122,15 @@ GccCompileLogIssueReportConvertor::buildLocationTree(
   location.add_child("textRange", textRange);
 
   return location;
+}
+
+/**
+ * @brief Get the Issue Severity object
+ *
+ * @param reportSeverity
+ * @return ESonarCloudSeverity
+ */
+ESonarCloudSeverity TextLogIssueReportConvertor::getMappedIssueSeverity(
+    const std::string &reportSeverity) {
+  return ESonarCloudSeverity::MAJOR;
 }

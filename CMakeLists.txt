@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.12)
 
 # Add name on project 
-project(cpp-coso VERSION "0.3.0")
+project(cpp-coso VERSION "0.3.1")
 
 set(GITHUB_USERNAME "MGuillaumeF")
 set(CPACK_PACKAGE_VENDOR "${GITHUB_USERNAME}")
@@ -90,11 +90,10 @@ if (Boost_FOUND)
   if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_executable(cpp-cosoTest ${TESTS_SRC_UT_DIR} ${REPORT_SRC_DIR})
     
-    add_custom_command(TARGET cpp-cosoTest PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/test/resources $<TARGET_FILE_DIR:cpp-cosoTest>/resources)
+    add_custom_command(TARGET cpp-cosoTest PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/test/resources $<TARGET_FILE_DIR:cpp-cosoTest>/resources)
     add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=../reports/reports.xml  --report_sink=../reports/reportUT.xml) 
   endif() 
   if(WIN32)
-    add_custom_command(TARGET cpp-coso PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/resources $<TARGET_FILE_DIR:cpp-coso>/resources)
     add_definitions("-D_WIN32_WINNT=0x0601")
     target_link_libraries(cpp-coso ${Boost_LIBRARIES} wsock32 ws2_32 ${EXTERNAL_LIBS} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
     if (CMAKE_BUILD_TYPE STREQUAL "Debug")
