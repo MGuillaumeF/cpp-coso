@@ -19,7 +19,6 @@
 // generated configuration
 #include "config.hpp"
 
-
 BOOST_AUTO_TEST_SUITE(testsApplicationEntries)
 
 void checkApplicationEntryRun(const std::list<std::string> &arguments,
@@ -58,7 +57,7 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
 
   std::regex versionPattern("(\d+\.\d+\.\d+)");
 
-  BOOST_CHECK(std::regex_match (VERSION,versionPattern));
+  BOOST_CHECK(std::regex_match(VERSION, versionPattern));
 
   // HELP MESSAGE TEST
   const std::string HELP_MESSAGE =
