@@ -4,7 +4,7 @@
   "description": "Generator of delivery HTML page of published version of package cpp-coso",
   "main": "index.js",
   "scripts": {
-    "prebuild" :  "tsc",
+    "prebuild": "tsc",
     "build": "webpack --define-process-env-node-env production --progress --color --env PUBLIC_PATH=\"'.'\"",
     "prettier": "prettier --write . --ignore-path ./.gitignore",
     "lint:eslint": "eslint . --fix --format html --output-file ./dist/reports/lint/eslint-report.html --ignore-path ./.gitignore",
@@ -23,7 +23,12 @@
   },
   "homepage": "https://github.com/MGuillaumeF/cpp-coso#readme",
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all", "not IE 11"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
+      "not IE 11"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

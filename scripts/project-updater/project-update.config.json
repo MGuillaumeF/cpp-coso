@@ -1,0 +1,19 @@
+{
+    "npm" : [
+        ".",
+        "../delivery-note-generator"
+    ],
+    "cmake" : [
+        "../.."
+    ],
+    "vcpkg" : [
+        "../.."
+    ],
+    "custom" : [
+        {
+            "file" : "../../.github/workflows/default.yml",
+            "pattern" : "(APPLICATION_VERSION: )\\d+\\.\\d+\\.\\d+",
+            "prefix" : "$1"
+        }
+    ]
+}
