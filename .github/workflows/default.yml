@@ -601,7 +601,7 @@ jobs:
       run: cat ./example.json
 
  publish:
-    if: github.actor != 'dependabot[bot]'
+    if: github.actor != 'dependabot[bot]' && ${{github.head_ref}} == 'main' && github.event_name != 'pull_request' 
     needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:
@@ -727,7 +727,6 @@ jobs:
         git add scripts/delivery-note-generator
 
     - name: commit/push version
-      if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
       run: |
         git commit -m "add v${{env.APPLICATION_VERSION}} package in delivery"
         git push
