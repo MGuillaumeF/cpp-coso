@@ -55,7 +55,8 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
   checkApplicationEntryRun({"--version"}, 0, expectedVersion, "");
   checkApplicationEntryRun({"-v"}, 0, expectedVersion, "");
 
-  std::regex versionPattern("(\\d+\\.\\d+\\.\\d+)", std::regex_constants::ECMAScript);
+  std::regex versionPattern("(\\d+\\.\\d+\\.\\d+)",
+                            std::regex_constants::ECMAScript);
 
   BOOST_CHECK(std::regex_match(VERSION, versionPattern));
 
