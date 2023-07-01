@@ -17,6 +17,8 @@ Pour chaque type de rapport il faut tester :
 - La conversion pour tous les types de sévérité géré par le format
 - Le comptage du nombre d'erreur trouver pour une source donée
 
+![Diagramme des tests unitaires](ut-tests.svg)
+
 ## Tests de fumée
 
 Pour chaque type d'OS testé une collect de rapport et une remonté du rapport dans une analyse sonar
