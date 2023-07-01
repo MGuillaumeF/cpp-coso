@@ -12,8 +12,13 @@
 #endif
 
 #include <iostream>
+#include <regex>
 
 #include "../../src/Application.hpp"
+
+// generated configuration
+#include "config.hpp"
+
 
 BOOST_AUTO_TEST_SUITE(testsApplicationEntries)
 
@@ -46,8 +51,14 @@ void checkApplicationEntryRun(const std::list<std::string> &arguments,
 
 BOOST_AUTO_TEST_CASE(testCLIEntries) {
   // VERSION TEST
-  checkApplicationEntryRun({"--version"}, 0, "0.3.0\n", "");
-  checkApplicationEntryRun({"-v"}, 0, "0.3.0\n", "");
+  const std::string VERSION = PROJECT_VERSION;
+  const std::string expectedVersion = VERSION + "\n";
+  checkApplicationEntryRun({"--version"}, 0, expectedVersion, "");
+  checkApplicationEntryRun({"-v"}, 0, expectedVersion, "");
+
+  std::regex versionPattern("(\d+\.\d+\.\d+)");
+
+  BOOST_CHECK(std::regex_match (VERSION,versionPattern));
 
   // HELP MESSAGE TEST
   const std::string HELP_MESSAGE =
