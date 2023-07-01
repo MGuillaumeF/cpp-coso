@@ -17,7 +17,7 @@
         },
         {
             "file" : "../../sonar-project.properties",
-            "pattern" : "(sonar\.projectVersion=)\\d+\\.\\d+\\.\\d+",
+            "pattern" : "(sonar\\.projectVersion=)\\d+\\.\\d+\\.\\d+",
             "prefix" : "$1"
         }
     ]
