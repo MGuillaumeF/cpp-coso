@@ -14,6 +14,11 @@
             "file" : "../../.github/workflows/default.yml",
             "pattern" : "(APPLICATION_VERSION: )\\d+\\.\\d+\\.\\d+",
             "prefix" : "$1"
+        },
+        {
+            "file" : "../../sonar-project.properties",
+            "pattern" : "(sonar\.projectVersion=)\\d+\\.\\d+\\.\\d+",
+            "prefix" : "$1"
         }
     ]
 }
