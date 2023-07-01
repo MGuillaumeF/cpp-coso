@@ -47,6 +47,13 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
 
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
+
     - name: Install dependencies
       run: |
         sudo add-apt-repository ppa:inkscape.dev/stable
@@ -182,6 +189,13 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -231,6 +245,13 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+        
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
     
     - name: Install armx64 toolchain
       run: sudo apt-get update && sudo apt-get upgrade && sudo apt-get install -y gcc-12-aarch64-linux-gnu g++-12-aarch64-linux-gnu
@@ -354,6 +375,13 @@ jobs:
     steps:
 
     - uses: actions/checkout@v3
+    
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -469,6 +497,13 @@ jobs:
     steps:
 
     - uses: actions/checkout@v3
+    
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
 
     - name: Install boost
       uses: MarkusJx/install-boost@v2.4.4
@@ -570,6 +605,13 @@ jobs:
           name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
           failOnError: false
           
+    - name: Update Version
+      working-directory: ${{github.workspace}}/scripts/project-updater
+      run: |
+        npm install
+        npm run build
+        node index.js ${{env.APPLICATION_VERSION}}
+        
     - name: Download docs
       uses: actions/download-artifact@v3
       with:
