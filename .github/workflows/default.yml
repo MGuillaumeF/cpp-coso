@@ -172,6 +172,27 @@ jobs:
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso gcc-warning ${{github.workspace}}/reports/gcc_warning_report.txt ${{github.workspace}}/reports/gcc-warning-sonarqube-report.json
       
+    - name: Unit Tests Graph
+      working-directory: ${{github.workspace}}
+      run: |
+        cd ${{github.workspace}}/bin
+        ./cpp-cosoTest --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1
+        dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/wiki/ut-tests.svg
+        
+    - name: Save tests graph
+      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add wiki || echo "No modification to add pop"
+        (git commit -m "[AUTO] update test unit test graph generated" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      
     - name: Application Tests ctest
       working-directory: ${{github.workspace}}/bin
       run: ctest
