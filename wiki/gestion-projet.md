@@ -9,7 +9,7 @@ Le présent document a pour rôle de définir les règles à suivre pour partici
 Le "Projet" GitHub sert à référencer toutes les tâches à effectuer sur le projet,
 Les tâches sont regroupées dans des "Milestones" qui sont les épiques à réaliser.
 
-La notion d' "User Story" n'existe pas sur ce model car les tâches sont à granularité fine, car l'intégration d'une tâche doit se faire rapidement.
+La notion d'"User Story" n'existe pas sur ce model car les tâches sont à granularité fine, car l'intégration d'une tâche doit se faire rapidement.
 
 ### Le template d'écriture des tickets
 
@@ -44,6 +44,15 @@ Pour qu'une tâche soit prête à commencer elle doit:
 - avoir le statut "TO DO".
 - ne pas avoir de blocant.
 
+### Le pattern d'ouverture de la branche
+
+La branche git doit être crée à partir du ticket, avec les patterns suivants :
+
+ - feature/* pour les ajouts fonctionnels
+ - bugfix/* pour les corrections de bug
+ - hotfix/* pour les ajustements rapides qui ne sont pas des bugs
+ - documentation/* pour les ajouts ou modifications documentaires
+
 ### Les critères de clôture de la tâche
 
 - les livrables doivent être réalisés.
@@ -57,7 +66,7 @@ Les livrables sont les éléments nouveaux à produire pendant la tâche, il peu
 
 ### L'importance de la documentation
 
-Le projet est une veille technologique, la documentation est un aspect primordial car c'est elle qui permet de transmettre le résultat de la veille technologique pour la répercuter sur un autre projet.
+La documentation doit etre detaillé pour garantir le maintient de l'application même après plusieurs mois de gêle des activités
 
 Chaque tâche crée doit notifier clairement la documentation associée, des tâches peuvent également être exclusivement documentaires pour ne pas impacter le déroulement de la progression de l'application.
 
@@ -110,3 +119,23 @@ Les dépendances qui se mettent à jour sont:
 Dans les demandes de tirage les fichiers sont automatiquement formatés avec les mêmes configurations qu'en local
 
 > Voir la documentation de l'intégration continue pour plus de détail.
+
+## Gestion de la livraison
+
+Quand on parle de livraison il s'agit de la déclaration et la mise à disposition d'une nouvelle version de l'application
+
+### Définition du scope des release
+
+Le scope des versions peut se retrouver dans le CHANGELOG.md à la racine du repository
+
+### Procédure de livraison
+
+Pour livrer il faut :
+
+- Créer une branche de livraison.
+- Mettre à jour la version de l'application dans le workflow github default.yml.
+- Ouvrir une demande de tirage en direction de la branche main.
+- Fusionner la demande de tirage.
+- Placer une étiquette sur le nouveau commit
+
+Le commit sur la branche main va engendrer une publication de la nouvelle version.
