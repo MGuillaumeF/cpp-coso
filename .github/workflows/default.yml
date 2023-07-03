@@ -196,15 +196,14 @@ jobs:
     - name: Application Tests ctest
       working-directory: ${{github.workspace}}/bin
       run: ctest
+      
+    - name: gcov after unit tests
+      working-directory: ${{github.workspace}}/bin
+      run: find -name '*.gcda' | xargs gcov;
 
     - name: Convert Boost Tests reports to sonarqube format
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
-
-    - name: gcov after unit tests
-      working-directory: ${{github.workspace}}/bin/CMakeFiles
-      # /cpp-coso.dir/src
-      run: find -name '*.gcda' | xargs gcov;
 
     - name: Archive Test report
       if: always()
