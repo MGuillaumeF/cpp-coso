@@ -440,7 +440,7 @@ jobs:
         move build-wrapper-win-x86/build-wrapper-win-x86-64.exe ${{github.workspace}}/bin
 
     - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.1
+      uses: microsoft/setup-msbuild@v1.3
 
     - name: Call build wrapper
       working-directory: ${{github.workspace}}/bin
