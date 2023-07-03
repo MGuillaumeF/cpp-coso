@@ -439,6 +439,9 @@ jobs:
         npm run extract build-wrapper-win-x86.zip .
         move build-wrapper-win-x86/build-wrapper-win-x86-64.exe ${{github.workspace}}/bin
 
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
     - name: Call build wrapper
       working-directory: ${{github.workspace}}/bin
       run : cmd /C "build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe cpp-coso.sln /t:Rebuild /nodeReuse:False"
