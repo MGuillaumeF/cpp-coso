@@ -435,7 +435,7 @@ jobs:
       working-directory: ${{github.workspace}}/tools/cli-tools
       run: |
         npm install
-        npm run download https://sonarcloud.io/static/cpp/build-wrapper-win-x86.zip?_gl=1*1ewia2a*_ga*MTgyNTUwMTg5OS4xNjM1NDY4NDgz*_ga_3BQP5VHE6N*MTY4ODM0MTM0OS4yNi4wLjE2ODgzNDEzNDkuMC4wLjA.*_ga_9JZ0GZ5TC6*MTY4ODM0MTM0OS41LjAuMTY4ODM0MTM0OS42MC4wLjA.
+        npm run download https://sonarcloud.io/static/cpp/build-wrapper-win-x86.zip?_gl=1*1ewia2a*_ga*MTgyNTUwMTg5OS4xNjM1NDY4NDgz*_ga_3BQP5VHE6N*MTY4ODM0MTM0OS4yNi4wLjE2ODgzNDEzNDkuMC4wLjA.*_ga_9JZ0GZ5TC6*MTY4ODM0MTM0OS41LjAuMTY4ODM0MTM0OS42MC4wLjA. build-wrapper-win-x86.zip
         npm run extract build-wrapper-win-x86.zip .
         move build-wrapper-win-x86/build-wrapper-win-x86-64.exe ${{github.workspace}}/bin
 
