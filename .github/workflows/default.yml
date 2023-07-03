@@ -459,7 +459,7 @@ jobs:
         -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
         -D"sonar.host.url=https://sonarcloud.io/"
         -D"sonar.verbose=false"
-        -D"sonar.branch.name=analize-windows"
+        -D"sonar.branch.name=branch-windows-analysis"
 
  build-release-Windows:
     needs: [build-debug-Windows]
