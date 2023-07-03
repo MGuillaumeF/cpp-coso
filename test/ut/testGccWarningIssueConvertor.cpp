@@ -22,19 +22,19 @@ BOOST_AUTO_TEST_CASE(testConvertGccWarningToSonarQube) {
   const boost::property_tree::ptree firstIssue = issues.front().second;
 
   BOOST_CHECK_EQUAL(firstIssue.get<std::string>("engineId"), "gcc-warning");
-  BOOST_CHECK_EQUAL(firstIssue.get<std::string>("ruleId"), "type-limits");
+  BOOST_CHECK_EQUAL(firstIssue.get<std::string>("ruleId"), "-Wtype-limits");
   BOOST_CHECK_EQUAL(firstIssue.get<std::string>("severity"), "MAJOR");
   BOOST_CHECK_EQUAL(firstIssue.get<std::string>("type"), "CODE_SMELL");
   BOOST_CHECK_EQUAL(
       firstIssue.get<std::string>("primaryLocation.message"),
-      "comparison of unsigned expression in ‘>= 0’ is always true");
+      "comparison of unsigned expression in ‘>= 0’ is always true ");
   BOOST_CHECK_EQUAL(firstIssue.get<std::string>("primaryLocation.filePath"),
                     "/home/runner/work/cpp-coso/cpp-coso/test/ut/"
                     "testBoostTestFwkResultConvertor.cpp");
   BOOST_CHECK_EQUAL(
       firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 44);
   BOOST_CHECK_EQUAL(
-      firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 72);
+      firstIssue.get<uint64_t>("primaryLocation.textRange.startColumn"), 72);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
