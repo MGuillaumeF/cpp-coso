@@ -1,2 +1,2 @@
-rem cmake -S %~dp0../ -B %~dp0../bin -DCMAKE_BUILD_TYPE=Release
-cmake --build %~dp0../bin > %~dp0../mvsc_warning_report.txt
+cmake -S %~dp0../ -B %~dp0../bin -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=C:/dev/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake --build %~dp0../bin > %~dp0../reports/mvsc_warning_report.txt 2>&1

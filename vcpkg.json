@@ -2,7 +2,7 @@
   "name": "cpp-coso",
   "version": "0.3.0",
   "homepage": "https://github.com/MGuillaumeF/cpp-coso/",
-  "description": "Tool o convert cpp reports to sonarqube reports",
+  "description": "Tool to convert cpp reports to sonarqube reports",
   "dependencies": [
     {
       "name": "boost-core",
