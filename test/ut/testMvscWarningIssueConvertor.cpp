@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(testConvertMvscWarningToSonarQube) {
   BOOST_CHECK_EQUAL(
       firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 17);
   BOOST_CHECK_EQUAL(
-      firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 2);
+      firstIssue.get<uint64_t>("primaryLocation.textRange.startColumn"), 2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
