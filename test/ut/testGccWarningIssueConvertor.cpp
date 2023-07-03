@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(testConvertGccWarningToSonarQube) {
                          "./resources/gcc-warning-sonarqube-report.json"}) ==
        EXIT_SUCCESS));
 
-  const boost::property_tree::ptree outputFile;
+  boost::property_tree::ptree outputFile;
   boost::property_tree::read_json(
       "./resources/gcc-warning-sonarqube-report.json", outputFile);
 

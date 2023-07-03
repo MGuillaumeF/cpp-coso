@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(testConvertCppCheckToSonarQube) {
                                  "./resources/cppcheck_report_result.json"}) ==
                EXIT_SUCCESS));
 
-  const boost::property_tree::ptree outputFile;
+  boost::property_tree::ptree outputFile;
   boost::property_tree::read_json("./resources/cppcheck_report_result.json",
                                   outputFile);
 

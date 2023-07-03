@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(testClangTidyToSonarQube) {
             "./resources/clang_tidy_report_sonarqube_test-generation.txt"}) ==
        EXIT_SUCCESS));
 
-  const boost::property_tree::ptree outputFile;
+  boost::property_tree::ptree outputFile;
   boost::property_tree::read_json(
       "./resources/clang_tidy_report_sonarqube_test-generation.txt",
       outputFile);

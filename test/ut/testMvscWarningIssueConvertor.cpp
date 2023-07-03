@@ -13,7 +13,7 @@ BOOST_AUTO_TEST_CASE(testConvertMvscWarningToSonarQube) {
                          "./resources/mvsc-warning-sonarqube-report.json"}) ==
        EXIT_SUCCESS));
 
-  const boost::property_tree::ptree outputFile;
+  boost::property_tree::ptree outputFile;
   boost::property_tree::read_json(
       "./resources/mvsc-warning-sonarqube-report.json", outputFile);
 
