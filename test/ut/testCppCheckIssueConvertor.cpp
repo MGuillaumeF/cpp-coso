@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(testConvertCppCheckToSonarQube) {
   BOOST_CHECK_EQUAL(
       firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 15);
   BOOST_CHECK_EQUAL(
-      firstIssue.get<uint64_t>("primaryLocation.textRange.startLine"), 2);
+      firstIssue.get<uint64_t>("primaryLocation.textRange.startColumn"), 2);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
