@@ -456,10 +456,10 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: sonar-scanner
-        -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-        -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-        -Dsonar.verbose=false
-        -Dsonar.branch.name=analize-windows
+        -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
+        -D"sonar.host.url=${{ secrets.SONAR_HOST_URL }}"
+        -D"sonar.verbose=false"
+        -D"sonar.branch.name=analize-windows"
 
  build-release-Windows:
     needs: [build-debug-Windows]
