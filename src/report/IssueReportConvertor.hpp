@@ -11,6 +11,15 @@
  */
 enum class ESonarCloudSeverity { INFO, MINOR, MAJOR, CRITICAL, BLOCKER };
 
+struct Issue {
+  std::string source_file;
+  uint64_t line;
+  uint64_t column;
+  ESonarCloudSeverity severity;
+  std::string message;
+  std::string rule_id;
+};
+
 /**
  * @brief abstract class to convert issue report
  */
