@@ -444,7 +444,7 @@ jobs:
 
     - name: Call build wrapper
       working-directory: ${{github.workspace}}/bin
-      run : cmd /C "build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe cpp-coso.sln /p:PreBuildEvent= /t:Rebuild /nodeReuse:False"
+      run : cmd /C "build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe cpp-coso.sln /p:PostBuildEventUseInBuild=false /t:Rebuild /nodeReuse:False"
 
     - name: Setup sonarqube
       if: github.actor != 'dependabot[bot]'
