@@ -1,5 +1,5 @@
 #define BOOST_TEST_DYN_LINK
-#include <boost/property_tree/read_json.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <boost/test/unit_test.hpp>
 
 #include "../../src/Application.hpp"
