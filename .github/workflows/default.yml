@@ -416,8 +416,8 @@ jobs:
     - name: Convert reports to sonarqube
       working-directory: ${{github.workspace}}/bin/Debug/
       run: |
-        cpp-coso.exe mvsc-warning ${{github.workspace}}/reports/mvsc-warning-report.json ${{github.workspace}}/reports/mvsc-warning-sonarqube-report.json
-        cpp-coso.exe boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
+        cpp-coso mvsc-warning ${{github.workspace}}/reports/mvsc-warning-report.json ${{github.workspace}}/reports/mvsc-warning-sonarqube-report.json
+        cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml
 
     - name: Archive Test report
       if: always()
