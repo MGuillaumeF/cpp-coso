@@ -378,6 +378,7 @@ jobs:
       run: cat ./example.json
 
  build-debug-Windows:
+    permissions: write-all
     env:
       BUILD_TYPE: Debug
       
