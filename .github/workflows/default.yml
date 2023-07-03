@@ -405,7 +405,7 @@ jobs:
 
     - name: Build Application windows
       working-directory: ${{github.workspace}}
-      run: cmake --build ${{github.workspace}}/bin --config Debug
+      run: cmake --build ${{github.workspace}}/bin --config Debug > reports/mvsc-warning-report.json 2>&1
 
     - name: Unit Tests
       working-directory: ${{github.workspace}}/bin/Debug/
@@ -413,12 +413,53 @@ jobs:
         move ${{github.workspace}}/test/resources ./resources
         cmd /C "cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${{github.workspace}}/reports/reports-win.xml --report_sink=${{github.workspace}}/reports/reportUT-win.xml"
 
+    - name: Convert reports to sonarqube
+      working-directory: ${{github.workspace}}/bin/Debug/
+      run: |
+        cmd /C "cpp-coso mvsc-warning ${{github.workspace}}/reports/mvsc-warning-report.json ${{github.workspace}}/reports/mvsc-warning-sonarqube-report.json"
+        cmd /C "cpp-coso boost-test ${{github.workspace}}/reports/reportUT-win.xml ${{github.workspace}}/reports/reports-win.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml"
+
     - name: Archive Test report
       if: always()
       uses: actions/upload-artifact@v3
       with:
         name: CPP-COSO Unit Test (win - temp) - Reports
         path: ${{github.workspace}}/reports
+
+    - name: Replace sonar-project.properties
+      run: |
+        del sonar-project.properties
+        move ${{github.workspace}}/tools/sonar/windows/sonar-project.properties .
+
+    - name: Download build wrapper C++
+      working-directory: ${{github.workspace}}/tools/cli-tools
+      run: |
+        npm install
+        npm run download https://sonarcloud.io/static/cpp/build-wrapper-win-x86.zip?_gl=1*1ewia2a*_ga*MTgyNTUwMTg5OS4xNjM1NDY4NDgz*_ga_3BQP5VHE6N*MTY4ODM0MTM0OS4yNi4wLjE2ODgzNDEzNDkuMC4wLjA.*_ga_9JZ0GZ5TC6*MTY4ODM0MTM0OS41LjAuMTY4ODM0MTM0OS42MC4wLjA. build-wrapper-win-x86.zip
+        npm run extract build-wrapper-win-x86.zip .
+        move build-wrapper-win-x86/build-wrapper-win-x86-64.exe ${{github.workspace}}/bin
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Call build wrapper
+      working-directory: ${{github.workspace}}/bin
+      run : cmd /C "build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe cpp-coso.sln /p:PreBuildEventUseInBuild=false /t:Rebuild /nodeReuse:False"
+
+    - name: Setup sonarqube
+      if: github.actor != 'dependabot[bot]'
+      uses: warchant/setup-sonar-scanner@v4
+
+    - name: Run SonarQube Windows
+      working-directory: ${{github.workspace}}
+      if: github.actor != 'dependabot[bot]'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: sonar-scanner
+        -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
+        -D"sonar.host.url=https://sonarcloud.io/"
+        -D"sonar.verbose=false"
+        -D"sonar.branch.name=analize-windows"
 
  build-release-Windows:
     needs: [build-debug-Windows]
