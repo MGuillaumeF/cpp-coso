@@ -50,7 +50,7 @@ public:
    * @param match The regexp match of row
    * @return Issue
    */
-   Issue getMappedIssue(const std::smatch &match) override;
+  Issue getMappedIssue(const std::smatch &match) override;
 
   /**
    * @brief Get instance of singleton MvscCompileWarningIssueReportConvertor
