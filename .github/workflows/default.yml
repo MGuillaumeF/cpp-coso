@@ -145,20 +145,42 @@ jobs:
     - name: Lint Cpp Check
       run: cppcheck --enable=all --language=c++ --std=c++20 --xml --output-file=${{github.workspace}}/reports/cppcheck_report.xml --project=bin/compile_commands.json
       
+    - name: Lint Clang-Tidy
+      run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-fuchsia-default-arguments-calls' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
-
+      
     - name: Doxygen Docs
       run: doxygen docg.conf
+      
+    - name: Unit Tests Graph
+      working-directory: ${{github.workspace}}
+      run: |
+        cd ${{github.workspace}}/bin
+        ./cpp-cosoTest --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1
+        dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/wiki/ut-tests.svg
+        cp ${{github.workspace}}/wiki/ut-tests.svg ${{github.workspace}}/docs/ut-tests.svg
+        
+    - name: Save tests graph
+      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
+      working-directory: ${{github.workspace}}
+      run: |
+        git stash
+        git checkout ${{github.head_ref}}
+        git stash pop || echo "Nothing in stashed stack"
+        git config user.name "MGuillaumeF"
+        git config user.email "${{secrets.EMAIL}}"
+        git add wiki || echo "No modification to add pop"
+        (git commit -m "[AUTO] update test unit test graph generated" && git push) || echo 'No modification to save'
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Archive Docs
       uses: actions/upload-artifact@v3
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
         path: ${{github.workspace}}/docs
-
-    - name: Lint Clang-Tidy
-      run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-fuchsia-default-arguments-calls' -header-filter='src/.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
 
     - name: Application Tests ctest
       working-directory: ${{github.workspace}}/bin
@@ -187,27 +209,6 @@ jobs:
     - name: Convert GCC Warnings to sonarqube format
       working-directory: ${{github.workspace}}/bin
       run: ./cpp-coso gcc-warning ${{github.workspace}}/reports/gcc_warning_report.txt ${{github.workspace}}/reports/gcc-warning-sonarqube-report.json
-      
-    - name: Unit Tests Graph
-      working-directory: ${{github.workspace}}
-      run: |
-        cd ${{github.workspace}}/bin
-        ./cpp-cosoTest --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1
-        dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/wiki/ut-tests.svg
-        
-    - name: Save tests graph
-      if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
-      working-directory: ${{github.workspace}}
-      run: |
-        git stash
-        git checkout ${{github.head_ref}}
-        git stash pop || echo "Nothing in stashed stack"
-        git config user.name "MGuillaumeF"
-        git config user.email "${{secrets.EMAIL}}"
-        git add wiki || echo "No modification to add pop"
-        (git commit -m "[AUTO] update test unit test graph generated" && git push) || echo 'No modification to save'
-      env:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
     - name: Archive Test report
       if: always()
@@ -477,8 +478,6 @@ jobs:
 
  build-release-Windows:
     needs: [build-debug-Windows]
-
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: windows-latest
     steps:
 
@@ -553,7 +552,6 @@ jobs:
   
  install-Windows:
     needs: [build-release-Windows]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: windows-latest
     steps:
 
@@ -600,7 +598,6 @@ jobs:
 
  build-release-MacOSX:
     needs: [build-debug-MacOSX]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: macos-11
     steps:
 
@@ -647,7 +644,6 @@ jobs:
  
  install-MacOSX:
     needs: [build-release-MacOSX]
-    if: ${{github.head_ref}} == 'main' && github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true
     runs-on: macos-11
     steps:
 
@@ -677,7 +673,7 @@ jobs:
       run: cat ./example.json
 
  publish:
-    if: github.actor != 'dependabot[bot]' && ${{github.head_ref}} == 'main' && github.event_name != 'pull_request' 
+    if: ${{ github.actor != 'dependabot[bot]' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
     needs: [install-Linux, install-Windows, install-MacOSX]
     runs-on: ubuntu-latest
     steps:

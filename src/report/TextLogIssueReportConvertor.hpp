@@ -1,44 +1,46 @@
-#ifndef __GCC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
-#define __GCC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
+#ifndef __TEXT_LOG_ISSUE_REPORT_CONVERTOR_HPP__
+#define __TEXT_LOG_ISSUE_REPORT_CONVERTOR_HPP__
 
 // extend abstract class
 #include "./IssueReportConvertor.hpp"
+// STL regrex import
+#include <regex>
 
 /**
  * @brief abstract class to convert issue report
  */
-class GccCompileLogIssueReportConvertor : public IssueReportConvertor {
+class TextLogIssueReportConvertor : public IssueReportConvertor {
 
 public:
   /**
    * @brief Construct a new Report Convertor object
-   * @param engineId Th engine Id to identify tools
+   * @param engineId The engine Id to identify tools
+   * @param pattern The regexp pattern to extract data from log text row
    *
    */
-  explicit GccCompileLogIssueReportConvertor(const std::string &engineId)
-      : m_engineId(engineId){};
+  explicit TextLogIssueReportConvertor(const std::string &engineId,
+                                       const std::string &pattern)
+      : m_engineId(engineId), m_pattern(pattern){};
   /**
    * @brief Destroy the Report Convertor object
    *
    */
-  ~GccCompileLogIssueReportConvertor() override = default;
+  ~TextLogIssueReportConvertor() override = default;
 
   /**
    */
-  GccCompileLogIssueReportConvertor(const GccCompileLogIssueReportConvertor &) =
-      delete;
+  TextLogIssueReportConvertor(const TextLogIssueReportConvertor &) = delete;
   /**
    */
-  GccCompileLogIssueReportConvertor(GccCompileLogIssueReportConvertor &&) =
-      delete;
+  TextLogIssueReportConvertor(TextLogIssueReportConvertor &&) = delete;
   /**
    */
-  GccCompileLogIssueReportConvertor &
-  operator=(const GccCompileLogIssueReportConvertor &) = delete;
+  TextLogIssueReportConvertor &
+  operator=(const TextLogIssueReportConvertor &) = delete;
   /**
    */
-  GccCompileLogIssueReportConvertor &
-  operator=(GccCompileLogIssueReportConvertor &&) = delete;
+  TextLogIssueReportConvertor &
+  operator=(TextLogIssueReportConvertor &&) = delete;
 
   /**
    * @brief Get the Issue Severity object
@@ -47,7 +49,15 @@ public:
    * @return const ESonarCloudSeverity
    */
   virtual const ESonarCloudSeverity
-  getMappedIssueSeverity(const std::string &reportSeverity) = 0;
+  getMappedIssueSeverity(const std::string &reportSeverity);
+
+  /**
+   * @brief Get the Issue object
+   *
+   * @param match The regexp match of row
+   * @return const Issue
+   */
+  virtual const Issue getMappedIssue(const std::smatch &match) = 0;
 
 private:
   /**
@@ -55,6 +65,11 @@ private:
    *
    */
   std::string m_engineId;
+  /**
+   * @brief The regexp pattern to extract data from log text row
+   *
+   */
+  std::string m_pattern;
 
   /**
    * @brief method to processing entries to change data format

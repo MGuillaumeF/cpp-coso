@@ -10,9 +10,6 @@
 #include <list>
 #include <map>
 
-// STL regrex import
-#include <regex>
-
 /**
  * @brief map to convert clang-tidy severity to sonacloud severity
  *
