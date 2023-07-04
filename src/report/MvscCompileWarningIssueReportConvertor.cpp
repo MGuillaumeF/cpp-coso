@@ -4,7 +4,7 @@
  * @brief Get the Issue object
  *
  * @param match The regexp match of row
- * @return const Issue
+ * @return Issue
  */
 Issue MvscCompileWarningIssueReportConvertor::getMappedIssue(
     const std::smatch &match) {
