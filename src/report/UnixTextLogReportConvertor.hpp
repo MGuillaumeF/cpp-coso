@@ -45,7 +45,7 @@ public:
    * @param match The regexp match of row
    * @return const Issue
    */
-  virtual const Issue getMappedIssue(const std::smatch &match) override;
+  virtual Issue getMappedIssue(const std::smatch &match) override;
 
   /**
    * @brief Get the Issue Severity object
