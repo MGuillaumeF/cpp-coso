@@ -35,9 +35,9 @@ const std::map<std::string, ESonarCloudSeverity, std::less<>>
  * @brief Get the Issue Severity object
  *
  * @param reportSeverity
- * @return const ESonarCloudSeverity
+ * @return ESonarCloudSeverity
  */
-const ESonarCloudSeverity ClangTidyIssueReportConvertor::getMappedIssueSeverity(
+ESonarCloudSeverity ClangTidyIssueReportConvertor::getMappedIssueSeverity(
     const std::string &reportSeverity) {
   // check issue level is known by tool and sonar
   if (!clangTidyToSonarCloudSeverity.contains(reportSeverity)) {

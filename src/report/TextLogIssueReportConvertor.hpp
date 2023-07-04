@@ -46,18 +46,18 @@ public:
    * @brief Get the Issue Severity object
    *
    * @param reportSeverity
-   * @return const ESonarCloudSeverity
+   * @return ESonarCloudSeverity
    */
-  virtual const ESonarCloudSeverity
+  virtual ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity);
 
   /**
    * @brief Get the Issue object
    *
    * @param match The regexp match of row
-   * @return const Issue
+   * @return Issue
    */
-  virtual const Issue getMappedIssue(const std::smatch &match) = 0;
+  virtual Issue getMappedIssue(const std::smatch &match) = 0;
 
 private:
   /**
