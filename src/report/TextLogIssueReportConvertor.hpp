@@ -46,7 +46,7 @@ public:
    * @brief Get the Issue Severity object
    *
    * @param reportSeverity
-   * @return const ESonarCloudSeverity
+   * @return ESonarCloudSeverity
    */
   virtual ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity);
