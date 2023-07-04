@@ -35,7 +35,7 @@ const std::map<std::string, ESonarCloudSeverity, std::less<>>
  * @brief Get the Issue Severity object
  *
  * @param reportSeverity
- * @return const ESonarCloudSeverity
+ * @return ESonarCloudSeverity
  */
 ESonarCloudSeverity ClangTidyIssueReportConvertor::getMappedIssueSeverity(
     const std::string &reportSeverity) {
