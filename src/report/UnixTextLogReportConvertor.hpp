@@ -43,7 +43,7 @@ public:
    * @brief Get the Issue object
    *
    * @param match The regexp match of row
-   * @return const Issue
+   * @return Issue
    */
   virtual Issue getMappedIssue(const std::smatch &match) override;
 
@@ -51,7 +51,7 @@ public:
    * @brief Get the Issue Severity object
    *
    * @param reportSeverity
-   * @return const ESonarCloudSeverity
+   * @return ESonarCloudSeverity
    */
   virtual ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity) override {
