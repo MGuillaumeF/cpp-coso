@@ -14,7 +14,7 @@ env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
   BOOST_VERSION: 1.81.0
-  APPLICATION_VERSION: 0.3.0
+  APPLICATION_VERSION: 0.3.1
   APPLICATION_NAME: cpp-coso
 
 permissions: write-all
