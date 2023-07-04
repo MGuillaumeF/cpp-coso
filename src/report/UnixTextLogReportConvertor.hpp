@@ -15,7 +15,7 @@ public:
    * @param engineId The engine Id to identify tools
    *
    */
-  UnixTextLogReportConvertor(const std::string &engineId)
+  explicit UnixTextLogReportConvertor(const std::string &engineId)
       : TextLogIssueReportConvertor(engineId,
                                     "(.+\\.[ch](?:pp|xx)?):(\\d+):(\\d+):\\s(["
                                     "a-z]+):\\s*(.+)\\[(.+)\\]"){};
