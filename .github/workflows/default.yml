@@ -160,7 +160,7 @@ jobs:
         cd ${{github.workspace}}/bin
         ./cpp-cosoTest --list_content=DOT > ${{github.workspace}}/reports/content.dot 2>&1
         dot ${{github.workspace}}/reports/content.dot -Tsvg -o ${{github.workspace}}/wiki/ut-tests.svg
-        cp ${{github.workspace}}/wiki/ut-tests.svg docs/ut-tests.svg
+        cp ${{github.workspace}}/wiki/ut-tests.svg ${{github.workspace}}/docs/ut-tests.svg
         
     - name: Save tests graph
       if: ${{ github.event_name == 'pull_request' && github.actor != 'dependabot[bot]' }}
