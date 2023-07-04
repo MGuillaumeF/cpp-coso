@@ -55,9 +55,9 @@ public:
    * @brief Get the Issue object
    *
    * @param match The regexp match of row
-   * @return const Issue
+   * @return Issue
    */
-  virtual const Issue getMappedIssue(const std::smatch &match) = 0;
+  virtual Issue getMappedIssue(const std::smatch &match) = 0;
 
 private:
   /**
