@@ -4,9 +4,9 @@
  * @brief Get the Issue object
  *
  * @param match The regexp match of row
- * @return const Issue
+ * @return Issue
  */
-const Issue
+Issue
 UnixTextLogReportConvertor::getMappedIssue(const std::smatch &match) {
   const uint8_t SOURCE_FILE_RG_POS = 1;
   const uint8_t LINE_RG_POS = 2;
