@@ -130,7 +130,7 @@ boost::property_tree::ptree TextLogIssueReportConvertor::buildLocationTree(
  * @param reportSeverity
  * @return const ESonarCloudSeverity
  */
-const ESonarCloudSeverity TextLogIssueReportConvertor::getMappedIssueSeverity(
+ESonarCloudSeverity TextLogIssueReportConvertor::getMappedIssueSeverity(
     const std::string &reportSeverity) {
   return ESonarCloudSeverity::MAJOR;
 }
