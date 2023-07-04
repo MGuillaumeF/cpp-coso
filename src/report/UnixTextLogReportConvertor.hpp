@@ -53,7 +53,7 @@ public:
    * @param reportSeverity
    * @return const ESonarCloudSeverity
    */
-  virtual const ESonarCloudSeverity
+  virtual ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity) override {
     return TextLogIssueReportConvertor::getMappedIssueSeverity(reportSeverity);
   };
