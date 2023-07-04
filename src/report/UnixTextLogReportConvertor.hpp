@@ -45,7 +45,7 @@ public:
    * @param match The regexp match of row
    * @return Issue
    */
-  virtual Issue getMappedIssue(const std::smatch &match) override;
+  Issue getMappedIssue(const std::smatch &match) override;
 
   /**
    * @brief Get the Issue Severity object
@@ -53,7 +53,7 @@ public:
    * @param reportSeverity
    * @return ESonarCloudSeverity
    */
-  virtual ESonarCloudSeverity
+  ESonarCloudSeverity
   getMappedIssueSeverity(const std::string &reportSeverity) override {
     return TextLogIssueReportConvertor::getMappedIssueSeverity(reportSeverity);
   };
