@@ -128,7 +128,7 @@ boost::property_tree::ptree TextLogIssueReportConvertor::buildLocationTree(
  * @brief Get the Issue Severity object
  *
  * @param reportSeverity
- * @return const ESonarCloudSeverity
+ * @return ESonarCloudSeverity
  */
 ESonarCloudSeverity TextLogIssueReportConvertor::getMappedIssueSeverity(
     const std::string &reportSeverity) {
