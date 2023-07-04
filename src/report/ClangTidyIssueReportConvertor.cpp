@@ -37,7 +37,7 @@ const std::map<std::string, ESonarCloudSeverity, std::less<>>
  * @param reportSeverity
  * @return const ESonarCloudSeverity
  */
-const ESonarCloudSeverity ClangTidyIssueReportConvertor::getMappedIssueSeverity(
+ESonarCloudSeverity ClangTidyIssueReportConvertor::getMappedIssueSeverity(
     const std::string &reportSeverity) {
   // check issue level is known by tool and sonar
   if (!clangTidyToSonarCloudSeverity.contains(reportSeverity)) {
