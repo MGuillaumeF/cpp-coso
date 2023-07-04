@@ -6,8 +6,7 @@
  * @param match The regexp match of row
  * @return Issue
  */
-Issue
-UnixTextLogReportConvertor::getMappedIssue(const std::smatch &match) {
+Issue UnixTextLogReportConvertor::getMappedIssue(const std::smatch &match) {
   const uint8_t SOURCE_FILE_RG_POS = 1;
   const uint8_t LINE_RG_POS = 2;
   const uint8_t COLUMN_RG_POS = 3;
