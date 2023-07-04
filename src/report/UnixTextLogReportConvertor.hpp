@@ -12,6 +12,7 @@ class UnixTextLogReportConvertor : public TextLogIssueReportConvertor {
 public:
   /**
    * @brief Construct a new Report Convertor object
+   * @param engineId The engine Id to identify tools
    *
    */
   UnixTextLogReportConvertor(const std::string &engineId)
