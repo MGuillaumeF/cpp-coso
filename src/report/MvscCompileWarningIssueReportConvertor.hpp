@@ -48,9 +48,9 @@ public:
    * @brief Get the Issue object
    *
    * @param match The regexp match of row
-   * @return const Issue
+   * @return Issue
    */
-  virtual const Issue getMappedIssue(const std::smatch &match) override;
+  virtual Issue getMappedIssue(const std::smatch &match) override;
 
   /**
    * @brief Get instance of singleton MvscCompileWarningIssueReportConvertor
