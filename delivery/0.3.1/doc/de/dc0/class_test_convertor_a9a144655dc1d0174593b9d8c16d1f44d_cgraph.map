@@ -1,0 +1,5 @@
+<map id="TestConvertor::boostReportsToSonarReport" name="TestConvertor::boostReportsToSonarReport">
+<area shape="rect" id="node1" title="Function to convert unified boost report to sonar generic report." alt="" coords="5,39,212,80"/>
+<area shape="rect" id="node2" href="$de/dc0/class_test_convertor.html#abc25ae29b63f0d501f322f31c2077c57" title="method to extract data case from log result test report to convert to sonarqube report" alt="" coords="260,5,459,47"/>
+<area shape="rect" id="node3" href="$de/dc0/class_test_convertor.html#a48e3841031ac5a40c45588a2aef67a5b" title="Save the Result of test in Map object." alt="" coords="261,71,458,112"/>
+</map>
