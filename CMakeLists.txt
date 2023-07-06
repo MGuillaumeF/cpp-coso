@@ -91,7 +91,7 @@ if (Boost_FOUND)
     add_executable(cpp-cosoTest ${TESTS_SRC_UT_DIR} ${REPORT_SRC_DIR})
     
     add_custom_command(TARGET cpp-cosoTest PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/test/resources $<TARGET_FILE_DIR:cpp-cosoTest>/resources)
-    add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=../reports/reports.xml  --report_sink=../reports/reportUT.xml) 
+    add_test(cpp-cosoUnitTests cpp-cosoTest --show_progress=yes --log_level=all --log_format=XML --report_level=detailed --report_format=XML --log_sink=${CMAKE_SOURCE_DIR}/reports/reports.xml  --report_sink=${CMAKE_SOURCE_DIR}/reports/reportUT.xml) 
   endif() 
   if(WIN32)
     add_definitions("-D_WIN32_WINNT=0x0601")
