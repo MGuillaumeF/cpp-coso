@@ -92,7 +92,7 @@
 <path fill="none" stroke="green" d="M297.98,-0.5C297.98,-0.5 883.98,-0.5 883.98,-0.5 889.98,-0.5 895.98,-6.5 895.98,-12.5 895.98,-12.5 895.98,-34.5 895.98,-34.5 895.98,-40.5 889.98,-46.5 883.98,-46.5 883.98,-46.5 297.98,-46.5 297.98,-46.5 291.98,-46.5 285.98,-40.5 285.98,-34.5 285.98,-34.5 285.98,-12.5 285.98,-12.5 285.98,-6.5 291.98,-0.5 297.98,-0.5"/>
 <text text-anchor="middle" x="590.98" y="-31.3" font-family="Helvetica,sans-Serif" font-size="14.00">testsMsvcWarningkConvertor</text>
 <polyline fill="none" stroke="green" points="285.98,-23.5 895.98,-23.5 "/>
-<text text-anchor="middle" x="590.98" y="-8.3" font-family="Helvetica,sans-Serif" font-size="14.00">/home/runner/work/cpp&#45;coso/cpp&#45;coso/test/ut/testMsvcWarningIssueConvertor.cpp(7)</text>
+<text text-anchor="middle" x="590.98" y="-8.3" font-family="Helvetica,sans-Serif" font-size="14.00">/home/runner/work/cpp&#45;coso/cpp&#45;coso/test/ut/testMvscWarningIssueConvertor.cpp(7)</text>
 </g>
 <!-- tu1&#45;&gt;tu7 -->
 <g id="edge12" class="edge">
@@ -190,7 +190,7 @@
 <path fill="none" stroke="green" d="M959.98,-0.5C959.98,-0.5 1545.98,-0.5 1545.98,-0.5 1551.98,-0.5 1557.98,-6.5 1557.98,-12.5 1557.98,-12.5 1557.98,-34.5 1557.98,-34.5 1557.98,-40.5 1551.98,-46.5 1545.98,-46.5 1545.98,-46.5 959.98,-46.5 959.98,-46.5 953.98,-46.5 947.98,-40.5 947.98,-34.5 947.98,-34.5 947.98,-12.5 947.98,-12.5 947.98,-6.5 953.98,-0.5 959.98,-0.5"/>
 <text text-anchor="middle" x="1252.98" y="-31.3" font-family="Helvetica,sans-Serif" font-size="14.00">testConvertMsvcWarningToSonarQube</text>
 <polyline fill="none" stroke="green" points="947.98,-23.5 1557.98,-23.5 "/>
-<text text-anchor="middle" x="1252.98" y="-8.3" font-family="Helvetica,sans-Serif" font-size="14.00">/home/runner/work/cpp&#45;coso/cpp&#45;coso/test/ut/testMsvcWarningIssueConvertor.cpp(9)</text>
+<text text-anchor="middle" x="1252.98" y="-8.3" font-family="Helvetica,sans-Serif" font-size="14.00">/home/runner/work/cpp&#45;coso/cpp&#45;coso/test/ut/testMvscWarningIssueConvertor.cpp(9)</text>
 </g>
 <!-- tu7&#45;&gt;tu65542 -->
 <g id="edge13" class="edge">
