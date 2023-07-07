@@ -1,0 +1,6 @@
+<map id="TextLogIssueReportConvertor::getMappedIssueSeverity" name="TextLogIssueReportConvertor::getMappedIssueSeverity">
+<area shape="rect" id="node1" title="Get the Issue Severity object." alt="" coords="551,39,764,80"/>
+<area shape="rect" id="node2" href="$d0/d81/class_msvc_compile_warning_issue_report_convertor.html#a5df3f6f0fa90bcadc7e6dcc775298e51" title="Get the Issue object." alt="" coords="263,5,503,47"/>
+<area shape="rect" id="node3" href="$dc/d88/class_unix_text_log_report_convertor.html#a131fdbcfb2b6a20ef2c2a478d107549b" title="Get the Issue Severity object." alt="" coords="278,71,487,112"/>
+<area shape="rect" id="node4" href="$dc/d88/class_unix_text_log_report_convertor.html#a203a61fdb2e7f84e313d95551416de9d" title="Get the Issue object." alt="" coords="5,71,215,112"/>
+</map>
