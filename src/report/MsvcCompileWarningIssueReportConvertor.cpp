@@ -1,4 +1,4 @@
-#include "./MvscCompileWarningIssueReportConvertor.hpp"
+#include "./MsvcCompileWarningIssueReportConvertor.hpp"
 
 /**
  * @brief Get the Issue object
@@ -6,7 +6,7 @@
  * @param match The regexp match of row
  * @return Issue
  */
-Issue MvscCompileWarningIssueReportConvertor::getMappedIssue(
+Issue MsvcCompileWarningIssueReportConvertor::getMappedIssue(
     const std::smatch &match) {
   const uint8_t SOURCE_FILE_RG_POS = 1;
   const uint8_t LINE_RG_POS = 2;
@@ -24,17 +24,17 @@ Issue MvscCompileWarningIssueReportConvertor::getMappedIssue(
   return issue;
 }
 
-std::unique_ptr<MvscCompileWarningIssueReportConvertor>
-    MvscCompileWarningIssueReportConvertor::s_pInstance =
-        std::make_unique<MvscCompileWarningIssueReportConvertor>();
+std::unique_ptr<MsvcCompileWarningIssueReportConvertor>
+    MsvcCompileWarningIssueReportConvertor::s_pInstance =
+        std::make_unique<MsvcCompileWarningIssueReportConvertor>();
 
 /**
- * @brief Get instance of singleton MvscCompileWarningIssueReportConvertor
+ * @brief Get instance of singleton MsvcCompileWarningIssueReportConvertor
  *
- * @return MvscCompileWarningIssueReportConvertor* address of
- * MvscCompileWarningIssueReportConvertor instance
+ * @return MsvcCompileWarningIssueReportConvertor* address of
+ * MsvcCompileWarningIssueReportConvertor instance
  */
-std::unique_ptr<MvscCompileWarningIssueReportConvertor> &
-MvscCompileWarningIssueReportConvertor::getInstance() {
+std::unique_ptr<MsvcCompileWarningIssueReportConvertor> &
+MsvcCompileWarningIssueReportConvertor::getInstance() {
   return s_pInstance;
 }

@@ -3,7 +3,7 @@
 #include "report/ClangTidyIssueReportConvertor.hpp"
 #include "report/CppCheckIssueReportConvertor.hpp"
 #include "report/GccCompileWarningIssueReportConvertor.hpp"
-#include "report/MvscCompileWarningIssueReportConvertor.hpp"
+#include "report/MsvcCompileWarningIssueReportConvertor.hpp"
 #include "report/TestConvertor.hpp"
 
 // boost imports
@@ -73,8 +73,8 @@ int32_t Application::run(const std::list<std::string> &args) {
       "clang-tidy-sonarqube-report.json\r\n"
       "cpp-coso gcc-warning gcc-warning-report.txt "
       "gcc-warning-sonarqube-report.json\r\n"
-      "cpp-coso mvsc-warning mvsc-warning-report.txt "
-      "mvsc-warning-sonarqube-report.json\r\n"
+      "cpp-coso msvc-warning msvc-warning-report.txt "
+      "msvc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
       "boost-test-results-report.xml boost-test-sonarqube-report.json";
   try {
@@ -119,7 +119,7 @@ int32_t Application::run(const std::list<std::string> &args) {
 
         } else if (reportType == "cppcheck" || reportType == "clang-tidy" ||
                    reportType == "gcc-warning" ||
-                   reportType == "mvsc-warning") {
+                   reportType == "msvc-warning") {
           if (args.size() == ARGUMENTS_LINT_SIZE) {
             const std::string inputFile = argsCopy.front();
             argsCopy.pop_front();
@@ -140,9 +140,9 @@ int32_t Application::run(const std::list<std::string> &args) {
                   {inputFile}, outputFile);
               GccCompileWarningIssueReportConvertor::getInstance().reset();
             } else {
-              MvscCompileWarningIssueReportConvertor::getInstance()->convert(
+              MsvcCompileWarningIssueReportConvertor::getInstance()->convert(
                   {inputFile}, outputFile);
-              MvscCompileWarningIssueReportConvertor::getInstance().reset();
+              MsvcCompileWarningIssueReportConvertor::getInstance().reset();
             }
           } else {
             std::cerr
@@ -160,7 +160,7 @@ int32_t Application::run(const std::list<std::string> &args) {
           std::cerr
               << "Bad usage of tool : " << std::endl
               << "unknown entry reports format, accepted format : "
-                 "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+                 "cppcheck, clang-tidy, gcc-warning, msvc-warning, boost-test"
               << std::endl;
           // change process return value
           exitStatus = EXIT_FAILURE;
@@ -169,7 +169,7 @@ int32_t Application::run(const std::list<std::string> &args) {
         std::cerr
             << "Bad usage of tool : " << std::endl
             << "unknown entry reports format, accepted format : "
-               "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test"
+               "cppcheck, clang-tidy, gcc-warning, msvc-warning, boost-test"
             << std::endl;
         // change process return value
         exitStatus = EXIT_FAILURE;

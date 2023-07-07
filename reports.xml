@@ -1,0 +1,83 @@
+<TestLog>
+    <TestSuite name="CppCosoSonarqubeTest">
+        <TestSuite name="boostTestFrameworksConvertor" file="D:\a\cpp-coso\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="14">
+            <TestCase name="testValidBoostResultReport" file="D:\a\cpp-coso\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="16">
+                <Exception file="D:\boost\boost\include\boost-1_81\boost/property_tree/xml_parser.hpp" line="82" function="read_xml"><![CDATA[D:\boost\boost\include\boost-1_81\boost/property_tree/xml_parser.hpp(82): Throw in function read_xml
+Dynamic exception type: struct boost::wrapexcept<class boost::property_tree::xml_parser::xml_parser_error>
+std::exception::what: ./resources/boost/reports.xml: cannot open file
+]]>
+                    <LastCheckpoint file="D:\a\cpp-coso\cpp-coso\test\ut\testBoostTestFwkResultConvertor.cpp" line="16"><![CDATA["testValidBoostResultReport" test entry]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>1619</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsClangTidyConvertor" file="D:\a\cpp-coso\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="11">
+            <TestCase name="testClangTidyToSonarQube" file="D:\a\cpp-coso\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="13">
+                <Error file="D:/a/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="19"><![CDATA[check (Application::run( {"clang-tidy", "./resources/clang_tidy_report.txt", "./resources/clang_tidy_report_sonarqube_test-generation.txt"}) == 0) has failed]]></Error>
+                <Exception file="D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp" line="72" function="read_json"><![CDATA[D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp(72): Throw in function read_json
+Dynamic exception type: struct boost::wrapexcept<class boost::property_tree::json_parser::json_parser_error>
+std::exception::what: ./resources/clang_tidy_report_sonarqube_test-generation.txt: cannot open file
+]]>
+                    <LastCheckpoint file="D:\a\cpp-coso\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="19"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>67407</TestingTime>
+            </TestCase>
+            <TestCase name="bad_file_not_found" file="D:\a\cpp-coso\cpp-coso\test\ut\testClangTidyIssueConvertor.cpp" line="55">
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="51"><![CDATA[check ex.what() == errorMessage has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testClangTidyIssueConvertor.cpp" line="58"><![CDATA[check 'exception "ConversionException" raised as expected: validation on the raised exception through predicate "conversionExceptionMessage"' has passed]]></Info>
+                <TestingTime>377</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsCppCheckConvertor" file="D:\a\cpp-coso\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="8">
+            <TestCase name="testConvertCppCheckToSonarQube" file="D:\a\cpp-coso\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="10">
+                <Error file="D:/a/cpp-coso/cpp-coso/test/ut/testCppCheckIssueConvertor.cpp" line="14"><![CDATA[check (Application::run({"cppcheck", "./resources/cppcheck_report.xml", "./resources/cppcheck_report_result.json"}) == 0) has failed]]></Error>
+                <Exception file="D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp" line="72" function="read_json"><![CDATA[D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp(72): Throw in function read_json
+Dynamic exception type: struct boost::wrapexcept<class boost::property_tree::json_parser::json_parser_error>
+std::exception::what: ./resources/cppcheck_report_result.json: cannot open file
+]]>
+                    <LastCheckpoint file="D:\a\cpp-coso\cpp-coso\test\ut\testCppCheckIssueConvertor.cpp" line="14"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>616</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsApplicationEntries" file="D:\a\cpp-coso\cpp-coso\test\ut\testEntries.cpp" line="22">
+            <TestCase name="testCLIEntries" file="D:\a\cpp-coso\cpp-coso\test\ut\testEntries.cpp" line="51">
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="61"><![CDATA[check std::regex_match(VERSION, versionPattern) has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <Info file="D:/a/cpp-coso/cpp-coso/test/ut/testEntries.cpp" line="26"><![CDATA[check Application::run(arguments) == exit_code has passed]]></Info>
+                <TestingTime>1522</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsGccWarningkConvertor" file="D:\a\cpp-coso\cpp-coso\test\ut\testGccWarningIssueConvertor.cpp" line="7">
+            <TestCase name="testConvertGccWarningToSonarQube" file="D:\a\cpp-coso\cpp-coso\test\ut\testGccWarningIssueConvertor.cpp" line="9">
+                <Error file="D:/a/cpp-coso/cpp-coso/test/ut/testGccWarningIssueConvertor.cpp" line="14"><![CDATA[check (Application::run({"gcc-warning", "./resources/gcc-warning-report.txt", "./resources/gcc-warning-sonarqube-report.json"}) == 0) has failed]]></Error>
+                <Exception file="D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp" line="72" function="read_json"><![CDATA[D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp(72): Throw in function read_json
+Dynamic exception type: struct boost::wrapexcept<class boost::property_tree::json_parser::json_parser_error>
+std::exception::what: ./resources/gcc-warning-sonarqube-report.json: cannot open file
+]]>
+                    <LastCheckpoint file="D:\a\cpp-coso\cpp-coso\test\ut\testGccWarningIssueConvertor.cpp" line="14"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>606</TestingTime>
+            </TestCase>
+        </TestSuite>
+        <TestSuite name="testsMvscWarningkConvertor" file="D:\a\cpp-coso\cpp-coso\test\ut\testMvscWarningIssueConvertor.cpp" line="7">
+            <TestCase name="testConvertMvscWarningToSonarQube" file="D:\a\cpp-coso\cpp-coso\test\ut\testMvscWarningIssueConvertor.cpp" line="9">
+                <Error file="D:/a/cpp-coso/cpp-coso/test/ut/testMvscWarningIssueConvertor.cpp" line="14"><![CDATA[check (Application::run({"mvsc-warning", "./resources/mvsc-warning-report.txt", "./resources/mvsc-warning-sonarqube-report.json"}) == 0) has failed]]></Error>
+                <Exception file="D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp" line="72" function="read_json"><![CDATA[D:\boost\boost\include\boost-1_81\boost/property_tree/json_parser.hpp(72): Throw in function read_json
+Dynamic exception type: struct boost::wrapexcept<class boost::property_tree::json_parser::json_parser_error>
+std::exception::what: ./resources/mvsc-warning-sonarqube-report.json: cannot open file
+]]>
+                    <LastCheckpoint file="D:\a\cpp-coso\cpp-coso\test\ut\testMvscWarningIssueConvertor.cpp" line="14"><![CDATA[]]></LastCheckpoint>
+                </Exception>
+                <TestingTime>568</TestingTime>
+            </TestCase>
+        </TestSuite>
+    </TestSuite>
+</TestLog>
