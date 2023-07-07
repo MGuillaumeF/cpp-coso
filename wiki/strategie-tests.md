@@ -33,4 +33,4 @@ Tester la compatibilité du convertisseur avec différente version de :
 - clang-tidy
 - cppcheck
 - gcc : 11 et 12 testé
-- mvsc
+- msvc

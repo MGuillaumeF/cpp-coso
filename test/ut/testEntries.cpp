@@ -72,8 +72,8 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
       "clang-tidy-sonarqube-report.json\r\n"
       "cpp-coso gcc-warning gcc-warning-report.txt "
       "gcc-warning-sonarqube-report.json\r\n"
-      "cpp-coso mvsc-warning mvsc-warning-report.txt "
-      "mvsc-warning-sonarqube-report.json\r\n"
+      "cpp-coso msvc-warning msvc-warning-report.txt "
+      "msvc-warning-sonarqube-report.json\r\n"
       "cpp-coso boost-test boost-test-log-report.xml "
       "boost-test-results-report.xml boost-test-sonarqube-report.json\n";
 
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(testCLIEntries) {
 
   const std::string BAD_TOOL_MESSAGE =
       "Bad usage of tool : \nunknown entry reports format, accepted format : "
-      "cppcheck, clang-tidy, gcc-warning, mvsc-warning, boost-test\n";
+      "cppcheck, clang-tidy, gcc-warning, msvc-warning, boost-test\n";
   const std::string BAD_TOOL_CLANG_TIDY_CPP_CHECK_MESSAGE =
       "Bad usage of tool : "
       "\narguments list error, accepted format :"

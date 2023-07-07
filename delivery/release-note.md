@@ -40,7 +40,7 @@ Convert Boost Test reports to Sonarqube with generic format
 
 #### Main goal of version
 
-Add GCC and MVSC warning reports capacity
+Add GCC and MSVC warning reports capacity
 
 #### Features of version
 
@@ -50,7 +50,7 @@ Add GCC and MVSC warning reports capacity
 - add generated web page for deployments
 - add Readme in doxygen home pages
 - add GCC warning reports
-- add MVSC warning reports
+- add MSVC warning reports
 - fix column start
 
 #### Main goal of version

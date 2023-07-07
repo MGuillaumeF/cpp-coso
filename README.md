@@ -13,7 +13,7 @@ This application convert cpp result report of lint tools to sonarqube generic da
 ## conversions available
 
 - gcc/g++ warning text logs to sonarqube generic data issues
-- mvsc compiler warning text logs to sonarqube generic data issues
+- msvc compiler warning text logs to sonarqube generic data issues
 - cppcheck XML reports to sonarqube generic data issues
 - clang-tidy plain text reports to sonarqube generic data issues
 - boost test XML reports to sonarqube generic test reports
@@ -24,8 +24,8 @@ This application convert cpp result report of lint tools to sonarqube generic da
 # convert gcc/g++ warnings plain text report to sonarqube generic data issue report
 cpp-coso gcc-warning ./path/to/reports/gcc_warning_source_report.txt ./path/to/reports/gcc-warning-sonarqube-report.json
 
-# convert MVSC compiler warnings plain text report to sonarqube generic data issue report
-cpp-coso mvsc-warning ./path/to/reports/mvsc_warning_source_report.txt ./path/to/reports/mvsc-warning-sonarqube-report.json
+# convert MSVC compiler warnings plain text report to sonarqube generic data issue report
+cpp-coso msvc-warning ./path/to/reports/msvc_warning_source_report.txt ./path/to/reports/msvc-warning-sonarqube-report.json
 
 # convert clang tidy plain text report to sonarqube generic data issue report
 cpp-coso clang-tidy ./path/to/reports/clang_tidy_source_report.txt ./path/to/reports/clang-tidy-sonarqube-report.json

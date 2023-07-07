@@ -1,5 +1,5 @@
-#ifndef __MVSC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
-#define __MVSC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
+#ifndef __MSVC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
+#define __MSVC_COMPILE_LOG_ISSUE_REPORT_CONVERTOR_HPP__
 
 // extend abstract class
 #include "./TextLogIssueReportConvertor.hpp"
@@ -7,7 +7,7 @@
 /**
  * @brief abstract class to convert issue report
  */
-class MvscCompileWarningIssueReportConvertor
+class MsvcCompileWarningIssueReportConvertor
     : public TextLogIssueReportConvertor {
 
 public:
@@ -15,9 +15,9 @@ public:
    * @brief Construct a new Report Convertor objec
    *
    */
-  MvscCompileWarningIssueReportConvertor()
+  MsvcCompileWarningIssueReportConvertor()
       : TextLogIssueReportConvertor(
-            "mvsc-warning",
+            "msvc-warning",
             "(.+\\.[chi](?:pp|xx)?)\\((\\d+),(\\d+)\\):\\s([a-z]+)"
             "\\s(C\\d+):\\s'.+': (.+)\\s\\[.+\\]"){};
 
@@ -25,24 +25,24 @@ public:
    * @brief Destroy the Report Convertor object
    *
    */
-  ~MvscCompileWarningIssueReportConvertor() override = default;
+  ~MsvcCompileWarningIssueReportConvertor() override = default;
 
   /**
    */
-  MvscCompileWarningIssueReportConvertor(
-      const MvscCompileWarningIssueReportConvertor &) = delete;
+  MsvcCompileWarningIssueReportConvertor(
+      const MsvcCompileWarningIssueReportConvertor &) = delete;
   /**
    */
-  MvscCompileWarningIssueReportConvertor(
-      MvscCompileWarningIssueReportConvertor &&) = delete;
+  MsvcCompileWarningIssueReportConvertor(
+      MsvcCompileWarningIssueReportConvertor &&) = delete;
   /**
    */
-  MvscCompileWarningIssueReportConvertor &
-  operator=(const MvscCompileWarningIssueReportConvertor &) = delete;
+  MsvcCompileWarningIssueReportConvertor &
+  operator=(const MsvcCompileWarningIssueReportConvertor &) = delete;
   /**
    */
-  MvscCompileWarningIssueReportConvertor &
-  operator=(MvscCompileWarningIssueReportConvertor &&) = delete;
+  MsvcCompileWarningIssueReportConvertor &
+  operator=(MsvcCompileWarningIssueReportConvertor &&) = delete;
 
   /**
    * @brief Get the Issue object
@@ -53,14 +53,14 @@ public:
   Issue getMappedIssue(const std::smatch &match) override;
 
   /**
-   * @brief Get instance of singleton MvscCompileWarningIssueReportConvertor
+   * @brief Get instance of singleton MsvcCompileWarningIssueReportConvertor
    *
-   * @return MvscCompileWarningIssueReportConvertor* address of
-   * MvscCompileWarningIssueReportConvertor instance
+   * @return MsvcCompileWarningIssueReportConvertor* address of
+   * MsvcCompileWarningIssueReportConvertor instance
    */
-  static std::unique_ptr<MvscCompileWarningIssueReportConvertor> &getInstance();
+  static std::unique_ptr<MsvcCompileWarningIssueReportConvertor> &getInstance();
 
 private:
-  static std::unique_ptr<MvscCompileWarningIssueReportConvertor> s_pInstance;
+  static std::unique_ptr<MsvcCompileWarningIssueReportConvertor> s_pInstance;
 };
 #endif

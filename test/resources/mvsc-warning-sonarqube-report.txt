@@ -1,7 +1,7 @@
 {
     "issues": [
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -15,7 +15,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -29,7 +29,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -43,7 +43,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4365",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -57,7 +57,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -71,7 +71,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -85,7 +85,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -99,7 +99,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4100",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -113,7 +113,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -127,7 +127,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -141,7 +141,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -155,7 +155,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -169,7 +169,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4296",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -183,7 +183,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -197,7 +197,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -211,7 +211,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -225,7 +225,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4100",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -239,7 +239,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4100",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -253,7 +253,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -267,7 +267,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -281,7 +281,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -295,7 +295,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4365",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -309,7 +309,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -323,7 +323,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -337,7 +337,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -351,7 +351,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4100",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -365,7 +365,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -379,7 +379,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -393,7 +393,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
@@ -407,7 +407,7 @@
             }
         },
         {
-            "engineId": "mvsc-warning",
+            "engineId": "msvc-warning",
             "ruleId": "C4514",
             "severity": "MAJOR",
             "type": "CODE_SMELL",
