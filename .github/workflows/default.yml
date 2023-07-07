@@ -421,14 +421,7 @@ jobs:
       working-directory: ${{github.workspace}}/bin/Debug/
       run: |
         cmd /C "cpp-coso msvc-warning ${{github.workspace}}/reports/msvc-warning-report.json ${{github.workspace}}/reports/msvc-warning-sonarqube-report.json"
-        cmd /C "cpp-coso boost-test ${{github.workspace}}/reports/reportUT-win.xml ${{github.workspace}}/reports/reports-win.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml"
-
-    - name: Archive Test report
-      if: always()
-      uses: actions/upload-artifact@v3
-      with:
-        name: CPP-COSO Unit Test (win - temp) - Reports
-        path: ${{github.workspace}}/reports
+        cmd /C "cpp-coso boost-test ${{github.workspace}}/reports/reportUT.xml ${{github.workspace}}/reports/reports.xml ${{github.workspace}}/reports/boost-test-sonarqube-report.xml"
 
     - name: Replace sonar-project.properties
       run: |
