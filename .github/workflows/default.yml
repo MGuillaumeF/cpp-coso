@@ -25,7 +25,7 @@ jobs:
     name: A job to delete old workflow runs
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Delete workflow runs
       uses: MajorScruffy/delete-old-workflow-runs@v0.3.0
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
@@ -250,7 +250,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
@@ -303,7 +303,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
@@ -390,7 +390,7 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Create reports directory
       run: mkdir ${{github.workspace}}/reports; 
@@ -463,7 +463,7 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Update Version
       working-directory: ${{github.workspace}}/scripts/project-updater
@@ -549,7 +549,7 @@ jobs:
     runs-on: macos-11
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Create reports directory
       run: mkdir ${{github.workspace}}/reports; 
@@ -579,7 +579,7 @@ jobs:
     runs-on: macos-11
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Update Version
       working-directory: ${{github.workspace}}/scripts/project-updater
@@ -653,7 +653,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
