@@ -124,7 +124,7 @@ jobs:
         platform_version: 20.04
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v3
       with:
         languages: 'cpp'
 
@@ -146,7 +146,7 @@ jobs:
       run: clang-tidy -checks='*,-modernize-use-trailing-return-type,-llvm-header-guard,-llvmlibc-*,-fuchsia-default-arguments-calls' -header-filter='.*' -p bin **/*.*pp > ${{github.workspace}}/reports/clang_tidy_report.txt
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v3
       
     - name: Doxygen Docs
       run: doxygen docg.conf
