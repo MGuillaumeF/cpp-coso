@@ -359,7 +359,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
 
@@ -533,7 +533,7 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
 
@@ -622,7 +622,7 @@ jobs:
     runs-on: macos-11
     steps:
 
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
 
@@ -679,13 +679,13 @@ jobs:
         echo "The version number is available, prepare publish...")
 
     - name: Download Deployment HTML tool temporary
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
         path: ${{github.workspace}}/scripts/delivery-note-generator
 
     - name: Download Updater Version configuration
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
         path: ${{github.workspace}}/scripts/project-updater
@@ -707,61 +707,61 @@ jobs:
       run: npx -y @mguillaumef/project-updater ${{env.APPLICATION_VERSION}}
 
     - name: Download docs
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-docs
         path: delivery/${{env.APPLICATION_VERSION}}/doc
 
     - name: Download Linux version DEBIAN
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.deb
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version RedHat
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.rpm
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Linux version ZIP
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Linux-x64.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Windows version NSIS win64
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.exe
         path: delivery/${{env.APPLICATION_VERSION}}
     
     - name: Download Windows version ZIP win64
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win64.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download Windows version NSIS win32
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.exe
         path: delivery/${{env.APPLICATION_VERSION}}
     
     - name: Download Windows version ZIP win32
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-win32.zip
         path: delivery/${{env.APPLICATION_VERSION}}
 
     - name: Download MacOSX version DragNDrop
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.dmg
         path: delivery/${{env.APPLICATION_VERSION}}
     
     - name: Download MacOSX version ZIP
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-Darwin.zip
         path: delivery/${{env.APPLICATION_VERSION}}
