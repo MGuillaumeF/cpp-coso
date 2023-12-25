@@ -690,13 +690,13 @@ jobs:
         name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
         path: ${{github.workspace}}/scripts/project-updater
 
-    - uses: geekyeggo/delete-artifact@v2
+    - uses: geekyeggo/delete-artifact@v4
       if: always()
       with:
           name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-delivery-html-tool
           failOnError: false
 
-    - uses: geekyeggo/delete-artifact@v2
+    - uses: geekyeggo/delete-artifact@v4
       if: always()
       with:
           name: ${{env.APPLICATION_NAME}}-${{env.APPLICATION_VERSION}}-temporary-project-updater-tool
